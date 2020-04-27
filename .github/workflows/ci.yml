@@ -1,0 +1,46 @@
+name: ci
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up Go
+        uses: actions/setup-go@v2
+      -
+        name: Build Windows executable
+        run: |
+          GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -v -ldflags "-s -w"
+          GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
+      -
+        name: Build action
+        run: |
+          npm install
+          npm run build
+      -
+        name: VirusTotal scan
+        uses: ./
+        with:
+          files: |
+            ghaction-virustotal-win32.exe
+            ghaction-virustotal-win64.exe
+          env:
+            VT_API_KEY: ${{ secrets.VT_API_KEY }}
