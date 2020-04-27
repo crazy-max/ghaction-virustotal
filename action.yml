@@ -1,0 +1,16 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: 'VirusTotal GitHub Action'
+description: "GitHub Action to upload and scan files with VirusTotal"
+author: 'crazy-max'
+branding:
+  color: 'red'
+  icon: 'activity'
+
+inputs:
+  files:
+    description: 'Newline-delimited list of path globs for asset files to upload for analysis'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

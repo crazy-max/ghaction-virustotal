@@ -1,0 +1,41 @@
+{
+  "name": "virustotal-github-action",
+  "private": true,
+  "description": "GitHub Action to upload and scan files with VirusTotal",
+  "main": "lib/main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "tsc && ncc build",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "pre-checkin": "npm run format && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crazy-max/ghaction-virustotal.git"
+  },
+  "keywords": [
+    "actions",
+    "virustotal",
+    "analysis",
+    "malware",
+    "security"
+  ],
+  "author": "CrazyMax",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "mime": "^2.4.4",
+    "node-virustotal": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/mime": "^2.0.1",
+    "@types/node": "^13.11.1",
+    "@zeit/ncc": "^0.22.1",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3",
+    "typescript-formatter": "^7.2.2"
+  }
+}
