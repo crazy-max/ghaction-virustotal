@@ -4648,7 +4648,7 @@ function run() {
 exports.run = run;
 const parseInputFiles = (files) => {
     return files.split(/\r?\n/).reduce((acc, line) => acc
-        .concat(line.split(","))
+        .concat(line.split(','))
         .filter(pat => pat)
         .map(pat => pat.trim()), []);
 };

@@ -23,12 +23,16 @@ export async function run() {
       nvtCon.submitFileForAnalysis(
         filepath.replace(/^.*[\\\/]/, ''),
         mime.getType(filepath),
-        fs.readFileSync(filepath), function(fileclear) {
-          core.info(`🐛 ${filepath} successfully uploaded. Check analysis status at https://www.virustotal.com/gui/file/${fileclear.scan_id}/detection`)
-        }, function(err){
-          core.info(`❌ Error during analysis of ${filepath}: ${err.message}`)
+        fs.readFileSync(filepath),
+        function (fileclear) {
+          core.info(
+            `🐛 ${filepath} successfully uploaded. Check analysis status at https://www.virustotal.com/gui/file/${fileclear.scan_id}/detection`
+          );
+        },
+        function (err) {
+          core.info(`❌ Error during analysis of ${filepath}: ${err.message}`);
         }
-      )
+      );
     });
   } catch (error) {
     core.setFailed(error.message);
@@ -39,7 +43,7 @@ const parseInputFiles = (files: string): string[] => {
   return files.split(/\r?\n/).reduce<string[]>(
     (acc, line) =>
       acc
-        .concat(line.split(","))
+        .concat(line.split(','))
         .filter(pat => pat)
         .map(pat => pat.trim()),
     []
