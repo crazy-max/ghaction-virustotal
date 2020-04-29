@@ -1,8 +1,8 @@
-import { lstatSync, readFileSync } from "fs";
-import { getType } from "mime";
-import { basename } from "path";
-import axios, {AxiosInstance, AxiosPromise} from "axios";
-import * as FormData from "form-data";
+import {lstatSync, readFileSync} from 'fs';
+import {getType} from 'mime';
+import {basename} from 'path';
+import axios, {AxiosInstance, AxiosPromise} from 'axios';
+import * as FormData from 'form-data';
 
 export interface Asset {
   name: string;
@@ -14,20 +14,20 @@ export interface Asset {
 export const defaultApiKey = 'e2513a75f92a4169e8a47b4ab1df757f83ae45008b4a8a49903450c8402add4d';
 
 interface IUploadModel {
-  data: IUploadData,
+  data: IUploadData;
 }
 
 interface IUploadData {
-  id: string,
-  type: string
+  id: string;
+  type: string;
 }
 
 interface IAnalysisModel {
-  meta: IAnalysisDataMeta,
+  meta: IAnalysisDataMeta;
 }
 
 interface IAnalysisDataMeta {
-  file_info: IAnalysisDataFileInfo
+  file_info: IAnalysisDataFileInfo;
 }
 
 interface IAnalysisDataFileInfo {
@@ -44,20 +44,20 @@ export class VirusTotal {
     this.instance = axios.create({
       baseURL: 'https://www.virustotal.com/api/v3',
       headers: {
-        'x-apikey': apiKey || defaultApiKey,
-      },
+        'x-apikey': apiKey || defaultApiKey
+      }
     });
   }
 
   upload(filepath: string | undefined): AxiosPromise<IUploadModel> {
-    if(!filepath) {
+    if (!filepath) {
       throw new Error('Missing asset filepath');
     }
 
-    let { name, size, mime, file } = asset(filepath);
+    let {name, size, mime, file} = asset(filepath);
 
     let fd = new FormData();
-    fd.append( 'file', file, {
+    fd.append('file', file, {
       filename: name,
       contentType: mime,
       knownLength: size
@@ -67,12 +67,12 @@ export class VirusTotal {
       headers: {
         ...this.instance.defaults.headers,
         ...fd.getHeaders()
-      },
+      }
     });
   }
 
   analysis(id: string | undefined): AxiosPromise<IAnalysisModel> {
-    if(!id) {
+    if (!id) {
       throw new Error('Missing analysis ID');
     }
     return this.instance.get(`/analyses/${id}`);
@@ -89,5 +89,5 @@ export const asset = (path: string): Asset => {
 };
 
 export const mimeOrDefault = (path: string): string => {
-  return getType(path) || "application/octet-stream";
+  return getType(path) || 'application/octet-stream';
 };

@@ -1,5 +1,5 @@
-import { parseInputFiles } from "./util";
-import { VirusTotal } from "./virustotal";
+import {parseInputFiles} from './util';
+import {VirusTotal} from './virustotal';
 import * as core from '@actions/core';
 
 async function run() {
@@ -12,13 +12,14 @@ async function run() {
     const vt = new VirusTotal(process.env.VT_API_KEY);
     files.forEach(filepath => {
       core.info(`🏃 Running VirusTotal analysis of ${filepath}...`);
-      vt.upload(filepath).then((upres) => {
-        vt.analysis(upres.data.data.id).then((anres) => {
-          core.info(`🐛 ${filepath} successfully uploaded. Check analysis status at https://www.virustotal.com/gui/file/${anres.data.meta.file_info.sha256}/detection`);
+      vt.upload(filepath).then(upres => {
+        vt.analysis(upres.data.data.id).then(anres => {
+          core.info(
+            `🐛 ${filepath} successfully uploaded. Check analysis status at https://www.virustotal.com/gui/file/${anres.data.meta.file_info.sha256}/detection`
+          );
         });
       });
     });
-
   } catch (error) {
     core.setFailed(error.message);
   }
