@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc && ncc build",
+    "test": "jest",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "pre-checkin": "npm run format && npm run build"
