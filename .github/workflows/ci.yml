@@ -10,14 +10,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-latest
-          - macOS-latest
-          - windows-latest
+    runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
@@ -26,10 +19,10 @@ jobs:
         name: Set up Go
         uses: actions/setup-go@v2
       -
-        name: Build Windows executable
+        name: Build Windows executables
         run: |
-          GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -v -ldflags "-s -w"
-          GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
+          GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -ldflags "-s -w"
+          GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -ldflags "-s -w"
       -
         name: Build action
         run: |
@@ -40,7 +33,7 @@ jobs:
         uses: ./
         with:
           files: |
-            ghaction-virustotal-win32.exe
-            ghaction-virustotal-win64.exe
+            ./ghaction-virustotal-win32.exe
+            ./ghaction-virustotal-win64.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
