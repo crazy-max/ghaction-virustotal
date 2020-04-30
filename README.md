@@ -10,6 +10,8 @@ GitHub Action to upload and scan files with [VirusTotal](https://www.virustotal.
 
 If you are interested, [check out](https://git.io/Je09Y) my other :octocat: GitHub Actions!
 
+![VirusTotal GitHub Action](.res/ghaction-virustotal.png)
+
 ## Usage
 
 ### Scan local files
