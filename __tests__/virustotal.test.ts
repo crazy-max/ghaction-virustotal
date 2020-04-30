@@ -22,7 +22,7 @@ describe('virustotal', () => {
 
   describe('upload', () => {
     it('uploads asset on VirusTotal', async () => {
-      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
+      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
       await vt.upload('tests/data/foo/bar.txt').then(response => {
         expect(response.status).toEqual(200);
         expect(response.data.data.id).not.toBeUndefined();
@@ -32,7 +32,7 @@ describe('virustotal', () => {
 
   describe('analysis', () => {
     it('returns analysis info from VirusTotal', async () => {
-      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
+      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
       await vt.upload('tests/data/foo/bar.txt').then(upres => {
         expect(upres.status).toEqual(200);
         expect(upres.data.data.id).not.toBeUndefined();

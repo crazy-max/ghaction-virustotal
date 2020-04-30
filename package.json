@@ -28,9 +28,12 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.2.3",
+    "@actions/github": "^2.1.1",
+    "@types/download": "^6.2.4",
     "@types/form-data": "^2.5.0",
     "axios": "^0.19.2",
     "concat-stream": "^2.0.0",
+    "download": "^8.0.0",
     "form-data": "^3.0.0",
     "mime": "^2.4.4"
   },
@@ -39,6 +42,7 @@
     "@types/mime": "^2.0.1",
     "@types/node": "^13.11.1",
     "@zeit/ncc": "^0.22.1",
+    "dotenv": "^8.2.0",
     "jest": "^25.4.0",
     "jest-circus": "^25.4.0",
     "jest-runtime": "^25.4.0",

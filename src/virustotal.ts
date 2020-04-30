@@ -4,15 +4,6 @@ import {basename} from 'path';
 import axios, {AxiosInstance, AxiosPromise} from 'axios';
 import * as FormData from 'form-data';
 
-export interface Asset {
-  name: string;
-  mime: string;
-  size: number;
-  file: Buffer;
-}
-
-export const defaultApiKey = 'e2513a75f92a4169e8a47b4ab1df757f83ae45008b4a8a49903450c8402add4d';
-
 interface IUploadModel {
   data: IUploadData;
 }
@@ -37,6 +28,13 @@ interface IAnalysisDataFileInfo {
   size: number;
 }
 
+export interface Asset {
+  name: string;
+  mime: string;
+  size: number;
+  file: Buffer;
+}
+
 export class VirusTotal {
   private instance: AxiosInstance;
 
@@ -44,7 +42,7 @@ export class VirusTotal {
     this.instance = axios.create({
       baseURL: 'https://www.virustotal.com/api/v3',
       headers: {
-        'x-apikey': apiKey || defaultApiKey
+        'x-apikey': apiKey
       }
     });
   }

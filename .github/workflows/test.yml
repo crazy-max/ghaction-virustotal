@@ -30,3 +30,6 @@ jobs:
       -
         name: Test
         run: npm run test
+        env:
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}

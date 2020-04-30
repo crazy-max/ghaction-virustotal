@@ -37,3 +37,5 @@ jobs:
           files: |
             ./ghaction-virustotal-win32.exe
             ./ghaction-virustotal-win64.exe
+        env:
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}

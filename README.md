@@ -12,15 +12,19 @@ If you are interested, [check out](https://git.io/Je09Y) my other :octocat: GitH
 
 ## Usage
 
+### Scan local files
+
+This action can be used to scan local files with VirusTotal:
+
 ```yaml
-name: virustotal
+name: build
 
 on:
   pull_request:
   push:
 
 jobs:
-  virustotal:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
@@ -48,6 +52,30 @@ jobs:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
 ```
 
+### Scan assets of a published release
+
+You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release) is triggered:
+
+```yaml
+name: released
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  virustotal:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        # https://github.com/crazy-max/ghaction-virustotal
+        name: VirusTotal Scan
+        uses: crazy-max/ghaction-virustotal@v1
+        env:
+          VT_API_KEY: ${{ secrets.VT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ## Customizing
 
 ### inputs
@@ -64,7 +92,8 @@ Following environment variables can be used as `step.env` keys
 
 | Name           | Description                           |
 |----------------|---------------------------------------|
-| `VT_API_KEY  ` | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) |
+| `VT_API_KEY  ` | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) required to upload assets |
+| `GITHUB_TOKEN` | [GITHUB_TOKEN](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) as provided by `secrets` |
 
 ## How can I help?
 

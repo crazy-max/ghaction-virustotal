@@ -20,6 +20,7 @@ describe('util', () => {
       ]);
     });
   });
+
   describe('paths', () => {
     it('resolves files given a set of paths', async () => {
       assert.deepStrictEqual(paths(['tests/data/**/*']), ['tests/data/foo/bar.txt']);
