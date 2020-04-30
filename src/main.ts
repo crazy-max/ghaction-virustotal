@@ -55,12 +55,12 @@ async function runForReleaseEvent(context: Context, vt: VirusTotal) {
 
   core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
   assets.forEach(asset => {
-    const downloadPath = path.join(tmpDir(), asset.name);
-    downloadReleaseAsset(octokit, context, asset, downloadPath);
-    vt.upload(downloadPath).then(res => {
-      core.info(
-        `🐛 ${asset.name} successfully uploaded. Check detection analysis at https://www.virustotal.com/gui/file-analysis/${res.data.data.id}/detection`
-      );
+    downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name)).then(downloadPath => {
+      vt.upload(downloadPath).then(res => {
+        core.info(
+          `🐛 ${asset.name} successfully uploaded. Check detection analysis at https://www.virustotal.com/gui/file-analysis/${res.data.data.id}/detection`
+        );
+      });
     });
   });
 }
