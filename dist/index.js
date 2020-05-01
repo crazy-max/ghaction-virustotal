@@ -5919,12 +5919,12 @@ function runForLocalFiles(context, vt) {
             return;
         }
         core.info(`📦 ${files.length} file(s) will be sent to VirusTotal for analysis.`);
-        files.forEach(filepath => {
-            vt.upload(filepath).then(upload => {
+        yield util_1.asyncForEach(files, (filepath) => __awaiter(this, void 0, void 0, function* () {
+            yield vt.upload(filepath).then(upload => {
                 outputAnalysis.push(`${filepath}=${upload.url}`);
                 core.info(`🐛 ${filepath} successfully uploaded. Check detection analysis at ${upload.url}`);
             });
-        });
+        }));
     });
 }
 function runForReleaseEvent(context, vt) {
@@ -5938,15 +5938,15 @@ function runForReleaseEvent(context, vt) {
             return;
         }
         core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
-        assets.forEach(asset => {
+        yield util_1.asyncForEach(assets, (asset) => __awaiter(this, void 0, void 0, function* () {
             core.info(`⬇️ Downloading ${asset.name}...`);
-            github_1.downloadReleaseAsset(octokit, context, asset, path.join(util_1.tmpDir(), asset.name)).then(downloadPath => {
-                vt.upload(downloadPath).then(upload => {
-                    outputAnalysis.push(`${asset.name}=${upload.url}`);
-                    core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
-                });
+            yield vt
+                .upload(yield github_1.downloadReleaseAsset(octokit, context, asset, path.join(util_1.tmpDir(), asset.name)))
+                .then(upload => {
+                outputAnalysis.push(`${asset.name}=${upload.url}`);
+                core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
             });
-        });
+        }));
     });
 }
 run();
@@ -8381,6 +8381,15 @@ function hasLastPage (link) {
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const glob = __webpack_require__(402);
 const fs_1 = __webpack_require__(747);
@@ -8413,6 +8422,11 @@ exports.loadContext = (env) => {
 exports.tmpDir = () => {
     return fs.mkdtempSync(path.join(os.tmpdir(), 'ghaction-virustotal-'));
 };
+exports.asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, function* () {
+    for (let index = 0; index < array.length; index++) {
+        yield callback(array[index], index, array);
+    }
+});
 
 
 /***/ }),
