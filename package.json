@@ -27,7 +27,7 @@
   "author": "CrazyMax",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.4",
     "@actions/github": "^2.1.1",
     "axios": "^0.19.2",
     "download": "^8.0.0",
