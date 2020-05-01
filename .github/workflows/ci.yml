@@ -32,6 +32,7 @@ jobs:
           npm run build
       -
         name: VirusTotal scan
+        id: vt
         uses: ./
         with:
           files: |
@@ -39,3 +40,6 @@ jobs:
             ./ghaction-virustotal-win64.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
+      -
+        name: Analysis results
+        run: echo ${{ steps.vt.outputs.analysis }}

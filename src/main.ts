@@ -6,6 +6,7 @@ import * as github from '@actions/github';
 import * as path from 'path';
 
 let inputFiles: string[];
+let outputAnalysis: string[];
 
 async function run() {
   try {
@@ -28,6 +29,9 @@ async function run() {
     } else {
       await runForLocalFiles(context, vt);
     }
+
+    core.info('🛒 Setting output analysis...');
+    core.setOutput('analysis', outputAnalysis.join(','));
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -42,10 +46,9 @@ async function runForLocalFiles(context: Context, vt: VirusTotal) {
 
   core.info(`📦 ${files.length} file(s) will be sent to VirusTotal for analysis.`);
   files.forEach(filepath => {
-    vt.upload(filepath).then(res => {
-      core.info(
-        `🐛 ${filepath} successfully uploaded. Check detection analysis at https://www.virustotal.com/gui/file-analysis/${res.data.data.id}/detection`
-      );
+    vt.upload(filepath).then(upload => {
+      outputAnalysis.push(`${filepath}=${upload.url}`);
+      core.info(`🐛 ${filepath} successfully uploaded. Check detection analysis at ${upload.url}`);
     });
   });
 }
@@ -65,10 +68,9 @@ async function runForReleaseEvent(context: Context, vt: VirusTotal) {
   assets.forEach(asset => {
     core.info(`⬇️ Downloading ${asset.name}...`);
     downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name)).then(downloadPath => {
-      vt.upload(downloadPath).then(res => {
-        core.info(
-          `🐛 ${asset.name} successfully uploaded. Check detection analysis at https://www.virustotal.com/gui/file-analysis/${res.data.data.id}/detection`
-        );
+      vt.upload(downloadPath).then(upload => {
+        outputAnalysis.push(`${asset.name}=${upload.url}`);
+        core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
       });
     });
   });

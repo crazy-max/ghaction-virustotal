@@ -23,9 +23,9 @@ describe('virustotal', () => {
   describe('upload', () => {
     it('uploads asset on VirusTotal', async () => {
       let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-      await vt.upload('tests/data/foo/bar.txt').then(response => {
-        expect(response.status).toEqual(200);
-        expect(response.data.data.id).not.toBeUndefined();
+      await vt.upload('tests/data/foo/bar.txt').then(upload => {
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
       });
     }, 30000);
   });
@@ -33,14 +33,11 @@ describe('virustotal', () => {
   describe('analysis', () => {
     it('returns analysis info from VirusTotal', async () => {
       let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-      await vt.upload('tests/data/foo/bar.txt').then(upres => {
-        expect(upres.status).toEqual(200);
-        expect(upres.data.data.id).not.toBeUndefined();
-        vt.analysis(upres.data.data.id).then(anres => {
-          expect(anres.status).toEqual(200);
-          expect(anres.data.meta.file_info.sha256).toEqual(
-            'cdf614b868c95c1367f3407bc43f9d74f10dfc0a96b2117808eb68569d6bb568'
-          );
+      await vt.upload('tests/data/foo/bar.txt').then(upload => {
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
+        vt.analysis(upload.id).then(analysis => {
+          expect(analysis.sha256).toEqual('cdf614b868c95c1367f3407bc43f9d74f10dfc0a96b2117808eb68569d6bb568');
         });
       });
     }, 30000);

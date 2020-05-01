@@ -45,6 +45,7 @@ jobs:
       -
         # https://github.com/crazy-max/ghaction-virustotal
         name: VirusTotal Scan
+        id: vt
         uses: crazy-max/ghaction-virustotal@v1
         with:
           files: |
@@ -52,6 +53,9 @@ jobs:
             ./ghaction-virustotal-win64.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
+      -
+        name: Analysis results
+        run: echo ${{ steps.vt.outputs.analysis }}
 ```
 
 ### Scan assets of a published release
@@ -72,6 +76,7 @@ jobs:
       -
         # https://github.com/crazy-max/ghaction-virustotal
         name: VirusTotal Scan
+        id: vt
         uses: crazy-max/ghaction-virustotal@v1
         with:
           files: |
@@ -79,6 +84,9 @@ jobs:
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Analysis results
+        run: echo ${{ steps.vt.outputs.analysis }}
 ```
 
 ## Customizing
@@ -90,6 +98,14 @@ Following inputs can be used as `step.with` keys
 | Name          | Type    | Default   | Description                      |
 |---------------|---------|-----------|----------------------------------|
 | `files`       | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis |
+
+### outputs
+
+Following outputs are available
+
+| Name          | Type    | Description                           |
+|---------------|---------|---------------------------------------|
+| `analysis`    | String  | Analysis results formatted as `asset=analysisURL` (comma separated) |
 
 ### environment variables
 

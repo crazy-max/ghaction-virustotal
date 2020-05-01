@@ -11,6 +11,10 @@ inputs:
     description: 'Newline-delimited list of path globs for asset files to upload for analysis'
     required: true
 
+outputs:
+  analysis:
+    description: 'Analysis results formatted as asset=analysisURL (comma separated)'
+
 runs:
   using: 'node12'
   main: 'dist/index.js'
