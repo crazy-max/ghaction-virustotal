@@ -21,7 +21,7 @@ export const parseInputFiles = (files: string): string[] => {
   );
 };
 
-export const paths = (patterns: string[]): string[] => {
+export const resolvePaths = (patterns: string[]): string[] => {
   return patterns.reduce((acc: string[], pattern: string): string[] => {
     return acc.concat(glob.sync(pattern).filter(path => lstatSync(path).isFile()));
   }, []);

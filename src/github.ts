@@ -1,6 +1,7 @@
 import * as github from '@actions/github';
 import * as fs from 'fs';
 import {Context} from './util';
+import * as matcher from 'matcher';
 
 export interface Release {
   id: number;
@@ -36,19 +37,20 @@ export const getRelease = async (octokit: github.GitHub, context: Context): Prom
 export const getReleaseAssets = async (
   octokit: github.GitHub,
   context: Context,
-  release: Release
+  release: Release,
+  patterns: Array<string>
 ): Promise<Array<ReleaseAsset>> => {
-  const res = await octokit.paginate(
-    octokit.repos.listAssetsForRelease.endpoint.merge({
-      owner: context.github_owner,
-      repo: context.github_repo,
-      release_id: release.id
-    })
-  );
-
-  return res.map(asset => {
-    return asset as ReleaseAsset;
-  }) as Array<ReleaseAsset>;
+  return (await octokit
+    .paginate(
+      octokit.repos.listAssetsForRelease.endpoint.merge({
+        owner: context.github_owner,
+        repo: context.github_repo,
+        release_id: release.id
+      })
+    )
+    .then(assets => {
+      return assets.filter(a => matcher.isMatch(a.name, patterns));
+    })) as Array<ReleaseAsset>;
 };
 
 export const downloadReleaseAsset = async (
@@ -74,7 +76,11 @@ export const downloadReleaseAsset = async (
     });
 };
 
-export const updateRelease = async (octokit: github.GitHub, context: Context, release: Release): Promise<Release> => {
+export const updateReleaseBody = async (
+  octokit: github.GitHub,
+  context: Context,
+  release: Release
+): Promise<Release> => {
   return (
     await octokit.repos.updateRelease({
       owner: context.github_owner,

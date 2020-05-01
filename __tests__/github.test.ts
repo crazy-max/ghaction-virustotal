@@ -1,4 +1,4 @@
-import {getRelease, getReleaseAssets, downloadReleaseAsset, Release, ReleaseAsset} from '../src/github';
+import {Release, ReleaseAsset, getRelease, getReleaseAssets, downloadReleaseAsset} from '../src/github';
 import * as github from '@actions/github';
 import {Context, tmpDir} from '../src/util';
 import * as path from 'path';
@@ -28,7 +28,7 @@ describe('github', () => {
     it('returns a GitHub release assets list', async () => {
       if (!release) release = await getRelease(octokit, context);
 
-      assets = await getReleaseAssets(octokit, context, release);
+      assets = await getReleaseAssets(octokit, context, release, ['*.exe']);
       expect(release).not.toBeUndefined();
       expect(assets.length).toEqual(2);
       expect(assets[0].name).toEqual('ghaction-virustotal-win32.exe');
@@ -38,10 +38,11 @@ describe('github', () => {
   describe('downloadReleaseAsset', () => {
     it('download a GitHub release asset', async () => {
       if (!release) release = await getRelease(octokit, context);
-      if (!assets) assets = await getReleaseAssets(octokit, context, release);
+      if (!assets) assets = await getReleaseAssets(octokit, context, release, ['*.exe']);
 
-      const downloadPath = await downloadReleaseAsset(octokit, context, assets[0], path.join(tmpDir(), assets[0].name));
-      let {name, size, mime, file} = asset(downloadPath);
+      let {name, size, mime, file} = asset(
+        await downloadReleaseAsset(octokit, context, assets[0], path.join(tmpDir(), assets[0].name))
+      );
       expect(size).toEqual(1306112);
       expect(mime).toEqual('application/octet-stream');
     });

@@ -1,4 +1,4 @@
-import {parseInputFiles, paths} from '../src/util';
+import {parseInputFiles, resolvePaths} from '../src/util';
 import * as assert from 'assert';
 
 describe('util', () => {
@@ -21,9 +21,9 @@ describe('util', () => {
     });
   });
 
-  describe('paths', () => {
+  describe('resolvePaths', () => {
     it('resolves files given a set of paths', async () => {
-      assert.deepStrictEqual(paths(['tests/data/**/*']), ['tests/data/foo/bar.txt']);
+      assert.deepStrictEqual(resolvePaths(['tests/data/**/*']), ['tests/data/foo/bar.txt']);
     });
   });
 });
