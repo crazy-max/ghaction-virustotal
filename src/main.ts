@@ -5,8 +5,8 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import * as path from 'path';
 
-let inputFiles: string[];
-let outputAnalysis: string[];
+let inputFiles: string[] = [];
+let outputAnalysis: string[] = [];
 
 async function run() {
   try {
