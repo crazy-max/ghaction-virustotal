@@ -1,4 +1,4 @@
-import {Context, loadContext, parseInputFiles, resolvePaths, tmpDir} from './util';
+import {Context, loadContext, parseInputFiles, resolvePaths, tmpDir, asyncForEach} from './util';
 import {getRelease, getReleaseAssets, downloadReleaseAsset} from './github';
 import {VirusTotal} from './virustotal';
 import * as core from '@actions/core';
@@ -45,8 +45,8 @@ async function runForLocalFiles(context: Context, vt: VirusTotal) {
   }
 
   core.info(`📦 ${files.length} file(s) will be sent to VirusTotal for analysis.`);
-  files.forEach(filepath => {
-    vt.upload(filepath).then(upload => {
+  await asyncForEach(files, async filepath => {
+    await vt.upload(filepath).then(upload => {
       outputAnalysis.push(`${filepath}=${upload.url}`);
       core.info(`🐛 ${filepath} successfully uploaded. Check detection analysis at ${upload.url}`);
     });
@@ -65,14 +65,14 @@ async function runForReleaseEvent(context: Context, vt: VirusTotal) {
   }
 
   core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
-  assets.forEach(asset => {
+  await asyncForEach(assets, async asset => {
     core.info(`⬇️ Downloading ${asset.name}...`);
-    downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name)).then(downloadPath => {
-      vt.upload(downloadPath).then(upload => {
+    await vt
+      .upload(await downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name)))
+      .then(upload => {
         outputAnalysis.push(`${asset.name}=${upload.url}`);
         core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
       });
-    });
   });
 }
 
