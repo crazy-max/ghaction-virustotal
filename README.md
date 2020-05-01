@@ -10,13 +10,13 @@ GitHub Action to upload and scan files with [VirusTotal](https://www.virustotal.
 
 If you are interested, [check out](https://git.io/Je09Y) my other :octocat: GitHub Actions!
 
-![VirusTotal GitHub Action](.res/ghaction-virustotal.png)
-
 ## Usage
 
 ### Scan local files
 
 This action can be used to scan local files with VirusTotal:
+
+![VirusTotal GitHub Action](.res/ghaction-virustotal-files.png)
 
 ```yaml
 name: build
@@ -67,6 +67,8 @@ jobs:
 ### Scan assets of a published release
 
 You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release) is triggered:
+
+![VirusTotal GitHub Action on release event](.res/ghaction-virustotal-release.png)
 
 ```yaml
 name: released
