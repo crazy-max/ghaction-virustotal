@@ -73,6 +73,9 @@ jobs:
         # https://github.com/crazy-max/ghaction-virustotal
         name: VirusTotal Scan
         uses: crazy-max/ghaction-virustotal@v1
+        with:
+          files: |
+            *.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -86,7 +89,7 @@ Following inputs can be used as `step.with` keys
 
 | Name          | Type    | Default   | Description                      |
 |---------------|---------|-----------|----------------------------------|
-| `files`       | String  |           | Newline-delimited list of path globs for asset files to upload for analysis |
+| `files`       | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis |
 
 ### environment variables
 
