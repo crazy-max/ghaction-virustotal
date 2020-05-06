@@ -26,11 +26,6 @@ jobs:
           GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -ldflags "-s -w"
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -ldflags "-s -w"
       -
-        name: Build action
-        run: |
-          npm install
-          npm run build
-      -
         name: VirusTotal scan
         id: vt
         uses: ./
