@@ -1,11 +1,7 @@
 {
   "name": "virustotal-github-action",
-  "private": true,
   "description": "GitHub Action to upload and scan files with VirusTotal",
   "main": "lib/main.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "build": "tsc && ncc build",
     "test": "jest",
