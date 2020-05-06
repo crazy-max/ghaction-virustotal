@@ -1,6 +1,7 @@
 [![GitHub release](https://img.shields.io/github/release/crazy-max/ghaction-virustotal.svg?style=flat-square)](https://github.com/crazy-max/ghaction-virustotal/releases/latest)
 [![GitHub marketplace](https://img.shields.io/badge/marketplace-virustotal--github--action-blue?logo=github&style=flat-square)](https://github.com/marketplace/actions/virustotal-github-action)
-[![Test workflow](https://github.com/crazy-max/ghaction-virustotal/workflows/test/badge.svg)](https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test)
+[![Test workflow](https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/test?label=test&logo=github&style=flat-square)](https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test)
+[![Codecov](https://img.shields.io/codecov/c/github/crazy-max/ghaction-virustotal?logo=codecov&style=flat-square)](https://codecov.io/gh/crazy-max/ghaction-virustotal)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/crazy-max)
 [![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/crazyws)
 

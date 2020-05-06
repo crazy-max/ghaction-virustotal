@@ -10,7 +10,8 @@
     "rootDir": "./src",
     "strict": true,
     "noImplicitAny": false,
-    "esModuleInterop": false
+    "esModuleInterop": false,
+    "sourceMap": true
   },
   "exclude": ["node_modules", "**/*.test.ts"]
 }
