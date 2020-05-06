@@ -40,7 +40,7 @@
     "@types/form-data": "^2.5.0",
     "@types/jest": "^25.2.1",
     "@types/mime": "^2.0.1",
-    "@types/node": "^13.11.1",
+    "@types/node": "^13.13.5",
     "@zeit/ncc": "^0.22.1",
     "dotenv": "^8.2.0",
     "jest": "^25.4.0",
