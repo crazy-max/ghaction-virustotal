@@ -4,7 +4,7 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc && ncc build",
-    "test": "jest",
+    "test": "jest --coverage",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "pre-checkin": "npm run format && npm run build"
