@@ -40,9 +40,7 @@ describe('github', () => {
       if (!release) release = await getRelease(octokit, context);
       if (!assets) assets = await getReleaseAssets(octokit, context, release, ['*.exe']);
 
-      let {name, size, mime, file} = asset(
-        await downloadReleaseAsset(octokit, context, assets[0], path.join(tmpDir(), assets[0].name))
-      );
+      let {name, size, mime, file} = asset(await downloadReleaseAsset(octokit, context, assets[0], path.join(tmpDir(), assets[0].name)));
       expect(size).toEqual(1306112);
       expect(mime).toEqual('application/octet-stream');
     });

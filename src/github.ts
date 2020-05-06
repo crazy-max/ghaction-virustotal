@@ -34,12 +34,7 @@ export const getRelease = async (octokit: github.GitHub, context: Context): Prom
   ).data as Release;
 };
 
-export const getReleaseAssets = async (
-  octokit: github.GitHub,
-  context: Context,
-  release: Release,
-  patterns: Array<string>
-): Promise<Array<ReleaseAsset>> => {
+export const getReleaseAssets = async (octokit: github.GitHub, context: Context, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
   return (await octokit
     .paginate(
       octokit.repos.listAssetsForRelease.endpoint.merge({
@@ -53,12 +48,7 @@ export const getReleaseAssets = async (
     })) as Array<ReleaseAsset>;
 };
 
-export const downloadReleaseAsset = async (
-  octokit: github.GitHub,
-  context: Context,
-  asset: ReleaseAsset,
-  downloadPath: string
-): Promise<string> => {
+export const downloadReleaseAsset = async (octokit: github.GitHub, context: Context, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
   return octokit.repos
     .getReleaseAsset({
       owner: context.github_owner,
@@ -76,11 +66,7 @@ export const downloadReleaseAsset = async (
     });
 };
 
-export const updateReleaseBody = async (
-  octokit: github.GitHub,
-  context: Context,
-  release: Release
-): Promise<Release> => {
+export const updateReleaseBody = async (octokit: github.GitHub, context: Context, release: Release): Promise<Release> => {
   return (
     await octokit.repos.updateRelease({
       owner: context.github_owner,

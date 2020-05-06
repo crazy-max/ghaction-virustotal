@@ -67,12 +67,10 @@ async function runForReleaseEvent(context: Context, vt: VirusTotal) {
   core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
   await asyncForEach(assets, async asset => {
     core.info(`⬇️ Downloading ${asset.name}...`);
-    await vt
-      .upload(await downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name)))
-      .then(upload => {
-        outputAnalysis.push(`${asset.name}=${upload.url}`);
-        core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
-      });
+    await vt.upload(await downloadReleaseAsset(octokit, context, asset, path.join(tmpDir(), asset.name))).then(upload => {
+      outputAnalysis.push(`${asset.name}=${upload.url}`);
+      core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
+    });
   });
 }
 

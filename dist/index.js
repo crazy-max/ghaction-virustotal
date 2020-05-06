@@ -5940,9 +5940,7 @@ function runForReleaseEvent(context, vt) {
         core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
         yield util_1.asyncForEach(assets, (asset) => __awaiter(this, void 0, void 0, function* () {
             core.info(`⬇️ Downloading ${asset.name}...`);
-            yield vt
-                .upload(yield github_1.downloadReleaseAsset(octokit, context, asset, path.join(util_1.tmpDir(), asset.name)))
-                .then(upload => {
+            yield vt.upload(yield github_1.downloadReleaseAsset(octokit, context, asset, path.join(util_1.tmpDir(), asset.name))).then(upload => {
                 outputAnalysis.push(`${asset.name}=${upload.url}`);
                 core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
             });
@@ -5950,7 +5948,7 @@ function runForReleaseEvent(context, vt) {
     });
 }
 run();
-
+//# sourceMappingURL=main.js.map
 
 /***/ }),
 
@@ -8427,7 +8425,7 @@ exports.asyncForEach = (array, callback) => __awaiter(void 0, void 0, void 0, fu
         yield callback(array[index], index, array);
     }
 });
-
+//# sourceMappingURL=util.js.map
 
 /***/ }),
 
@@ -16496,7 +16494,7 @@ exports.updateReleaseBody = (octokit, context, release) => __awaiter(void 0, voi
         body: release.body
     })).data;
 });
-
+//# sourceMappingURL=github.js.map
 
 /***/ }),
 
@@ -33203,7 +33201,7 @@ exports.asset = (path) => {
 exports.mimeOrDefault = (path) => {
     return mime_1.getType(path) || 'application/octet-stream';
 };
-
+//# sourceMappingURL=virustotal.js.map
 
 /***/ }),
 
