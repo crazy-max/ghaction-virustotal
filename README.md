@@ -1,15 +1,32 @@
-[![GitHub release](https://img.shields.io/github/release/crazy-max/ghaction-virustotal.svg?style=flat-square)](https://github.com/crazy-max/ghaction-virustotal/releases/latest)
-[![GitHub marketplace](https://img.shields.io/badge/marketplace-virustotal--github--action-blue?logo=github&style=flat-square)](https://github.com/marketplace/actions/virustotal-github-action)
-[![Test workflow](https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/test?label=test&logo=github&style=flat-square)](https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test)
-[![Codecov](https://img.shields.io/codecov/c/github/crazy-max/ghaction-virustotal?logo=codecov&style=flat-square)](https://codecov.io/gh/crazy-max/ghaction-virustotal)
-[![Become a sponsor](https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/crazy-max)
-[![Paypal Donate](https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square)](https://www.paypal.me/crazyws)
+<p align="center"><a href="https://github.com/crazy-max/ghaction-virustotal" target="_blank"><img height="160" src="https://raw.githubusercontent.com/crazy-max/ghaction-virustotal/master/.res/virustotal-github-actions.png"></a></p>
+
+<p align="center">
+  <a href="https://github.com/crazy-max/ghaction-virustotal/releases/latest"><img src="https://img.shields.io/github/release/crazy-max/ghaction-virustotal.svg?style=flat-square" alt="GitHub release"></a>
+  <a href="https://github.com/marketplace/actions/virustotal-github-action"><img src="https://img.shields.io/badge/marketplace-virustotal--github--action-blue?logo=github&style=flat-square" alt="GitHub marketplace"></a>
+  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=ci"><img src="https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/ci?label=ci&logo=github&style=flat-square" alt="CI workflow"></a>
+  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test"><img src="https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/test?label=test&logo=github&style=flat-square" alt="Test workflow"></a>
+  <a href="https://codecov.io/gh/crazy-max/ghaction-virustotal"><img src="https://img.shields.io/codecov/c/github/crazy-max/ghaction-virustotal?logo=codecov&style=flat-square" alt="Codecov"></a>
+  <br /><a href="https://github.com/sponsors/crazy-max"><img src="https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square" alt="Become a sponsor"></a>
+  <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
+</p>
 
 ## About
 
 GitHub Action to upload and scan files with [VirusTotal](https://www.virustotal.com).
 
 If you are interested, [check out](https://git.io/Je09Y) my other :octocat: GitHub Actions!
+
+___
+
+* [Usage](#usage)
+  * [Scan local files](#scan-local-files)
+  * [Scan assets of a published release](#scan-assets-of-a-published-release)
+* [Customizing](#customizing)
+  * [inputs](#inputs)
+  * [outputs](#outputs)
+  * [environment variables](#environment-variables)
+* [How can I help?](#how-can-i-help)
+* [License](#license)
 
 ## Usage
 
