@@ -1,22 +1,21 @@
-import {parseInputFiles, resolvePaths} from '../src/util';
-import * as assert from 'assert';
+import * as util from '../src/util';
 
 describe('util', () => {
   describe('parseInputFiles', () => {
     it('parses empty strings', () => {
-      assert.deepStrictEqual(parseInputFiles(''), []);
+      expect(util.parseInputFiles('')).toEqual([]);
     });
     it('parses comma-delimited strings', () => {
-      assert.deepStrictEqual(parseInputFiles('foo,bar'), ['foo', 'bar']);
+      expect(util.parseInputFiles('foo,bar')).toEqual(['foo', 'bar']);
     });
     it('parses newline and comma-delimited (and then some)', () => {
-      assert.deepStrictEqual(parseInputFiles('foo,bar\nbaz,boom,\n\ndoom,loom '), ['foo', 'bar', 'baz', 'boom', 'doom', 'loom']);
+      expect(util.parseInputFiles('foo,bar\nbaz,boom,\n\ndoom,loom ')).toEqual(['foo', 'bar', 'baz', 'boom', 'doom', 'loom']);
     });
   });
 
   describe('resolvePaths', () => {
     it('resolves files given a set of paths', async () => {
-      assert.deepStrictEqual(resolvePaths(['tests/data/**/*']), ['tests/data/foo/bar.txt']);
+      expect(util.resolvePaths(['tests/data/**/*'])).toEqual(['tests/data/foo/bar.txt']);
     });
   });
 });
