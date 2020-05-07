@@ -1,16 +1,25 @@
 name: test
 
 on:
-  pull_request:
-    branches:
-      - master
   push:
     branches:
-      - master
+      - 'master'
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
     steps:
       -
         # https://github.com/actions/checkout
