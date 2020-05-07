@@ -33,7 +33,11 @@ jobs:
         run: npm run test
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Audit packages
+        run: npm audit --audit-level=high
+        if: matrix.os == 'ubuntu-latest'
       -
         # https://github.com/codecov/codecov-action
         name: Upload coverage
