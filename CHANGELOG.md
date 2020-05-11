@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 (2020/05/11)
+
+* More tests
+* Update deps
+
 ## 1.1.1 (2020/05/01)
 
 * More screenshots
