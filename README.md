@@ -48,11 +48,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        # https://github.com/actions/checkout
         name: Checkout
         uses: actions/checkout@v2
       -
-        # https://github.com/actions/setup-go
         name: Set up Go
         uses: actions/setup-go@v2
       -
@@ -61,7 +59,6 @@ jobs:
           GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -v -ldflags "-s -w"
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
-        # https://github.com/crazy-max/ghaction-virustotal
         name: VirusTotal Scan
         id: vt
         uses: crazy-max/ghaction-virustotal@v1
@@ -100,7 +97,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        # https://github.com/crazy-max/ghaction-virustotal
         name: VirusTotal Scan
         id: vt
         uses: crazy-max/ghaction-virustotal@v1
@@ -129,7 +125,7 @@ Following inputs can be used as `step.with` keys
 
 | Name          | Type    | Default   | Description                      |
 |---------------|---------|-----------|----------------------------------|
-| `files`       | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis |
+| `files`       | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
 
 ### outputs
 
