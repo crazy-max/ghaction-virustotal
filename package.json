@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/form-data": "^2.5.0",
     "@types/jest": "^25.2.2",
-    "@types/mime": "^2.0.1",
+    "@types/mime": "^2.0.2",
     "@types/node": "^13.13.5",
     "@zeit/ncc": "^0.22.1",
     "dotenv": "^8.2.0",
