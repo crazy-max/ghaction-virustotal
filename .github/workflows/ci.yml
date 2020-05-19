@@ -21,10 +21,12 @@ jobs:
         name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.13
+          go-version: 1.14
       -
         name: Build Windows executables
         run: |
+          cd ./test/app/
+          go mod download
           GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -ldflags "-s -w"
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -ldflags "-s -w"
       -
@@ -33,8 +35,7 @@ jobs:
         uses: ./
         with:
           files: |
-            ./ghaction-virustotal-win32.exe
-            ./ghaction-virustotal-win64.exe
+            ./test/app/ghaction-virustotal-*.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
       -
