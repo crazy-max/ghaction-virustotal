@@ -99,6 +99,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look like this:
+
+![VirusTotal GitHub Action update release body](.res/ghaction-virustotal-release-body.png)
+
 ## Customizing
 
 ### inputs
