@@ -24,7 +24,6 @@ ___
 * [Customizing](#customizing)
   * [inputs](#inputs)
   * [outputs](#outputs)
-  * [environment variables](#environment-variables)
 * [How can I help?](#how-can-i-help)
 * [License](#license)
 
@@ -63,11 +62,10 @@ jobs:
         id: vt
         uses: crazy-max/ghaction-virustotal@v1
         with:
+          vt-api-key: ${{ secrets.VT_API_KEY }}
           files: |
             ./ghaction-virustotal-win32.exe
             ./ghaction-virustotal-win64.exe
-        env:
-          VT_API_KEY: ${{ secrets.VT_API_KEY }}
 ```
 
 ### Scan assets of a published release
@@ -92,11 +90,10 @@ jobs:
         id: vt
         uses: crazy-max/ghaction-virustotal@v1
         with:
+          vt-api-key: ${{ secrets.VT_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             *.exe
-        env:
-          VT_API_KEY: ${{ secrets.VT_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look like this:
@@ -111,10 +108,13 @@ Following inputs can be used as `step.with` keys
 
 | Name                        | Type    | Default   | Description                      |
 |-----------------------------|---------|-----------|----------------------------------|
+| `vt_api_key`                | String  |           | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) to upload assets (**required**) |
 | `files`                     | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
 | `update_release_body`**¹**  | Bool    | `false`   | If enabled, analysis link(s) will be appended to the release body |
+| `github_token`**²**         | String  |           | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` |
 
-> **¹** Only available on if [release event is triggered](#scan-assets-of-a-published-release) for the workflow.
+> * **¹** Only available on if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
+> * **²** Required if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
 
 ### outputs
 
@@ -123,15 +123,6 @@ Following outputs are available
 | Name          | Type    | Description                           |
 |---------------|---------|---------------------------------------|
 | `analysis`    | String  | Analysis results formatted as `asset=analysisURL` (comma separated) |
-
-### environment variables
-
-Following environment variables can be used as `step.env` keys
-
-| Name           | Description                           |
-|----------------|---------------------------------------|
-| `VT_API_KEY  ` | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) required to upload assets |
-| `GITHUB_TOKEN` | [GITHUB_TOKEN](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) as provided by `secrets` |
 
 ## How can I help?
 

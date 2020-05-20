@@ -7,6 +7,9 @@ branding:
   icon: 'activity'
 
 inputs:
+  vt_api_key:
+    description: 'The GitHub token used to create an authenticated client for GitHub API'
+    required: true
   files:
     description: 'Newline-delimited list of path globs for asset files to upload for analysis'
     required: true
@@ -14,6 +17,10 @@ inputs:
     description: 'If enabled, analysis link(s) will be appended to the release body'
     default: 'false'
     required: true
+  github_token:
+    description: 'The GitHub token used to create an authenticated client for GitHub API'
+    default: ${{ github.token }}
+    required: false
 
 outputs:
   analysis:

@@ -10,10 +10,7 @@ let outputAnalysis: string[] = [];
 
 async function run() {
   try {
-    if (!process.env.VT_API_KEY) {
-      core.setFailed('You have to provide a VT_API_KEY');
-      return;
-    }
+    const vtApiKey: string = core.getInput('vt_api_key', {required: true});
 
     inputFiles = await utilm.parseInputFiles(core.getInput('files', {required: true}));
     if (inputFiles.length == 0) {
@@ -22,7 +19,7 @@ async function run() {
     }
 
     const context = utilm.loadContext(process.env);
-    const vt = new VirusTotal(process.env.VT_API_KEY || '');
+    const vt = new VirusTotal(vtApiKey);
 
     if (github.context.eventName == 'release') {
       await runForReleaseEvent(context, vt);
@@ -55,7 +52,8 @@ async function runForLocalFiles(context: utilm.Context, vt: VirusTotal) {
 
 async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
   core.info(`🔔 Release event detected for ${github.context.ref} in this workflow. Preparing to scan assets...`);
-  const octokit = new github.GitHub(process.env['GITHUB_TOKEN'] || '');
+  const githubToken: string = core.getInput('github_token', {required: true});
+  const octokit = new github.GitHub(githubToken);
 
   const release = await githubm.getRelease(octokit, context);
   release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);

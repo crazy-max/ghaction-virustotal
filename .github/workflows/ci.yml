@@ -34,10 +34,9 @@ jobs:
         id: vt
         uses: ./
         with:
+          vt-api-key: ${{ secrets.VT_API_KEY }}
           files: |
             ./tests/app/ghaction-virustotal-*.exe
-        env:
-          VT_API_KEY: ${{ secrets.VT_API_KEY }}
       -
         name: Analysis results
         run: |
