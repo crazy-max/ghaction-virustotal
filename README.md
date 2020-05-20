@@ -68,15 +68,6 @@ jobs:
             ./ghaction-virustotal-win64.exe
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
-      -
-        name: Analysis results
-        run: |
-          IFS=',' read -ra RESULTS <<< "${{ steps.vt.outputs.analysis }}"
-          for i in "${RESULTS[@]}"; do
-            file=$( cut -d '=' -f 1 <<< "$i" )
-            url=$( cut -d '=' -f 2- <<< "$i" )
-            echo "${file} is being analyzed at ${url}"
-          done
 ```
 
 ### Scan assets of a published release
@@ -106,15 +97,6 @@ jobs:
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      -
-        name: Analysis results
-        run: |
-          IFS=',' read -ra RESULTS <<< "${{ steps.vt.outputs.analysis }}"
-          for i in "${RESULTS[@]}"; do
-            file=$( cut -d '=' -f 1 <<< "$i" )
-            url=$( cut -d '=' -f 2- <<< "$i" )
-            echo "${file} is being analyzed at ${url}"
-          done
 ```
 
 ## Customizing
@@ -123,9 +105,12 @@ jobs:
 
 Following inputs can be used as `step.with` keys
 
-| Name          | Type    | Default   | Description                      |
-|---------------|---------|-----------|----------------------------------|
-| `files`       | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
+| Name                        | Type    | Default   | Description                      |
+|-----------------------------|---------|-----------|----------------------------------|
+| `files`                     | String  |           | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
+| `update_release_body`**¹**  | Bool    | `false`   | If enabled, analysis link(s) will be appended to the release body |
+
+> **¹** Only available on if [release event is triggered](#scan-assets-of-a-published-release) for the workflow.
 
 ### outputs
 

@@ -10,6 +10,10 @@ inputs:
   files:
     description: 'Newline-delimited list of path globs for asset files to upload for analysis'
     required: true
+  update_release_body:
+    description: 'If enabled, analysis link(s) will be appended to the release body'
+    default: 'false'
+    required: true
 
 outputs:
   analysis:

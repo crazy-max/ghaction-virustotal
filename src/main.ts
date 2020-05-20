@@ -58,6 +58,8 @@ async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
   const octokit = new github.GitHub(process.env['GITHUB_TOKEN'] || '');
 
   const release = await githubm.getRelease(octokit, context);
+  release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);
+
   const assets = await githubm.getReleaseAssets(octokit, context, release, inputFiles);
   if (assets.length == 0) {
     core.warning(`⚠️ No assets were found for ${release.tag_name} release tag. Please check the 'files' input.`);
@@ -70,8 +72,14 @@ async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
     await vt.upload(await githubm.downloadReleaseAsset(octokit, context, asset, path.join(utilm.tmpDir(), asset.name))).then(upload => {
       outputAnalysis.push(`${asset.name}=${upload.url}`);
       core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
+      release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
     });
   });
+
+  if (/true/i.test(core.getInput('update_release_body'))) {
+    core.info(`📦 Appending analysis link(s) to release body...`);
+    await githubm.updateReleaseBody(octokit, context, release);
+  }
 }
 
 run();
