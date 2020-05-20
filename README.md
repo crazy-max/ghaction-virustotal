@@ -62,7 +62,7 @@ jobs:
         id: vt
         uses: crazy-max/ghaction-virustotal@v2
         with:
-          vt-api-key: ${{ secrets.VT_API_KEY }}
+          vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             ./ghaction-virustotal-win32.exe
             ./ghaction-virustotal-win64.exe
@@ -90,8 +90,8 @@ jobs:
         id: vt
         uses: crazy-max/ghaction-virustotal@v2
         with:
-          vt-api-key: ${{ secrets.VT_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             *.exe
 ```
