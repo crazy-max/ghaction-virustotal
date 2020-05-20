@@ -44,6 +44,6 @@
     "prettier": "^2.0.4",
     "removeNPMAbsolutePaths": "^2.0.0",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   }
 }
