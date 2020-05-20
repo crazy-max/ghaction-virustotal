@@ -77,7 +77,7 @@ async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
   });
 
   if (/true/i.test(core.getInput('update_release_body'))) {
-    core.info(`📦 Appending analysis link(s) to release body...`);
+    core.info(`✍️ Appending analysis link(s) to release body...`);
     await githubm.updateReleaseBody(octokit, context, release);
   }
 }
