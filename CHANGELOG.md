@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0 (2020/05/20)
+
+* Move `VT_API_KEY` and `GITHUB_TOKEN` env vars to `vt_api_key` and `github_token` inputs
+
 ## 1.3.0 (2020/05/20)
 
 * Add `update_release_body` input to append analysis link(s) to the release body

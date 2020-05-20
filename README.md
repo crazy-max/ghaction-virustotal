@@ -113,7 +113,7 @@ Following inputs can be used as `step.with` keys
 | `update_release_body`**¹**  | Bool    | `false`   | If enabled, analysis link(s) will be appended to the release body |
 | `github_token`**²**         | String  |           | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` |
 
-> * **¹** Only available on if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
+> * **¹** Only available if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
 > * **²** Required if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
 
 ### outputs
