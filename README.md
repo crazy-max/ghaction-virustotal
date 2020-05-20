@@ -60,7 +60,7 @@ jobs:
       -
         name: VirusTotal Scan
         id: vt
-        uses: crazy-max/ghaction-virustotal@v1
+        uses: crazy-max/ghaction-virustotal@v2
         with:
           vt-api-key: ${{ secrets.VT_API_KEY }}
           files: |
@@ -88,7 +88,7 @@ jobs:
       -
         name: VirusTotal Scan
         id: vt
-        uses: crazy-max/ghaction-virustotal@v1
+        uses: crazy-max/ghaction-virustotal@v2
         with:
           vt-api-key: ${{ secrets.VT_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
