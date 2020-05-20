@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 (2020/05/20)
+
+* Add `update_release_body` input to append analysis link(s) to the release body
+* Update deps
+
 ## 1.2.0 (2020/05/11)
 
 * More tests
