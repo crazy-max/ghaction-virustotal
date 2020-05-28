@@ -29,7 +29,7 @@
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
     "matcher": "^3.0.0",
-    "mime": "^2.4.5"
+    "mime": "^2.4.6"
   },
   "devDependencies": {
     "@types/form-data": "^2.5.0",
