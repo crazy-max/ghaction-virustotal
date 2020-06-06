@@ -21,7 +21,7 @@ ___
 * [Usage](#usage)
   * [Scan local files](#scan-local-files)
   * [Scan assets of a published release](#scan-assets-of-a-published-release)
-  * [Scan through VirusTotal Monitor](#scan-local-files)
+  * [Scan through VirusTotal Monitor](#scan-through-virustotal-monitor)
 * [Customizing](#customizing)
   * [inputs](#inputs)
   * [outputs](#outputs)
@@ -60,7 +60,6 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Scan
-        id: vt
         uses: crazy-max/ghaction-virustotal@v2
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
@@ -88,7 +87,6 @@ jobs:
     steps:
       -
         name: VirusTotal Scan
-        id: vt
         uses: crazy-max/ghaction-virustotal@v2
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
@@ -131,7 +129,6 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Monitor Scan
-        id: vt
         uses: crazy-max/ghaction-virustotal@v2
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
