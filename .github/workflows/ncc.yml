@@ -1,9 +1,6 @@
 name: ncc
 
 on:
-  repository_dispatch:
-    types:
-      - ncc
   push:
     branches:
       - master

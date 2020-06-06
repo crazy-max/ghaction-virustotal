@@ -13,9 +13,9 @@ let outputAnalysis: string[] = [];
 async function run() {
   try {
     const vtApiKey: string = core.getInput('vt_api_key', {required: true});
-    const inputVtMonitor: boolean = /true/i.test(core.getInput('vt_monitor'));
-    const inputMonitorPath: string = core.getInput('monitor_path') || '/';
 
+    inputVtMonitor = /true/i.test(core.getInput('vt_monitor'));
+    inputMonitorPath = core.getInput('monitor_path') || '/';
     inputFiles = await utilm.parseInputFiles(core.getInput('files', {required: true}));
     if (inputFiles.length == 0) {
       core.setFailed(`You must enter at least one path glob in the input 'files'`);
