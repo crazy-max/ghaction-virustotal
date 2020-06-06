@@ -13,6 +13,14 @@ inputs:
   files:
     description: 'Newline-delimited list of path globs for asset files to upload for analysis'
     required: true
+  vt_monitor:
+    description: 'If enabled, files will be uploaded to VirusTotal Monitor endpoint'
+    default: 'false'
+    required: false
+  monitor_path:
+    description: 'A path relative to current monitor user root folder to upload files'
+    default: '/'
+    required: false
   update_release_body:
     description: 'If enabled, analysis link(s) will be appended to the release body'
     default: 'false'

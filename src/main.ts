@@ -6,11 +6,15 @@ import * as github from '@actions/github';
 import * as path from 'path';
 
 let inputFiles: string[] = [];
+let inputVtMonitor: boolean = false;
+let inputMonitorPath: string;
 let outputAnalysis: string[] = [];
 
 async function run() {
   try {
     const vtApiKey: string = core.getInput('vt_api_key', {required: true});
+    const inputVtMonitor: boolean = /true/i.test(core.getInput('vt_monitor'));
+    const inputMonitorPath: string = core.getInput('monitor_path') || '/';
 
     inputFiles = await utilm.parseInputFiles(core.getInput('files', {required: true}));
     if (inputFiles.length == 0) {
@@ -43,10 +47,17 @@ async function runForLocalFiles(context: utilm.Context, vt: VirusTotal) {
 
   core.info(`📦 ${files.length} file(s) will be sent to VirusTotal for analysis.`);
   await utilm.asyncForEach(files, async filepath => {
-    await vt.upload(filepath).then(upload => {
-      outputAnalysis.push(`${filepath}=${upload.url}`);
-      core.info(`🐛 ${filepath} successfully uploaded. Check detection analysis at ${upload.url}`);
-    });
+    if (inputVtMonitor) {
+      await vt.monitorItems(filepath, inputMonitorPath).then(upload => {
+        outputAnalysis.push(`${filepath}=${upload.url}`);
+        core.info(`🐛 ${filepath} successfully uploaded to monitor. Check detection analysis at ${upload.url}`);
+      });
+    } else {
+      await vt.files(filepath).then(upload => {
+        outputAnalysis.push(`${filepath}=${upload.url}`);
+        core.info(`🐛 ${filepath} successfully uploaded. Check detection analysis at ${upload.url}`);
+      });
+    }
   });
 }
 
@@ -67,11 +78,19 @@ async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
   core.info(`📦 ${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
   await utilm.asyncForEach(assets, async asset => {
     core.info(`⬇️ Downloading ${asset.name}...`);
-    await vt.upload(await githubm.downloadReleaseAsset(octokit, context, asset, path.join(utilm.tmpDir(), asset.name))).then(upload => {
-      outputAnalysis.push(`${asset.name}=${upload.url}`);
-      core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
-      release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
-    });
+    if (inputVtMonitor) {
+      await vt.monitorItems(await githubm.downloadReleaseAsset(octokit, context, asset, path.join(utilm.tmpDir(), asset.name)), inputMonitorPath).then(upload => {
+        outputAnalysis.push(`${asset.name}=${upload.url}`);
+        core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
+        release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
+      });
+    } else {
+      await vt.files(await githubm.downloadReleaseAsset(octokit, context, asset, path.join(utilm.tmpDir(), asset.name))).then(upload => {
+        outputAnalysis.push(`${asset.name}=${upload.url}`);
+        core.info(`🐛 ${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
+        release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
+      });
+    }
   });
 
   if (/true/i.test(core.getInput('update_release_body'))) {

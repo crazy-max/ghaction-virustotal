@@ -21,7 +21,16 @@ describe('virustotal', () => {
 
   it('uploads asset on VirusTotal', async () => {
     let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-    await vt.upload('tests/data/foo/bar.txt').then(upload => {
+    await vt.files('tests/data/foo/bar.txt').then(upload => {
+      console.log(upload);
+      expect(upload.id).not.toBeUndefined();
+      expect(upload.url).not.toBeUndefined();
+    });
+  }, 30000);
+
+  it('uploads asset on VirusTotal Monitor', async () => {
+    let vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY || '');
+    await vt.monitorItems('tests/data/foo/bar.txt', '/test').then(upload => {
       console.log(upload);
       expect(upload.id).not.toBeUndefined();
       expect(upload.url).not.toBeUndefined();
@@ -30,11 +39,11 @@ describe('virustotal', () => {
 
   it('returns analysis info from VirusTotal', async () => {
     let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-    await vt.upload('tests/data/foo/bar.txt').then(upload => {
+    await vt.files('tests/data/foo/bar.txt').then(upload => {
       console.log(upload);
       expect(upload.id).not.toBeUndefined();
       expect(upload.url).not.toBeUndefined();
-      vt.analysis(upload.id).then(analysis => {
+      vt.analyses(upload.id).then(analysis => {
         console.log(analysis);
         expect(analysis.sha256).toEqual('cdf614b868c95c1367f3407bc43f9d74f10dfc0a96b2117808eb68569d6bb568');
       });

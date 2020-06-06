@@ -1,8 +1,10 @@
 import {lstatSync, readFileSync} from 'fs';
 import {getType} from 'mime';
-import {basename} from 'path';
+import {basename, join} from 'path';
 import axios, {AxiosInstance} from 'axios';
 import * as FormData from 'form-data';
+import * as upath from 'upath';
+import * as core from '@actions/core';
 
 interface UploadData {
   id: string;
@@ -36,8 +38,8 @@ export class VirusTotal {
     });
   }
 
-  upload(filepath: string): Promise<UploadData> {
-    const {name, mime, size, file} = asset(filepath);
+  files(filename: string): Promise<UploadData> {
+    const {name, mime, size, file} = asset(filename);
     let fd = new FormData();
     fd.append('file', file, {
       filename: name,
@@ -59,10 +61,37 @@ export class VirusTotal {
       });
   }
 
-  analysis(id: string): Promise<AnalysisMetaFileInfo> {
+  analyses(id: string): Promise<AnalysisMetaFileInfo> {
     return this.instance.get(`/analyses/${id}`).then(analysis => {
       return analysis.data.data.file_info as AnalysisMetaFileInfo;
     });
+  }
+
+  monitorItems(filename: string, path?: string): Promise<UploadData> {
+    const {name, mime, size, file} = asset(filename);
+    let fd = new FormData();
+    fd.append('file', file, {
+      filename: name,
+      contentType: mime,
+      knownLength: size
+    });
+
+    const itemPath: string = upath.toUnix(join(path ? path : '/', name));
+    core.debug(`monitorItems path: ${itemPath}`);
+    fd.append('path', itemPath);
+
+    return this.instance
+      .post('/monitor/items', fd.getBuffer(), {
+        headers: {
+          ...this.instance.defaults.headers,
+          ...fd.getHeaders()
+        }
+      })
+      .then(upload => {
+        const data = upload.data.data as UploadData;
+        data.url = `https://www.virustotal.com/monitor/analyses/item:${data.id}`;
+        return data;
+      });
   }
 }
 
