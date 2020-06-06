@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.0.0
       -
         name: Setup TS
         run: npm install tslint typescript -g
