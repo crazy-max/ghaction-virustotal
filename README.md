@@ -105,7 +105,7 @@ If you set `update_release_body: true` input, analysis link(s) will be appended 
 
 To scan your assets through VirusTotal Monitor you can use the following workflow:
 
-![VirusTotal Monitor Scan](.res/ghaction-virustotal-files.png)
+![VirusTotal Monitor Scan](.res/ghaction-virustotal-monitor.png)
 
 ```yaml
 name: build

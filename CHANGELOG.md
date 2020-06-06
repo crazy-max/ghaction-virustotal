@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 (2020/06/06)
+
+* Add support for VirusTotal Monitor
+* Update deps
+
 ## 2.0.1 (2020/05/20)
 
 * Fix README
