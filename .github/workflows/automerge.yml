@@ -28,3 +28,4 @@ jobs:
           MERGE_LABELS: ":bell: automerge,:game_die: dependencies"
           MERGE_METHOD: squash
           MERGE_COMMIT_MESSAGE: automatic
+          UPDATE_LABELS: ":bell: automerge,:game_die: dependencies"
