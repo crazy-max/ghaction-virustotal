@@ -19,23 +19,12 @@ on:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
     steps:
       -
         name: Automerge
         uses: pascalgn/automerge-action@v0.8.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_LABELS:
+          MERGE_LABELS: ":bell: automerge,:game_die: dependencies"
           MERGE_METHOD: squash
           MERGE_COMMIT_MESSAGE: automatic
-      -
-        name: Dispatch event
-        uses: actions/github-script@v2
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.repos.createDispatchEvent({
-              ...context.repo,
-              event_type: 'ncc'
-            })
