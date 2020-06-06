@@ -11,13 +11,6 @@ interface UploadData {
   url: string;
 }
 
-interface AnalysisMetaFileInfo {
-  md5: string;
-  sha1: string;
-  sha256: string;
-  size: number;
-}
-
 export interface Asset {
   name: string;
   mime: string;
@@ -58,12 +51,6 @@ export class VirusTotal {
         data.url = `https://www.virustotal.com/gui/file-analysis/${data.id}/detection`;
         return data;
       });
-  }
-
-  analyses(id: string): Promise<AnalysisMetaFileInfo> {
-    return this.instance.get(`/analyses/${id}`).then(analysis => {
-      return analysis.data.data.file_info as AnalysisMetaFileInfo;
-    });
   }
 
   monitorItems(filename: string, path?: string): Promise<UploadData> {

@@ -33,15 +33,4 @@ describe('virustotal', () => {
       expect(upload.url).not.toBeUndefined();
     });
   }, 30000);
-
-  it('returns analysis info from VirusTotal', async () => {
-    let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-    await vt.files('tests/data/foo/bar.txt').then(upload => {
-      expect(upload.id).not.toBeUndefined();
-      expect(upload.url).not.toBeUndefined();
-      vt.analyses(upload.id).then(analysis => {
-        expect(analysis.sha256).toEqual('cdf614b868c95c1367f3407bc43f9d74f10dfc0a96b2117808eb68569d6bb568');
-      });
-    });
-  }, 30000);
 });
