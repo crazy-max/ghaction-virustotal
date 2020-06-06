@@ -19,7 +19,13 @@ module.exports =
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		var threw = true;
+/******/ 		try {
+/******/ 			modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 			threw = false;
+/******/ 		} finally {
+/******/ 			if(threw) delete installedModules[moduleId];
+/******/ 		}
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -6667,7 +6673,7 @@ module.exports = [["0","\u0000",127],["8ea1","｡",62],["a1a1","　、。，．�
 /* 215 */
 /***/ (function(module) {
 
-module.exports = {"_from":"@octokit/rest@16.43.1","_id":"@octokit/rest@16.43.1","_inBundle":false,"_integrity":"sha512-gfFKwRT/wFxq5qlNjnW2dh+qh74XgTQ2B179UX5K1HYCluioWj8Ndbgqw2PVqa1NnVJkGHp2ovMpVn/DImlmkw==","_location":"/@octokit/rest","_phantomChildren":{"@octokit/types":"2.12.2","deprecation":"2.3.1","once":"1.4.0"},"_requested":{"type":"version","registry":true,"raw":"@octokit/rest@16.43.1","name":"@octokit/rest","escapedName":"@octokit%2frest","scope":"@octokit","rawSpec":"16.43.1","saveSpec":null,"fetchSpec":"16.43.1"},"_requiredBy":["/@actions/github"],"_resolved":"https://registry.npmjs.org/@octokit/rest/-/rest-16.43.1.tgz","_spec":"16.43.1","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/rest.js/issues"},"bundlesize":[{"path":"./dist/octokit-rest.min.js.gz","maxSize":"33 kB"}],"contributors":[{"name":"Mike de Boer","email":"info@mikedeboer.nl"},{"name":"Fabian Jakobs","email":"fabian@c9.io"},{"name":"Joe Gallo","email":"joe@brassafrax.com"},{"name":"Gregor Martynus","url":"https://github.com/gr2m"}],"dependencies":{"@octokit/auth-token":"^2.4.0","@octokit/plugin-paginate-rest":"^1.1.1","@octokit/plugin-request-log":"^1.0.0","@octokit/plugin-rest-endpoint-methods":"2.4.0","@octokit/request":"^5.2.0","@octokit/request-error":"^1.0.2","atob-lite":"^2.0.0","before-after-hook":"^2.0.0","btoa-lite":"^1.0.0","deprecation":"^2.0.0","lodash.get":"^4.4.2","lodash.set":"^4.3.2","lodash.uniq":"^4.5.0","octokit-pagination-methods":"^1.1.0","once":"^1.4.0","universal-user-agent":"^4.0.0"},"description":"GitHub REST API client for Node.js","devDependencies":{"@gimenete/type-writer":"^0.1.3","@octokit/auth":"^1.1.1","@octokit/fixtures-server":"^5.0.6","@octokit/graphql":"^4.2.0","@types/node":"^13.1.0","bundlesize":"^0.18.0","chai":"^4.1.2","compression-webpack-plugin":"^3.1.0","cypress":"^3.0.0","glob":"^7.1.2","http-proxy-agent":"^4.0.0","lodash.camelcase":"^4.3.0","lodash.merge":"^4.6.1","lodash.upperfirst":"^4.3.1","lolex":"^5.1.2","mkdirp":"^1.0.0","mocha":"^7.0.1","mustache":"^4.0.0","nock":"^11.3.3","npm-run-all":"^4.1.2","nyc":"^15.0.0","prettier":"^1.14.2","proxy":"^1.0.0","semantic-release":"^17.0.0","sinon":"^8.0.0","sinon-chai":"^3.0.0","sort-keys":"^4.0.0","string-to-arraybuffer":"^1.0.0","string-to-jsdoc-comment":"^1.0.0","typescript":"^3.3.1","webpack":"^4.0.0","webpack-bundle-analyzer":"^3.0.0","webpack-cli":"^3.0.0"},"files":["index.js","index.d.ts","lib","plugins"],"homepage":"https://github.com/octokit/rest.js#readme","keywords":["octokit","github","rest","api-client"],"license":"MIT","name":"@octokit/rest","nyc":{"ignore":["test"]},"publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/rest.js.git"},"scripts":{"build":"npm-run-all build:*","build:browser":"npm-run-all build:browser:*","build:browser:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-rest.js --profile --json > dist/bundle-stats.json","build:browser:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-rest.min.js --devtool source-map","build:ts":"npm run -s update-endpoints:typescript","coverage":"nyc report --reporter=html && open coverage/index.html","generate-bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","lint":"prettier --check '{lib,plugins,scripts,test}/**/*.{js,json,ts}' 'docs/*.{js,json}' 'docs/src/**/*' index.js README.md package.json","lint:fix":"prettier --write '{lib,plugins,scripts,test}/**/*.{js,json,ts}' 'docs/*.{js,json}' 'docs/src/**/*' index.js README.md package.json","postvalidate:ts":"tsc --noEmit --target es6 test/typescript-validate.ts","prebuild:browser":"mkdirp dist/","pretest":"npm run -s lint","prevalidate:ts":"npm run -s build:ts","start-fixtures-server":"octokit-fixtures-server","test":"nyc mocha test/mocha-node-setup.js \"test/*/**/*-test.js\"","test:browser":"cypress run --browser chrome","update-endpoints":"npm-run-all update-endpoints:*","update-endpoints:fetch-json":"node scripts/update-endpoints/fetch-json","update-endpoints:typescript":"node scripts/update-endpoints/typescript","validate:ts":"tsc --target es6 --noImplicitAny index.d.ts"},"types":"index.d.ts","version":"16.43.1"};
+module.exports = {"_from":"@octokit/rest@^16.43.1","_id":"@octokit/rest@16.43.1","_inBundle":false,"_integrity":"sha512-gfFKwRT/wFxq5qlNjnW2dh+qh74XgTQ2B179UX5K1HYCluioWj8Ndbgqw2PVqa1NnVJkGHp2ovMpVn/DImlmkw==","_location":"/@octokit/rest","_phantomChildren":{"@types/node":"13.13.5","deprecation":"2.3.1","once":"1.4.0","os-name":"3.1.0"},"_requested":{"type":"range","registry":true,"raw":"@octokit/rest@^16.43.1","name":"@octokit/rest","escapedName":"@octokit%2frest","scope":"@octokit","rawSpec":"^16.43.1","saveSpec":null,"fetchSpec":"^16.43.1"},"_requiredBy":["/@actions/github"],"_resolved":"https://registry.npmjs.org/@octokit/rest/-/rest-16.43.1.tgz","_shasum":"3b11e7d1b1ac2bbeeb23b08a17df0b20947eda6b","_spec":"@octokit/rest@^16.43.1","author":{"name":"Gregor Martynus","url":"https://github.com/gr2m"},"bugs":{"url":"https://github.com/octokit/rest.js/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/octokit-rest.min.js.gz","maxSize":"33 kB"}],"contributors":[{"name":"Mike de Boer","email":"info@mikedeboer.nl"},{"name":"Fabian Jakobs","email":"fabian@c9.io"},{"name":"Joe Gallo","email":"joe@brassafrax.com"},{"name":"Gregor Martynus","url":"https://github.com/gr2m"}],"dependencies":{"@octokit/auth-token":"^2.4.0","@octokit/plugin-paginate-rest":"^1.1.1","@octokit/plugin-request-log":"^1.0.0","@octokit/plugin-rest-endpoint-methods":"2.4.0","@octokit/request":"^5.2.0","@octokit/request-error":"^1.0.2","atob-lite":"^2.0.0","before-after-hook":"^2.0.0","btoa-lite":"^1.0.0","deprecation":"^2.0.0","lodash.get":"^4.4.2","lodash.set":"^4.3.2","lodash.uniq":"^4.5.0","octokit-pagination-methods":"^1.1.0","once":"^1.4.0","universal-user-agent":"^4.0.0"},"deprecated":false,"description":"GitHub REST API client for Node.js","devDependencies":{"@gimenete/type-writer":"^0.1.3","@octokit/auth":"^1.1.1","@octokit/fixtures-server":"^5.0.6","@octokit/graphql":"^4.2.0","@types/node":"^13.1.0","bundlesize":"^0.18.0","chai":"^4.1.2","compression-webpack-plugin":"^3.1.0","cypress":"^3.0.0","glob":"^7.1.2","http-proxy-agent":"^4.0.0","lodash.camelcase":"^4.3.0","lodash.merge":"^4.6.1","lodash.upperfirst":"^4.3.1","lolex":"^5.1.2","mkdirp":"^1.0.0","mocha":"^7.0.1","mustache":"^4.0.0","nock":"^11.3.3","npm-run-all":"^4.1.2","nyc":"^15.0.0","prettier":"^1.14.2","proxy":"^1.0.0","semantic-release":"^17.0.0","sinon":"^8.0.0","sinon-chai":"^3.0.0","sort-keys":"^4.0.0","string-to-arraybuffer":"^1.0.0","string-to-jsdoc-comment":"^1.0.0","typescript":"^3.3.1","webpack":"^4.0.0","webpack-bundle-analyzer":"^3.0.0","webpack-cli":"^3.0.0"},"files":["index.js","index.d.ts","lib","plugins"],"homepage":"https://github.com/octokit/rest.js#readme","keywords":["octokit","github","rest","api-client"],"license":"MIT","name":"@octokit/rest","nyc":{"ignore":["test"]},"publishConfig":{"access":"public"},"release":{"publish":["@semantic-release/npm",{"path":"@semantic-release/github","assets":["dist/*","!dist/*.map.gz"]}]},"repository":{"type":"git","url":"git+https://github.com/octokit/rest.js.git"},"scripts":{"build":"npm-run-all build:*","build:browser":"npm-run-all build:browser:*","build:browser:development":"webpack --mode development --entry . --output-library=Octokit --output=./dist/octokit-rest.js --profile --json > dist/bundle-stats.json","build:browser:production":"webpack --mode production --entry . --plugin=compression-webpack-plugin --output-library=Octokit --output-path=./dist --output-filename=octokit-rest.min.js --devtool source-map","build:ts":"npm run -s update-endpoints:typescript","coverage":"nyc report --reporter=html && open coverage/index.html","generate-bundle-report":"webpack-bundle-analyzer dist/bundle-stats.json --mode=static --no-open --report dist/bundle-report.html","lint":"prettier --check '{lib,plugins,scripts,test}/**/*.{js,json,ts}' 'docs/*.{js,json}' 'docs/src/**/*' index.js README.md package.json","lint:fix":"prettier --write '{lib,plugins,scripts,test}/**/*.{js,json,ts}' 'docs/*.{js,json}' 'docs/src/**/*' index.js README.md package.json","postvalidate:ts":"tsc --noEmit --target es6 test/typescript-validate.ts","prebuild:browser":"mkdirp dist/","pretest":"npm run -s lint","prevalidate:ts":"npm run -s build:ts","start-fixtures-server":"octokit-fixtures-server","test":"nyc mocha test/mocha-node-setup.js \"test/*/**/*-test.js\"","test:browser":"cypress run --browser chrome","update-endpoints":"npm-run-all update-endpoints:*","update-endpoints:fetch-json":"node scripts/update-endpoints/fetch-json","update-endpoints:typescript":"node scripts/update-endpoints/typescript","validate:ts":"tsc --target es6 --noImplicitAny index.d.ts"},"types":"index.d.ts","version":"16.43.1"};
 
 /***/ }),
 /* 216 */,
@@ -9520,6 +9526,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.asyncForEach = exports.tmpDir = exports.loadContext = exports.resolvePaths = exports.parseInputFiles = void 0;
 const glob = __webpack_require__(402);
 const fs_1 = __webpack_require__(747);
 const fs = __webpack_require__(747);
@@ -10365,7 +10372,7 @@ function withDefaults(oldDefaults, newDefaults) {
   });
 }
 
-const VERSION = "6.0.1";
+const VERSION = "6.0.2";
 
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
@@ -18145,7 +18152,7 @@ var isPlainObject = _interopDefault(__webpack_require__(548));
 var nodeFetch = _interopDefault(__webpack_require__(454));
 var requestError = __webpack_require__(463);
 
-const VERSION = "5.4.2";
+const VERSION = "5.4.4";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
@@ -18881,6 +18888,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateReleaseBody = exports.downloadReleaseAsset = exports.getReleaseAssets = exports.getRelease = void 0;
 const fs = __webpack_require__(747);
 const matcher = __webpack_require__(167);
 exports.getRelease = (octokit, context) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33502,182 +33510,7 @@ function childrenIgnored (self, path) {
 
 /***/ }),
 /* 857 */,
-/* 858 */
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-/**
-* upath http://github.com/anodynos/upath/
-*
-* A proxy to `path`, replacing `\` with `/` for all results & new methods to normalize & join keeping leading `./` and add, change, default, trim file extensions.
-* Version 1.1.1 - Compiled on 2019-03-07 10:45:51
-* Repository git://github.com/anodynos/upath
-* Copyright(c) 2019 Angelos Pikoulas <agelos.pikoulas@gmail.com>
-* License MIT
-*/
-
-// Generated by uRequire v0.7.0-beta.33 target: 'lib' template: 'nodejs'
-
-
-var VERSION = '1.1.1'; // injected by urequire-rc-inject-version
-
-var extraFn, extraFunctions, isFunction, isString, isValidExt, name, path, propName, propValue, toUnix, upath, slice = [].slice, indexOf = [].indexOf || function (item) {
-    for (var i = 0, l = this.length; i < l; i++) {
-      if (i in this && this[i] === item)
-        return i;
-    }
-    return -1;
-  }, hasProp = {}.hasOwnProperty;
-path = __webpack_require__(622);
-isFunction = function (val) {
-  return val instanceof Function;
-};
-isString = function (val) {
-  return typeof val === "string" || !!val && typeof val === "object" && Object.prototype.toString.call(val) === "[object String]";
-};
-upath = exports;
-upath.VERSION = typeof VERSION !== "undefined" && VERSION !== null ? VERSION : "NO-VERSION";
-toUnix = function (p) {
-  var double;
-  p = p.replace(/\\/g, "/");
-  double = /\/\//;
-  while (p.match(double)) {
-    p = p.replace(double, "/");
-  }
-  return p;
-};
-for (propName in path) {
-  propValue = path[propName];
-  if (isFunction(propValue)) {
-    upath[propName] = function (propName) {
-      return function () {
-        var args, result;
-        args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-        args = args.map(function (p) {
-          if (isString(p)) {
-            return toUnix(p);
-          } else {
-            return p;
-          }
-        });
-        result = path[propName].apply(path, args);
-        if (isString(result)) {
-          return toUnix(result);
-        } else {
-          return result;
-        }
-      };
-    }(propName);
-  } else {
-    upath[propName] = propValue;
-  }
-}
-upath.sep = "/";
-extraFunctions = {
-  toUnix: toUnix,
-  normalizeSafe: function (p) {
-    p = toUnix(p);
-    if (p.startsWith("./")) {
-      if (p.startsWith("./..") || p === "./") {
-        return upath.normalize(p);
-      } else {
-        return "./" + upath.normalize(p);
-      }
-    } else {
-      return upath.normalize(p);
-    }
-  },
-  normalizeTrim: function (p) {
-    p = upath.normalizeSafe(p);
-    if (p.endsWith("/")) {
-      return p.slice(0, +(p.length - 2) + 1 || 9000000000);
-    } else {
-      return p;
-    }
-  },
-  joinSafe: function () {
-    var p, result;
-    p = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    result = upath.join.apply(null, p);
-    if (p[0].startsWith("./") && !result.startsWith("./")) {
-      result = "./" + result;
-    }
-    return result;
-  },
-  addExt: function (file, ext) {
-    if (!ext) {
-      return file;
-    } else {
-      if (ext[0] !== ".") {
-        ext = "." + ext;
-      }
-      return file + (file.endsWith(ext) ? "" : ext);
-    }
-  },
-  trimExt: function (filename, ignoreExts, maxSize) {
-    var oldExt;
-    if (maxSize == null) {
-      maxSize = 7;
-    }
-    oldExt = upath.extname(filename);
-    if (isValidExt(oldExt, ignoreExts, maxSize)) {
-      return filename.slice(0, +(filename.length - oldExt.length - 1) + 1 || 9000000000);
-    } else {
-      return filename;
-    }
-  },
-  removeExt: function (filename, ext) {
-    if (!ext) {
-      return filename;
-    } else {
-      ext = ext[0] === "." ? ext : "." + ext;
-      if (upath.extname(filename) === ext) {
-        return upath.trimExt(filename);
-      } else {
-        return filename;
-      }
-    }
-  },
-  changeExt: function (filename, ext, ignoreExts, maxSize) {
-    if (maxSize == null) {
-      maxSize = 7;
-    }
-    return upath.trimExt(filename, ignoreExts, maxSize) + (!ext ? "" : ext[0] === "." ? ext : "." + ext);
-  },
-  defaultExt: function (filename, ext, ignoreExts, maxSize) {
-    var oldExt;
-    if (maxSize == null) {
-      maxSize = 7;
-    }
-    oldExt = upath.extname(filename);
-    if (isValidExt(oldExt, ignoreExts, maxSize)) {
-      return filename;
-    } else {
-      return upath.addExt(filename, ext);
-    }
-  }
-};
-isValidExt = function (ext, ignoreExts, maxSize) {
-  if (ignoreExts == null) {
-    ignoreExts = [];
-  }
-  return ext && ext.length <= maxSize && indexOf.call(ignoreExts.map(function (e) {
-    return (e && e[0] !== "." ? "." : "") + e;
-  }), ext) < 0;
-};
-for (name in extraFunctions) {
-  if (!hasProp.call(extraFunctions, name))
-    continue;
-  extraFn = extraFunctions[name];
-  if (upath[name] !== void 0) {
-    throw new Error("path." + name + " already exists.");
-  } else {
-    upath[name] = extraFn;
-  }
-}
-
-;
-
-/***/ }),
+/* 858 */,
 /* 859 */,
 /* 860 */,
 /* 861 */,
@@ -35412,7 +35245,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var request = __webpack_require__(753);
 var universalUserAgent = __webpack_require__(796);
 
-const VERSION = "4.4.0";
+const VERSION = "4.5.0";
 
 class GraphqlError extends Error {
   constructor(request, response) {
@@ -36133,12 +35966,12 @@ function terminator(callback)
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.mimeOrDefault = exports.asset = exports.VirusTotal = void 0;
 const fs_1 = __webpack_require__(747);
 const mime_1 = __webpack_require__(444);
 const path_1 = __webpack_require__(622);
 const axios_1 = __webpack_require__(53);
 const FormData = __webpack_require__(928);
-const upath = __webpack_require__(858);
 const core = __webpack_require__(470);
 class VirusTotal {
     constructor(apiKey) {
@@ -36180,7 +36013,7 @@ class VirusTotal {
             contentType: mime,
             knownLength: size
         });
-        const itemPath = upath.toUnix(path_1.join(path ? path : '/', name));
+        const itemPath = path_1.posix.join(path ? path : '/', name);
         core.debug(`monitorItems path: ${itemPath}`);
         fd.append('path', itemPath);
         return this.instance

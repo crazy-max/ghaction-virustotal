@@ -1,9 +1,8 @@
 import {lstatSync, readFileSync} from 'fs';
 import {getType} from 'mime';
-import {basename, join} from 'path';
+import {basename, posix} from 'path';
 import axios, {AxiosInstance} from 'axios';
 import * as FormData from 'form-data';
-import * as upath from 'upath';
 import * as core from '@actions/core';
 
 interface UploadData {
@@ -76,7 +75,7 @@ export class VirusTotal {
       knownLength: size
     });
 
-    const itemPath: string = upath.toUnix(join(path ? path : '/', name));
+    const itemPath: string = posix.join(path ? path : '/', name);
     core.debug(`monitorItems path: ${itemPath}`);
     fd.append('path', itemPath);
 
