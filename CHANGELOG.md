@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2 (2020/06/07)
+
+* Fix pattern matcher for GitHub releases
+
 ## 2.1.1 (2020/06/06)
 
 * Update README
