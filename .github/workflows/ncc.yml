@@ -30,4 +30,3 @@ jobs:
           title: "Update generated content"
           branch: ncc
           branch-suffix: timestamp
-          labels: ":bell: automerge"
