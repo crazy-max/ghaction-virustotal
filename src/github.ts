@@ -1,7 +1,6 @@
 import * as github from '@actions/github';
 import * as fs from 'fs';
 import {Context} from './util';
-import * as matcher from 'matcher';
 
 export interface Release {
   id: number;
@@ -44,7 +43,11 @@ export const getReleaseAssets = async (octokit: github.GitHub, context: Context,
       })
     )
     .then(assets => {
-      return assets.filter(a => matcher.isMatch(a.name, patterns));
+      return assets.filter(function (asset) {
+        return patterns.some(function (pattern) {
+          return asset.name.match(pattern);
+        });
+      });
     })) as Array<ReleaseAsset>;
 };
 

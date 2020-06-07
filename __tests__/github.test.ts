@@ -27,10 +27,11 @@ describe('github', () => {
       release = await githubm.getRelease(octokit, context);
     }
 
-    assets = await githubm.getReleaseAssets(octokit, context, release, ['*.exe']);
+    assets = await githubm.getReleaseAssets(octokit, context, release, ['ghaction-virustotal-(win32|win64).exe']);
     expect(release).not.toBeUndefined();
     expect(assets.length).toEqual(2);
     expect(assets[0].name).toEqual('ghaction-virustotal-win32.exe');
+    expect(assets[1].name).toEqual('ghaction-virustotal-win64.exe');
   });
 
   it('download a GitHub release asset', async () => {
@@ -38,7 +39,7 @@ describe('github', () => {
       release = await githubm.getRelease(octokit, context);
     }
     if (!assets) {
-      assets = await githubm.getReleaseAssets(octokit, context, release, ['*.exe']);
+      assets = await githubm.getReleaseAssets(octokit, context, release, ['ghaction-virustotal-*.exe']);
     }
 
     const releaseAsset = await githubm.downloadReleaseAsset(octokit, context, assets[0], path.join(utilm.tmpDir(), assets[0].name));

@@ -15,6 +15,7 @@ describe('util', () => {
 
   it('resolves files given a set of paths', async () => {
     expect(util.resolvePaths(['tests/data/**/*'])).toEqual(['tests/data/foo/bar.txt']);
+    expect(util.resolvePaths(['./package*(-lock).json'])).toEqual(['./package-lock.json', './package.json']);
   });
 
   it('loads context for this action', async () => {
