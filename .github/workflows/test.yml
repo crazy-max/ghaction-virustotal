@@ -35,10 +35,6 @@ jobs:
           VT_MONITOR_API_KEY: ${{ secrets.VT_MONITOR_API_KEY}}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       -
-        name: Audit packages
-        run: npm audit --audit-level=high
-        if: matrix.os == 'ubuntu-latest'
-      -
         name: Upload coverage
         uses: codecov/codecov-action@v1.0.7
         if: success()
