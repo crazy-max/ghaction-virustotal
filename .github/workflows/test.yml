@@ -26,10 +26,10 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Install
-        run: npm install
+        run: yarn install
       -
         name: Test
-        run: npm run test
+        run: yarn run test
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
           VT_MONITOR_API_KEY: ${{ secrets.VT_MONITOR_API_KEY}}
