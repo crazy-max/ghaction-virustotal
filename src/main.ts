@@ -64,7 +64,7 @@ async function runForLocalFiles(context: utilm.Context, vt: VirusTotal) {
 async function runForReleaseEvent(context: utilm.Context, vt: VirusTotal) {
   core.info(`🔔 Release event detected for ${github.context.ref} in this workflow. Preparing to scan assets...`);
   const githubToken: string = core.getInput('github_token', {required: true});
-  const octokit = new github.GitHub(githubToken);
+  const octokit = github.getOctokit(githubToken);
 
   const release = await githubm.getRelease(octokit, context);
   release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);

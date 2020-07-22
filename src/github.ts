@@ -1,4 +1,3 @@
-import * as github from '@actions/github';
 import * as fs from 'fs';
 import {Context} from './util';
 
@@ -22,7 +21,7 @@ export interface ReleaseAsset {
   file: Buffer;
 }
 
-export const getRelease = async (octokit: github.GitHub, context: Context): Promise<Release> => {
+export const getRelease = async (octokit, context: Context): Promise<Release> => {
   const tag = context.github_ref.replace('refs/tags/', '');
   return (
     await octokit.repos.getReleaseByTag({
@@ -33,25 +32,21 @@ export const getRelease = async (octokit: github.GitHub, context: Context): Prom
   ).data as Release;
 };
 
-export const getReleaseAssets = async (octokit: github.GitHub, context: Context, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
-  return (await octokit
-    .paginate(
-      octokit.repos.listAssetsForRelease.endpoint.merge({
-        owner: context.github_owner,
-        repo: context.github_repo,
-        release_id: release.id
-      })
-    )
-    .then(assets => {
-      return assets.filter(function (asset) {
-        return patterns.some(function (pattern) {
-          return asset.name.match(pattern);
-        });
-      });
-    })) as Array<ReleaseAsset>;
+export const getReleaseAssets = async (octokit, context: Context, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
+  return (
+    await octokit.paginate(octokit.repos.listReleaseAssets, {
+      owner: context.github_owner,
+      repo: context.github_repo,
+      release_id: release.id
+    })
+  ).filter(function (asset) {
+    return patterns.some(function (pattern) {
+      return asset.name.match(pattern);
+    });
+  }) as Array<ReleaseAsset>;
 };
 
-export const downloadReleaseAsset = async (octokit: github.GitHub, context: Context, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
+export const downloadReleaseAsset = async (octokit, context: Context, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
   return octokit.repos
     .getReleaseAsset({
       owner: context.github_owner,
@@ -69,7 +64,7 @@ export const downloadReleaseAsset = async (octokit: github.GitHub, context: Cont
     });
 };
 
-export const updateReleaseBody = async (octokit: github.GitHub, context: Context, release: Release): Promise<Release> => {
+export const updateReleaseBody = async (octokit, context: Context, release: Release): Promise<Release> => {
   return (
     await octokit.repos.updateRelease({
       owner: context.github_owner,

@@ -10,7 +10,7 @@ const context: utilm.Context = {
   github_ref: 'v1.0.0'
 };
 
-const octokit = new github.GitHub({auth: process.env.GITHUB_TOKEN || ''});
+const octokit = github.getOctokit(process.env.GITHUB_TOKEN || '');
 
 describe('github', () => {
   let release: githubm.Release;
@@ -39,7 +39,7 @@ describe('github', () => {
       release = await githubm.getRelease(octokit, context);
     }
     if (!assets) {
-      assets = await githubm.getReleaseAssets(octokit, context, release, ['ghaction-virustotal-*.exe']);
+      assets = await githubm.getReleaseAssets(octokit, context, release, ['ghaction-virustotal-(win32|win64).exe']);
     }
 
     const releaseAsset = await githubm.downloadReleaseAsset(octokit, context, assets[0], path.join(utilm.tmpDir(), assets[0].name));
