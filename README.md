@@ -145,14 +145,14 @@ jobs:
 
 Following inputs can be used as `step.with` keys
 
-| Name                        | Type    | Default               | Description                      |
-|-----------------------------|---------|-----------------------|----------------------------------|
-| `vt_api_key`                | String  |                       | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) to upload assets (**required**) |
-| `files`                     | String  |                       | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
-| `vt_monitor`                | Bool    | `false`               | If enabled, files will be uploaded to [VirusTotal Monitor](https://developers.virustotal.com/v3.0/reference#monitor) endpoint |
-| `monitor_path`**¹**         | String  | `/`                   | A path relative to current monitor user root folder to upload files |
-| `update_release_body`**²**  | Bool    | `false`               | If enabled, analysis link(s) will be appended to the release body |
-| `github_token`**³**         | String  | `${{ github.token }}` | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` |
+| Name                        | Type    | Description                      |
+|-----------------------------|---------|----------------------------------|
+| `vt_api_key`                | String  | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) to upload assets (**required**) |
+| `files`                     | String  | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**) |
+| `vt_monitor`                | Bool    | If enabled, files will be uploaded to [VirusTotal Monitor](https://developers.virustotal.com/v3.0/reference#monitor) endpoint (default `false`) |
+| `monitor_path`**¹**         | String  | A path relative to current monitor user root folder to upload files (default `/`) |
+| `update_release_body`**²**  | Bool    | If enabled, analysis link(s) will be appended to the release body (default `false`) |
+| `github_token`**³**         | String  | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` (default `${{ github.token }}`) |
 
 > * **¹** Only available if `vt_monitor` is enabled.
 > * **²** Only available if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
