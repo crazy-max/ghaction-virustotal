@@ -23,7 +23,7 @@
   "author": "CrazyMax",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.5",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
