@@ -93,7 +93,7 @@ jobs:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           github_token: ${{ github.token }}
           files: |
-            *.exe
+            .exe$
 ```
 
 If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look like this:
