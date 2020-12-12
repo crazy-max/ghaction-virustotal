@@ -24,21 +24,29 @@ export interface ReleaseAsset {
 export const getRelease = async (octokit, context: Context): Promise<Release> => {
   const tag = context.github_ref.replace('refs/tags/', '');
   return (
-    await octokit.repos.getReleaseByTag({
-      owner: context.github_owner,
-      repo: context.github_repo,
-      tag
-    })
+    await octokit.repos
+      .getReleaseByTag({
+        owner: context.github_owner,
+        repo: context.github_repo,
+        tag
+      })
+      .catch(error => {
+        throw new Error(`Cannot get release ${tag}: ${error}`);
+      })
   ).data as Release;
 };
 
 export const getReleaseAssets = async (octokit, context: Context, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
   return (
-    await octokit.paginate(octokit.repos.listReleaseAssets, {
-      owner: context.github_owner,
-      repo: context.github_repo,
-      release_id: release.id
-    })
+    await octokit
+      .paginate(octokit.repos.listReleaseAssets, {
+        owner: context.github_owner,
+        repo: context.github_repo,
+        release_id: release.id
+      })
+      .catch(error => {
+        throw new Error(`Cannot list assets for release ${release.tag_name}: ${error}`);
+      })
   ).filter(function (asset) {
     return patterns.some(function (pattern) {
       return asset.name.match(pattern);
@@ -61,16 +69,23 @@ export const downloadReleaseAsset = async (octokit, context: Context, asset: Rel
     .then(downloadAsset => {
       fs.writeFileSync(downloadPath, Buffer.from(downloadAsset.data), 'binary');
       return downloadPath;
+    })
+    .catch(error => {
+      throw new Error(`Cannot download release asset ${asset.name} (${asset.id}): ${error}`);
     });
 };
 
 export const updateReleaseBody = async (octokit, context: Context, release: Release): Promise<Release> => {
   return (
-    await octokit.repos.updateRelease({
-      owner: context.github_owner,
-      repo: context.github_repo,
-      release_id: release.id,
-      body: release.body
-    })
+    await octokit.repos
+      .updateRelease({
+        owner: context.github_owner,
+        repo: context.github_repo,
+        release_id: release.id,
+        body: release.body
+      })
+      .catch(error => {
+        throw new Error(`Cannot update release body: ${error}`);
+      })
   ).data as Release;
 };

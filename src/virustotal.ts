@@ -50,6 +50,9 @@ export class VirusTotal {
         const data = upload.data.data as UploadData;
         data.url = `https://www.virustotal.com/gui/file-analysis/${data.id}/detection`;
         return data;
+      })
+      .catch(error => {
+        throw new Error(`Cannot send ${name} to VirusTotal: ${error}`);
       });
   }
 
@@ -77,6 +80,9 @@ export class VirusTotal {
         const data = upload.data.data as UploadData;
         data.url = `https://www.virustotal.com/monitor/analyses/item:${data.id}`;
         return data;
+      })
+      .catch(error => {
+        throw new Error(`Cannot send ${name} to VirusTotal Monitor at ${itemPath}: ${error}`);
       });
   }
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.3.0 (2020/12/12)
+
+* Enhanced error messages output
+* Bump node-fetch from 2.6.0 to 2.6.1 (#59)
+* Bump lodash from 4.17.15 to 4.17.20 (#58)
+* Bump axios from 0.19.2 to 0.21.0 (#56)
+
 ## 2.2.1 (2020/10/01)
 
 * Fix CVE-2020-15228
