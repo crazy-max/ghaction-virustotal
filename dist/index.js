@@ -295,7 +295,7 @@ class VirusTotal {
             return data;
         })
             .catch(error => {
-            throw new Error(`Cannot send ${name} to VirusTotal: ${error}`);
+            throw new Error(`Cannot send ${name} to VirusTotal: ${JSON.stringify(error)}`);
         });
     }
     monitorItems(filename, path) {
@@ -319,7 +319,7 @@ class VirusTotal {
             return data;
         })
             .catch(error => {
-            throw new Error(`Cannot send ${name} to VirusTotal Monitor at ${itemPath}: ${error}`);
+            throw new Error(`Cannot send ${name} to VirusTotal Monitor: ${JSON.stringify(error)}`);
         });
     }
 }
