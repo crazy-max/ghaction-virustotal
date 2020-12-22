@@ -26,7 +26,9 @@ export class VirusTotal {
       baseURL: 'https://www.virustotal.com/api/v3',
       headers: {
         'x-apikey': apiKey
-      }
+      },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity
     });
   }
 
