@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.0 (2020/12/22)
+
+* Fix maxBodyLength limit (#64)
+* Bump node-notifier from 8.0.0 to 8.0.1 (#63)
+* Bump axios from 0.21.0 to 0.21.1 (#62)
+* Bump mime from 2.4.6 to 2.4.7 (#61)
+* JSON stringify Axios error response
+
 ## 2.3.0 (2020/12/12)
 
 * Enhanced error messages output
