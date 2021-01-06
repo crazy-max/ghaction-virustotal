@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.1 (2021/01/06)
+
+* Fix error output
+
 ## 2.4.0 (2020/12/22)
 
 * Fix maxBodyLength limit (#64)

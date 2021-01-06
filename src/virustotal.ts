@@ -54,7 +54,7 @@ export class VirusTotal {
         return data;
       })
       .catch(error => {
-        throw new Error(`Cannot send ${name} to VirusTotal: ${JSON.stringify(error)}`);
+        throw new Error(`Cannot send ${name} to VirusTotal: ${error}`);
       });
   }
 
@@ -84,7 +84,7 @@ export class VirusTotal {
         return data;
       })
       .catch(error => {
-        throw new Error(`Cannot send ${name} to VirusTotal Monitor: ${JSON.stringify(error)}`);
+        throw new Error(`Cannot send ${name} to VirusTotal Monitor at ${itemPath}: ${error}`);
       });
   }
 }
