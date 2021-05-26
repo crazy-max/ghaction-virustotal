@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/crazy-max/ghaction-virustotal" target="_blank"><img height="160" src="https://raw.githubusercontent.com/crazy-max/ghaction-virustotal/master/.res/virustotal-github-actions.png"></a></p>
+<p align="center"><a href="https://github.com/crazy-max/ghaction-virustotal" target="_blank"><img height="160" src="https://raw.githubusercontent.com/crazy-max/ghaction-virustotal/master/.github/virustotal-github-actions.png"></a></p>
 
 <p align="center">
   <a href="https://github.com/crazy-max/ghaction-virustotal/releases/latest"><img src="https://img.shields.io/github/release/crazy-max/ghaction-virustotal.svg?style=flat-square" alt="GitHub release"></a>
@@ -35,7 +35,7 @@ ___
 
 This action can be used to scan local files with VirusTotal:
 
-![VirusTotal GitHub Action](.res/ghaction-virustotal-files.png)
+![VirusTotal GitHub Action](.github/ghaction-virustotal-files.png)
 
 ```yaml
 name: build
@@ -73,7 +73,7 @@ jobs:
 
 You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release) is triggered:
 
-![VirusTotal GitHub Action on release event](.res/ghaction-virustotal-release.png)
+![VirusTotal GitHub Action on release event](.github/ghaction-virustotal-release.png)
 
 ```yaml
 name: released
@@ -98,13 +98,13 @@ jobs:
 
 If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look like this:
 
-![VirusTotal GitHub Action update release body](.res/ghaction-virustotal-release-body.png)
+![VirusTotal GitHub Action update release body](.github/ghaction-virustotal-release-body.png)
 
 ### Scan through VirusTotal Monitor
 
 To scan your assets through VirusTotal Monitor you can use the following workflow:
 
-![VirusTotal Monitor Scan](.res/ghaction-virustotal-monitor.png)
+![VirusTotal Monitor Scan](.github/ghaction-virustotal-monitor.png)
 
 ```yaml
 name: build
@@ -184,7 +184,10 @@ updates:
 
 ## How can I help?
 
-All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon: You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
+All kinds of contributions are welcome :raised_hands:! The most basic way to show your support is to star :star2:
+the project, or to raise issues :speech_balloon: You can also support this project by
+[**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) :clap: or by making a
+[Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely! :rocket:
 
 Thanks again for your support, it is much appreciated! :pray:
 
