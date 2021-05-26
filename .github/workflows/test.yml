@@ -40,3 +40,7 @@ jobs:
         if: success()
         with:
           file: ./coverage/clover.xml
+      -
+        name: Dump context
+        if: always()
+        uses: crazy-max/ghaction-dump-context@v1
