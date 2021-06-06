@@ -4,15 +4,13 @@ import {VirusTotal} from './virustotal';
 import * as core from '@actions/core';
 import * as path from 'path';
 
-let inputFiles: string[] = [];
-let inputVtMonitor: boolean = false;
-let inputMonitorPath: string;
-let outputAnalysis: string[] = [];
 let octokit;
+let inputs: Inputs;
+let outputAnalysis: string[] = [];
 
 async function run() {
   try {
-    const inputs: Inputs = await getInputs();
+    inputs = await getInputs();
     if (inputs.files.length == 0) {
       core.setFailed(`You must enter at least one path glob in the input 'files'`);
       return;
@@ -37,7 +35,7 @@ async function run() {
 }
 
 async function runForLocalFiles(vt: VirusTotal) {
-  const files: string[] = await resolvePaths(inputFiles);
+  const files: string[] = await resolvePaths(inputs.files);
   if (files.length == 0) {
     core.warning(`No files were found. Please check the 'files' input.`);
     return;
@@ -45,8 +43,8 @@ async function runForLocalFiles(vt: VirusTotal) {
 
   await core.group(`${files.length} file(s) will be sent to VirusTotal for analysis`, async () => {
     await asyncForEach(files, async filepath => {
-      if (inputVtMonitor) {
-        await vt.monitorItems(filepath, inputMonitorPath).then(upload => {
+      if (inputs.vtMonitor) {
+        await vt.monitorItems(filepath, inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${filepath}=${upload.url}`);
           core.info(`${filepath} successfully uploaded to monitor. Check detection analysis at ${upload.url}`);
         });
@@ -66,7 +64,7 @@ async function runForReleaseEvent(vt: VirusTotal) {
   const release = await github.getRelease(octokit, github.context().ref.replace('refs/tags/', ''));
   release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);
 
-  const assets = await github.getReleaseAssets(octokit, release, inputFiles);
+  const assets = await github.getReleaseAssets(octokit, release, inputs.files);
   if (assets.length == 0) {
     core.warning(`No assets were found for ${release.tag_name} release tag. Please check the 'files' input.`);
     return;
@@ -76,8 +74,8 @@ async function runForReleaseEvent(vt: VirusTotal) {
   await core.group(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`, async () => {
     await asyncForEach(assets, async asset => {
       core.debug(`Downloading ${asset.name}`);
-      if (inputVtMonitor) {
-        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(tmpDir(), asset.name)), inputMonitorPath).then(upload => {
+      if (inputs.vtMonitor) {
+        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);

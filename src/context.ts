@@ -1,5 +1,4 @@
 import * as glob from 'glob';
-import {lstatSync} from 'fs';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
@@ -57,6 +56,6 @@ export const asyncForEach = async (array, callback) => {
 
 export const resolvePaths = (patterns: string[]): string[] => {
   return patterns.reduce((acc: string[], pattern: string): string[] => {
-    return acc.concat(glob.sync(pattern).filter(path => lstatSync(path).isFile()));
+    return acc.concat(glob.sync(pattern).filter(path => fs.lstatSync(path).isFile()));
   }, []);
 };
