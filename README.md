@@ -25,6 +25,7 @@ ___
 * [Customizing](#customizing)
   * [inputs](#inputs)
   * [outputs](#outputs)
+* [Limitation](#limitation)
 * [Keep up-to-date with GitHub Dependabot](#keep-up-to-date-with-github-dependabot)
 * [How can I help?](#how-can-i-help)
 * [License](#license)
@@ -164,6 +165,26 @@ Following outputs are available
 | Name          | Type    | Description                           |
 |---------------|---------|---------------------------------------|
 | `analysis`    | String  | Analysis results formatted as `<filename>=<analysisURL>` (comma separated) |
+
+## Limitation
+
+`GITHUB_TOKEN` permissions [are limited to the repository](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token#about-the-github_token-secret)
+that contains your workflow.
+
+If you need to handle assets for a private repository, you must therefore create a custom [Personal Access Token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
+with `repo` permissions and [add it as a secret in the repository](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets). If you create a
+secret named `GH_PAT`, the step will look like this:
+
+```yaml
+      -
+        name: VirusTotal Scan
+        uses: crazy-max/ghaction-virustotal@v2
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          files: |
+            .exe$
+          github_token: ${{ secrets.GH_PAT }}
+```
 
 ## Keep up-to-date with GitHub Dependabot
 

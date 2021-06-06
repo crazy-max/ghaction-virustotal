@@ -221,8 +221,6 @@ function runForLocalFiles(vt) {
 function runForReleaseEvent(vt) {
     return __awaiter(this, void 0, void 0, function* () {
         core.info(`Release event detected for ${github.context().ref} in this workflow. Preparing to scan assets...`);
-        const githubToken = core.getInput('github_token', { required: true });
-        const octokit = github.getOctokit(githubToken);
         const release = yield github.getRelease(octokit, github.context().ref.replace('refs/tags/', ''));
         release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);
         const assets = yield github.getReleaseAssets(octokit, release, inputFiles);

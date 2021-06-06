@@ -40,15 +40,6 @@ jobs:
           files: |
             ./tests/app/ghaction-virustotal-(win32|win64).exe
       -
-        name: Analysis results
-        run: |
-          IFS=',' read -ra RESULTS <<< "${{ steps.vt.outputs.analysis }}"
-          for i in "${RESULTS[@]}"; do
-            file=$( cut -d '=' -f 1 <<< "$i" )
-            url=$( cut -d '=' -f 2- <<< "$i" )
-            echo "${file} is being analyzed at ${url}"
-          done
-      -
         name: Dump context
         if: always()
         uses: crazy-max/ghaction-dump-context@v1
