@@ -71,9 +71,8 @@ jobs:
 
 ### Scan assets of a published release
 
-You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release) is triggered:
-
-![VirusTotal GitHub Action on release event](.github/ghaction-virustotal-release.png)
+You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release)
+is triggered:
 
 ```yaml
 name: released
@@ -95,15 +94,14 @@ jobs:
             .exe$
 ```
 
-If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look like this:
+If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look
+like this:
 
 ![VirusTotal GitHub Action update release body](.github/ghaction-virustotal-release-body.png)
 
 ### Scan through VirusTotal Monitor
 
 To scan your assets through VirusTotal Monitor you can use the following workflow:
-
-![VirusTotal Monitor Scan](.github/ghaction-virustotal-monitor.png)
 
 ```yaml
 name: build
