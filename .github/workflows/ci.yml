@@ -38,7 +38,7 @@ jobs:
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
-            ./tests/app/ghaction-virustotal-*.exe
+            ./tests/app/ghaction-virustotal-(win32|win64).exe
       -
         name: Analysis results
         run: |
