@@ -1,5 +1,6 @@
 module.exports = {
   clearMocks: true,
+  coverageDirectory: 'coverage',
   moduleFileExtensions: ['js', 'ts'],
   setupFiles: ["dotenv/config"],
   testEnvironment: 'node',
