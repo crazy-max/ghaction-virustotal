@@ -40,7 +40,6 @@ jobs:
         if: success()
         with:
           file: ./coverage/clover.xml
-          token: ${{ secrets.CODECOV_TOKEN }}
       -
         name: Dump context
         if: always()
