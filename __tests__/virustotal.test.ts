@@ -18,19 +18,27 @@ describe('virustotal', () => {
     expect(file.toString()).toEqual('scan me');
   });
 
-  it('uploads asset on VirusTotal', async () => {
-    let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY || '');
-    await vt.files('tests/data/foo/bar.txt').then(upload => {
-      expect(upload.id).not.toBeUndefined();
-      expect(upload.url).not.toBeUndefined();
-    });
-  }, 30000);
+  (process.env.VT_API_KEY ? it : it.skip)(
+    'uploads asset on VirusTotal',
+    async () => {
+      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
+      await vt.files('tests/data/foo/bar.txt').then(upload => {
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
+      });
+    },
+    30000
+  );
 
-  it('uploads asset on VirusTotal Monitor', async () => {
-    let vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY || '');
-    await vt.monitorItems('tests/data/foo/bar.txt', '/test').then(upload => {
-      expect(upload.id).not.toBeUndefined();
-      expect(upload.url).not.toBeUndefined();
-    });
-  }, 30000);
+  (process.env.VT_MONITOR_API_KEY ? it : it.skip)(
+    'uploads asset on VirusTotal Monitor',
+    async () => {
+      let vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY);
+      await vt.monitorItems('tests/data/foo/bar.txt', '/test').then(upload => {
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
+      });
+    },
+    30000
+  );
 });
