@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import * as core from '@actions/core';
+import {issueCommand} from '@actions/core/lib/command';
 
 let _tmpDir: string;
 
@@ -59,3 +60,8 @@ export const resolvePaths = (patterns: string[]): string[] => {
     return acc.concat(glob.sync(pattern).filter(path => fs.lstatSync(path).isFile()));
   }, []);
 };
+
+// FIXME: Temp fix https://github.com/actions/toolkit/issues/777
+export function setOutput(name: string, value: any): void {
+  issueCommand('set-output', {name}, value);
+}

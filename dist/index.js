@@ -17,12 +17,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolvePaths = exports.asyncForEach = exports.getInputList = exports.getInputs = exports.tmpDir = void 0;
+exports.setOutput = exports.resolvePaths = exports.asyncForEach = exports.getInputList = exports.getInputs = exports.tmpDir = void 0;
 const glob = __webpack_require__(1957);
 const fs = __webpack_require__(5747);
 const path = __webpack_require__(5622);
 const os = __webpack_require__(2087);
 const core = __webpack_require__(2186);
+const command_1 = __webpack_require__(7351);
 let _tmpDir;
 function tmpDir() {
     if (!_tmpDir) {
@@ -67,6 +68,11 @@ exports.resolvePaths = (patterns) => {
         return acc.concat(glob.sync(pattern).filter(path => fs.lstatSync(path).isFile()));
     }, []);
 };
+// FIXME: Temp fix https://github.com/actions/toolkit/issues/777
+function setOutput(name, value) {
+    command_1.issueCommand('set-output', { name }, value);
+}
+exports.setOutput = setOutput;
 //# sourceMappingURL=context.js.map
 
 /***/ }),
@@ -156,7 +162,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const context_1 = __webpack_require__(3842);
+const context = __webpack_require__(3842);
 const github = __webpack_require__(5928);
 const virustotal_1 = __webpack_require__(2826);
 const core = __webpack_require__(2186);
@@ -167,7 +173,7 @@ let outputAnalysis = [];
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            inputs = yield context_1.getInputs();
+            inputs = yield context.getInputs();
             if (inputs.files.length == 0) {
                 core.setFailed(`You must enter at least one path glob in the input 'files'`);
                 return;
@@ -181,7 +187,7 @@ function run() {
                 yield runForLocalFiles(vt);
             }
             yield core.group(`Setting output analysis`, () => __awaiter(this, void 0, void 0, function* () {
-                core.setOutput('analysis', outputAnalysis.join(','));
+                context.setOutput('analysis', outputAnalysis.join(','));
                 core.info(`analysis=${outputAnalysis.join(',')}`);
             }));
         }
@@ -192,13 +198,13 @@ function run() {
 }
 function runForLocalFiles(vt) {
     return __awaiter(this, void 0, void 0, function* () {
-        const files = yield context_1.resolvePaths(inputs.files);
+        const files = yield context.resolvePaths(inputs.files);
         if (files.length == 0) {
             core.warning(`No files were found. Please check the 'files' input.`);
             return;
         }
         yield core.group(`${files.length} file(s) will be sent to VirusTotal for analysis`, () => __awaiter(this, void 0, void 0, function* () {
-            yield context_1.asyncForEach(files, (filepath) => __awaiter(this, void 0, void 0, function* () {
+            yield context.asyncForEach(files, (filepath) => __awaiter(this, void 0, void 0, function* () {
                 if (inputs.vtMonitor) {
                     yield vt.monitorItems(filepath, inputs.monitorPath).then(upload => {
                         outputAnalysis.push(`${filepath}=${upload.url}`);
@@ -227,17 +233,17 @@ function runForReleaseEvent(vt) {
         }
         core.info(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
         yield core.group(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`, () => __awaiter(this, void 0, void 0, function* () {
-            yield context_1.asyncForEach(assets, (asset) => __awaiter(this, void 0, void 0, function* () {
+            yield context.asyncForEach(assets, (asset) => __awaiter(this, void 0, void 0, function* () {
                 core.debug(`Downloading ${asset.name}`);
                 if (inputs.vtMonitor) {
-                    yield vt.monitorItems(yield github.downloadReleaseAsset(octokit, asset, path.join(context_1.tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
+                    yield vt.monitorItems(yield github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
                         outputAnalysis.push(`${asset.name}=${upload.url}`);
                         core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
                         release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
                     });
                 }
                 else {
-                    yield vt.files(yield github.downloadReleaseAsset(octokit, asset, path.join(context_1.tmpDir(), asset.name))).then(upload => {
+                    yield vt.files(yield github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name))).then(upload => {
                         outputAnalysis.push(`${asset.name}=${upload.url}`);
                         core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
                         release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
