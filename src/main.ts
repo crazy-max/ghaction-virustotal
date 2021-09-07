@@ -1,16 +1,16 @@
-import {getInputs, Inputs, tmpDir, asyncForEach, resolvePaths} from './context';
+import * as context from './context';
 import * as github from './github';
 import {VirusTotal} from './virustotal';
 import * as core from '@actions/core';
 import * as path from 'path';
 
 let octokit;
-let inputs: Inputs;
+let inputs: context.Inputs;
 let outputAnalysis: string[] = [];
 
 async function run() {
   try {
-    inputs = await getInputs();
+    inputs = await context.getInputs();
     if (inputs.files.length == 0) {
       core.setFailed(`You must enter at least one path glob in the input 'files'`);
       return;
@@ -26,7 +26,7 @@ async function run() {
     }
 
     await core.group(`Setting output analysis`, async () => {
-      core.setOutput('analysis', outputAnalysis.join(','));
+      context.setOutput('analysis', outputAnalysis.join(','));
       core.info(`analysis=${outputAnalysis.join(',')}`);
     });
   } catch (error) {
@@ -35,14 +35,14 @@ async function run() {
 }
 
 async function runForLocalFiles(vt: VirusTotal) {
-  const files: string[] = await resolvePaths(inputs.files);
+  const files: string[] = await context.resolvePaths(inputs.files);
   if (files.length == 0) {
     core.warning(`No files were found. Please check the 'files' input.`);
     return;
   }
 
   await core.group(`${files.length} file(s) will be sent to VirusTotal for analysis`, async () => {
-    await asyncForEach(files, async filepath => {
+    await context.asyncForEach(files, async filepath => {
       if (inputs.vtMonitor) {
         await vt.monitorItems(filepath, inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${filepath}=${upload.url}`);
@@ -72,16 +72,16 @@ async function runForReleaseEvent(vt: VirusTotal) {
 
   core.info(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
   await core.group(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`, async () => {
-    await asyncForEach(assets, async asset => {
+    await context.asyncForEach(assets, async asset => {
       core.debug(`Downloading ${asset.name}`);
       if (inputs.vtMonitor) {
-        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
+        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
         });
       } else {
-        await vt.files(await github.downloadReleaseAsset(octokit, asset, path.join(tmpDir(), asset.name))).then(upload => {
+        await vt.files(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name))).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n* [\`${asset.name}\`](${upload.url})`);
