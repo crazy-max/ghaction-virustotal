@@ -36,9 +36,9 @@ function getInputs() {
         return {
             vtApiKey: core.getInput('vt_api_key'),
             files: yield getInputList('files'),
-            vtMonitor: /true/i.test(core.getInput('vt_monitor')),
+            vtMonitor: core.getBooleanInput('vt_monitor'),
             monitorPath: core.getInput('monitor_path') || '/',
-            updateReleaseBody: /true/i.test(core.getInput('update_release_body')),
+            updateReleaseBody: core.getBooleanInput('update_release_body'),
             githubToken: core.getInput('github_token')
         };
     });
