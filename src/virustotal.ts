@@ -25,7 +25,7 @@ export class VirusTotal {
     this.instance = axios.create({
       baseURL: 'https://www.virustotal.com/api/v3',
       headers: {
-        'x-apikey': apiKey
+        'x-apikey': apiKey ?? ''
       },
       maxContentLength: Infinity,
       maxBodyLength: Infinity
@@ -43,10 +43,7 @@ export class VirusTotal {
 
     return this.instance
       .post('/files', fd.getBuffer(), {
-        headers: {
-          ...this.instance.defaults.headers,
-          ...fd.getHeaders()
-        }
+        headers: fd.getHeaders()
       })
       .then(upload => {
         const data = upload.data.data as UploadData;
@@ -73,10 +70,7 @@ export class VirusTotal {
 
     return this.instance
       .post('/monitor/items', fd.getBuffer(), {
-        headers: {
-          ...this.instance.defaults.headers,
-          ...fd.getHeaders()
-        }
+        headers: fd.getHeaders()
       })
       .then(upload => {
         const data = upload.data.data as UploadData;
