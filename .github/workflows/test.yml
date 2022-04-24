@@ -3,33 +3,30 @@ name: test
 on:
   push:
     branches:
-      - master
-      - releases/v*
-    paths-ignore:
-      - '**.md'
+      - 'master'
+      - 'releases/v*'
   pull_request:
-    paths-ignore:
-      - '**.md'
+    branches:
+      - 'master'
+      - 'releases/v*'
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
+    runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Install
-        run: yarn install
+        name: Validate
+        uses: docker/bake-action@v1
+        with:
+          targets: validate
       -
         name: Test
-        run: yarn run test
+        uses: docker/bake-action@v1
+        with:
+          targets: test
         env:
           VT_API_KEY: ${{ secrets.VT_API_KEY }}
           VT_MONITOR_API_KEY: ${{ secrets.VT_MONITOR_API_KEY}}
@@ -37,10 +34,5 @@ jobs:
       -
         name: Upload coverage
         uses: codecov/codecov-action@v3
-        if: success()
         with:
           file: ./coverage/clover.xml
-      -
-        name: Dump context
-        if: always()
-        uses: crazy-max/ghaction-dump-context@v1

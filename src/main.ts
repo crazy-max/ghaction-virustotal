@@ -6,7 +6,7 @@ import * as path from 'path';
 
 let octokit;
 let inputs: context.Inputs;
-let outputAnalysis: string[] = [];
+const outputAnalysis: string[] = [];
 
 async function run() {
   try {

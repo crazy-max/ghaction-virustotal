@@ -62,6 +62,6 @@ export const resolvePaths = (patterns: string[]): string[] => {
 };
 
 // FIXME: Temp fix https://github.com/actions/toolkit/issues/777
-export function setOutput(name: string, value: any): void {
+export function setOutput(name: string, value: unknown): void {
   issueCommand('set-output', {name}, value);
 }

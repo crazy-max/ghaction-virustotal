@@ -1,3 +1,4 @@
+import {describe, expect, it} from '@jest/globals';
 import {mimeOrDefault, asset, VirusTotal} from '../src/virustotal';
 
 describe('virustotal', () => {
@@ -21,9 +22,11 @@ describe('virustotal', () => {
   (process.env.VT_API_KEY ? it : it.skip)(
     'uploads asset on VirusTotal',
     async () => {
-      let vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
+      const vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
       await vt.files('tests/data/foo/bar.txt').then(upload => {
+        // eslint-disable-next-line jest/no-standalone-expect
         expect(upload.id).not.toBeUndefined();
+        // eslint-disable-next-line jest/no-standalone-expect
         expect(upload.url).not.toBeUndefined();
       });
     },
@@ -33,9 +36,11 @@ describe('virustotal', () => {
   (process.env.VT_MONITOR_API_KEY ? it : it.skip)(
     'uploads asset on VirusTotal Monitor',
     async () => {
-      let vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY);
+      const vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY);
       await vt.monitorItems('tests/data/foo/bar.txt', '/test').then(upload => {
+        // eslint-disable-next-line jest/no-standalone-expect
         expect(upload.id).not.toBeUndefined();
+        // eslint-disable-next-line jest/no-standalone-expect
         expect(upload.url).not.toBeUndefined();
       });
     },
