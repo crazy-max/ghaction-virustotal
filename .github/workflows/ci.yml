@@ -29,10 +29,10 @@ jobs:
       -
         name: Build Windows executables
         run: |
-          cd ./tests/app/
           go mod download
           GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -ldflags "-s -w"
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -ldflags "-s -w"
+        working-directory: ./tests/app/
       -
         name: VirusTotal scan
         id: vt
@@ -40,7 +40,7 @@ jobs:
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
-            ./tests/app/ghaction-virustotal-(win32|win64).exe
+            ./tests/app/*.exe
       -
         name: Dump context
         if: always()
