@@ -1,3 +1,4 @@
+import {beforeEach, describe, expect, it, jest} from '@jest/globals';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
@@ -16,11 +17,9 @@ jest.spyOn(context, 'tmpDir').mockImplementation((): string => {
   return tmpDir;
 });
 
-jest.spyOn(github, 'context').mockImplementation(
-  (): Context => {
-    return new Context();
-  }
-);
+jest.spyOn(github, 'context').mockImplementation((): Context => {
+  return new Context();
+});
 
 beforeEach(() => {
   Object.keys(process.env).forEach(function (key) {
@@ -68,6 +67,7 @@ describe('github', () => {
     }
 
     const releaseAsset = await github.downloadReleaseAsset(octokit, assets[0], path.join(context.tmpDir(), assets[0].name));
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {name, size, mime, file} = asset(releaseAsset);
     expect(size).toEqual(4391936);
     expect(mime).toEqual('application/octet-stream');

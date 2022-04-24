@@ -34,7 +34,7 @@ export class VirusTotal {
 
   files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append('file', file, {
       filename: name,
       contentType: mime,
@@ -60,7 +60,7 @@ export class VirusTotal {
 
   monitorItems(filename: string, path?: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
-    let fd = new FormData();
+    const fd = new FormData();
     fd.append('file', file, {
       filename: name,
       contentType: mime,
