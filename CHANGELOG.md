@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.5.0 (2022/05/26)
+
+* Update dev dependencies and workflow (#111)
+* Handle latest Octokit definitions (#78)
+* Fix setOutput (#87)
+* Use `core.getBooleanInput` (#86)
+* Fix inputs and release event
+* Bump @actions/core from 1.2.6 to 1.6.0 (#76 #82 #91)
+* Bump @actions/github from 5.0.0 to 5.0.1 (#112)
+* Bump axios from 0.21.1 to 0.26.1 (#84 #85 #106)
+* Bump mime from 2.4.7 to 3.0.0 (#67 #95)
+* Bump node-fetch from 2.6.1 to 2.6.7 (#104)
+* Bump follow-redirects from 1.14.3 to 1.14.9 (#105)
+* Bump minimist from 1.2.5 to 1.2.6 (#107)
+* Bump ansi-regex from 5.0.0 to 5.0.1 (#90)
+* Bump tmpl from 1.0.4 to 1.0.5 (#89)
+* Bump path-parse from 1.0.6 to 1.0.7 (#81)
+* Bump form-data from 3.0.0 to 4.0.0 (#66)
+* Bump y18n from 4.0.0 to 4.0.3 (#70)
+* Bump hosted-git-info from 2.8.8 to 2.8.9 (#72)
+* Bump lodash from 4.17.20 to 4.17.21 (#71)
+* Bump ws from 7.3.0 to 7.4.6 (#77)
+
 ## 2.4.1 (2021/01/06)
 
 * Fix error output
