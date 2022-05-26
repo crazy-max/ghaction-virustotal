@@ -60,7 +60,7 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v2
+        uses: crazy-max/ghaction-virustotal@v3
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
@@ -86,7 +86,7 @@ jobs:
     steps:
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v2
+        uses: crazy-max/ghaction-virustotal@v3
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
@@ -126,7 +126,7 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Monitor Scan
-        uses: crazy-max/ghaction-virustotal@v2
+        uses: crazy-max/ghaction-virustotal@v3
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           vt_monitor: true
