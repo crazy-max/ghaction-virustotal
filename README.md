@@ -49,10 +49,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
       -
         name: Build
         run: |
@@ -115,10 +115,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Set up Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
       -
         name: Build
         run: |
