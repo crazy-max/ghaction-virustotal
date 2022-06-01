@@ -1,0 +1,143 @@
+DefaultTimeZone;Sistem Varsayılan Saat Dilimi
+Pacific/Midway;(GMT-11:00) Midway Adası, Samoa
+Pacific/Pago_Pago;(GMT-11:00) Pago Pago
+Pacific/Honolulu;(GMT-10:00) Hawai
+America/Anchorage;(GMT-09:00) Alaska
+America/Juneau;(GMT-09:00) Juneau
+America/Vancouver;(GMT-08:00) Vancouver
+America/Los_Angeles;(GMT-08:00) Pasifik Saati (ABD ve Kanada)
+America/Tijuana;(GMT-08:00) Tijuana
+America/Edmonton;(GMT-07:00) Edmonton
+America/Denver;(GMT-07:00) Mountain Saati (ABD ve Kanada)
+America/Phoenix;(GMT-07:00) Arizona
+America/Mazatlan;(GMT-07:00) Mazatlan
+America/Chihuahua;(GMT-07:00) Chihuahua
+America/Winnipeg;(GMT-06:00) Winnipeg
+America/Regina;(GMT-06:00) Saskatchewan
+America/Chicago;(GMT-06:00) Merkezi Saat (ABD ve Kanada)
+America/Mexico_City;(GMT-06:00) Mexico City
+America/Guatemala;(GMT-06:00) Guatemala
+America/El_Salvador;(GMT-06:00) El Salvador
+America/Managua;(GMT-06:00) Managua
+America/Costa_Rica;(GMT-06:00) Kosta Rika
+America/Tegucigalpa;(GMT-06:00) Tegucigalpa
+America/Monterrey;(GMT-06:00) Monterrey
+America/Montreal;(GMT-05:00) Montreal
+America/New_York;(GMT-05:00) Doğu Saati (ABD ve Kanada)
+America/Indianapolis;(GMT-05:00) Indiana (Doğu)
+America/Panama;(GMT-05:00) Panama
+America/Bogota;(GMT-05:00) Bogota
+America/Lima;(GMT-05:00) Lima
+America/Halifax;(GMT-04:00) Halifax
+America/Puerto_Rico;(GMT-04:00) Porto Riko
+America/Caracas;(GMT-04:00) Karakas
+Canada/Atlantic;(GMT-04:00) Atlantik Saati (Kanada)
+America/La_Paz;(GMT-04:00) La Paz
+America/Santiago;(GMT-04:00) Santiago
+America/Guyana;(GMT-4:00) Guyana
+America/St_Johns;(GMT-03:30) Newfoundland ve Labrador
+America/Montevideo;(GMT-03:30) Montevideo
+America/Araguaina;(GMT-03:00) Recife
+America/Argentina/Buenos_Aires;(GMT-03:00) Buenos Aires, Georgetown
+America/Godthab;(GMT-03:00) Grönland
+America/Sao_Paulo;(GMT-03:00) Sao Paulo
+Atlantic/Azores;(GMT-01:00) Azor Adaları
+Atlantic/Cape_Verde;(GMT-01:00) Cape Verde Adaları
+UTC;(GMT+00:00) Evrensel Saat UTC
+Etc/Greenwich;(GMT+00:00) Greenwich Ortalama Saati
+Atlantic/Reykjavik;(GMT+00:00) Reykjavik
+Europe/Dublin;(GMT+00:00) Dublin
+Europe/London;(GMT+00:00) Londra
+Europe/Lisbon;(GMT+00:00) Lizbon
+Africa/Casablanca;(GMT+00:00) Kazablanka
+Africa/Nouakchott;(GMT+00:00) Nuakşot
+Europe/Belgrade;(GMT+01:00) Belgrad, Bratislava, Ljubljana
+CET;(GMT+01:00) Saraybosna, Üsküp, Zagreb
+Europe/Oslo;(GMT+01:00) Oslo
+Europe/Stockholm;(GMT+01:00) Stockholm
+Europe/Copenhagen;(GMT+01:00) Kopenhag
+Europe/Berlin;(GMT+01:00) Berlin
+Europe/Amsterdam;(GMT+01:00) Amsterdam
+Europe/Brussels;(GMT+01:00) Brüksel
+Europe/Luxembourg;(GMT+01:00) Lüksemburg
+Europe/Paris;(GMT+01:00) Paris
+Europe/Zurich;(GMT+01:00) Zürih
+Europe/Madrid;(GMT+01:00) Madrid
+Africa/Bangui;(GMT+1:00) Batı Orta Afrika
+Europe/Rome;(GMT+01:00) Roma
+Africa/Algiers;(GMT+01:00) Cezayir
+Africa/Tunis;(GMT+01:00) Tunus
+Europe/Warsaw;(GMT+01:00) Varşova
+Europe/Prague;(GMT+01:00) Prag Bratislava
+Europe/Vienna;(GMT+01:00) Viyana
+Europe/Budapest;(GMT+01:00) Budapeşte
+Europe/Helsinki;(GMT+02:00) Helsinki
+Africa/Harare;(GMT+02:00) Harare, Pretoria
+Europe/Sofia;(GMT+02:00) Sofya
+Europe/Istanbul;(GMT+02:00) İstanbul
+Europe/Athens;(GMT+02:00) Atina
+Europe/Bucharest;(GMT+2:00) Bükreş
+Asia/Nicosia;(GMT+02:00) Lefkoşa
+Asia/Beirut;(GMT+02:00) Beyrut
+Asia/Damascus;(GMT+02:00) Şam
+Asia/Jerusalem;(GMT+02:00) Kudüs
+Asia/Amman;(GMT+02:00) Amman
+Africa/Tripoli;(GMT+02:00) Trablus
+Africa/Cairo;(GMT+02:00) Kahire
+Africa/Johannesburg;(GMT+02:00) Johannesburg
+Europe/Kiev;(GMT+02:00) Kiev
+Africa/Nairobi;(GMT+03:00) Nairobi
+Europe/Moscow;(GMT+03:00) Moskova
+Asia/Baghdad;(GMT+03:00) Bağdat
+Asia/Kuwait;(GMT+03:00) Kuveyt
+Asia/Riyadh;(GMT+03:00) Riyad
+Asia/Bahrain;(GMT+03:00) Bahreyn
+Asia/Qatar;(GMT+03:00) Katar
+Asia/Aden;(GMT+03:00) Aden
+Africa/Khartoum;(GMT+03:00) Hartum
+Africa/Djibouti;(GMT+03:00) Cibuti
+Africa/Mogadishu;(GMT+03:00) Mogadişu
+Europe/Minsk;(GMT+03:00) Minsk
+Asia/Tehran;(GMT+03:30) Tahran
+Asia/Dubai;(GMT+04:00) Dubai
+Asia/Muscat;(GMT+04:00) Maskat
+Asia/Baku;(GMT+04:00) Bakü, Tiflis, Erivan
+Asia/Kabul;(GMT+04:30) Kabil
+Asia/Yekaterinburg;(GMT+05:00) Yekaterinburg
+Asia/Tashkent;(GMT+05:00) İslamabad, Karaçi, Taşkent
+Asia/Calcutta;(GMT+05:30) Hindistan
+Asia/Novosibirsk;(GMT+06:00) Novosibirsk
+Asia/Kolkata;(GMT+05:30) Bombay, Kalküta, Yeni Delhi
+Asia/Kathmandu;(GMT+5:45) Katmandu
+Asia/Almaty;(GMT+06:00) Almatı
+Asia/Dacca;(GMT+06:00) Dacca
+Asia/Dhaka;(GMT+06:00) Astana, Dakka
+Asia/Rangoon;(GMT+06:30) Rangoon
+Asia/Krasnoyarsk;(GMT+07:00) Krasnoyarsk
+Asia/Bangkok;(GMT+07:00) Bangkok
+Asia/Saigon;(GMT+07:00) Vietnam
+Asia/Jakarta;(GMT+07:00) Cakarta
+Asia/Irkutsk;(GMT+08:00) Irkutsk, Ulan Batur
+Asia/Shanghai;(GMT+08:00) Pekin, Şanghay
+Asia/Hong_Kong;(GMT+08:00) Hong Kong
+Asia/Taipei;(GMT+08:00) Taipei
+Asia/Kuala_Lumpur;(GMT+08:00) Kuala Lumpur
+Asia/Singapore;(GMT+08:00) Singapur
+Australia/Perth;(GMT+08:00) Perth
+Asia/Yakutsk;(GMT+09:00) Yakutsk
+Asia/Seoul;(GMT+09:00) Seul
+Asia/Tokyo;(GMT+09:00) Osaka, Sapporo, Tokyo
+Australia/Darwin;(GMT+09:30) Darwin
+Australia/Adelaide;(GMT+09:30) Adelaide
+Asia/Vladivostok;(GMT+10:00) Vladivostok
+Pacific/Port_Moresby;(GMT+10:00) Guam, Port Moresby
+Australia/Brisbane;(GMT+10:00) Brisbane
+Australia/Sydney;(GMT+10:00) Canberra, Melbourne, Sidney
+Australia/Hobart;(GMT+10:00) Hobart
+Asia/Magadan;(GMT+11:00) Magadan
+SST;(GMT+11:00) Solomon Adaları
+Pacific/Noumea;(GMT+11:00) Yeni Kaledonya
+Asia/Kamchatka;(GMT+12:00) Kamçatka
+Pacific/Auckland;(GMT+12:00) Auckland, Wellington
+Pacific/Fiji;(GMT+12:00) Fiji Adaları, Marshall Adaları
+Pacific/Apia;(GMT+13:00) Bağımsız Samoa Devleti

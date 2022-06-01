@@ -1,0 +1,56 @@
+54,Argentina,AR
+61,Australia,AU
+973,Bahrain,BH
+32,Belgium,BE
+55,Brazil,BR
+359,Bulgaria,BG
+1,Canada,CA
+56,Chile,CL
+86,China,CN
+57,Colombia,CO
+357,Cyprus,CY
+420,Czech Republic,CZ
+45,Denmark,DK
+1890,Dominica Republic,DO
+503,El Salvador,SV
+372,Estonia,EE
+358,Finland,FI
+33,France,FR
+995,Georgia,GE
+49,Germany,DE
+30,Greece,GR
+882,Hong Kong,HK
+36,Hungary,HU
+91,India,IN
+353,Ireland,IE
+972,Israel,IL
+39,Italy,IT
+81,Japan,JP
+371,Latvia,LV
+370,Lithuania,LT
+352,Luxembourg,LU
+356,Malta,MT
+52,Mexico,MX
+31,Netherlands,NL
+64,New Zealand,NZ
+47,Norway,NO
+507,Panama,PA
+51,Peru,PE
+63,Philippines,PH
+48,Poland,PL
+351,Portugal,PT
+1787,Puerto Rico,PR
+40,Romania,RO
+65,Singapore,SG
+421,Slovakia,SK
+386,Slovenia,SI
+27,South Africa,ZA
+82,Korea,KR
+34,Spain,ES
+46,Sweden,SE
+41,Switzerland,CH
+886,Taiwan,TW
+44,United Kingdom,GB
+1,United States,US
+58,Venezuela,VE
+84,Vietnam,VN

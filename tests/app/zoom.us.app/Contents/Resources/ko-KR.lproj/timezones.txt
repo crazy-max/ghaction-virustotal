@@ -1,0 +1,149 @@
+DefaultTimeZone;System Default Time Zone
+Pacific/Midway;(GMT-11:00) 미드웨이 제도, 사모아
+Pacific/Pago_Pago;(GMT-11:00) 파고파고
+Pacific/Honolulu;(GMT-10:00) 하와이
+America/Anchorage;(GMT-09:00) 알래스카
+America/Juneau;(GMT-09:00) 주노
+America/Vancouver;(GMT-08:00) 밴쿠버
+America/Los_Angeles;(GMT-08:00) 태평양 표준시(미국 및 캐나다)
+America/Tijuana;(GMT-08:00) 티후아나
+America/Edmonton;(GMT-07:00) 에드먼턴
+America/Denver;(GMT-07:00) 산지 표준시(미국 및 캐나다)
+America/Phoenix;(GMT-07:00) 애리조나
+America/Mazatlan;(GMT-07:00) 마사틀란
+America/Chihuahua;(GMT-07:00) 치와와
+America/Whitehorse;(GMT-07:00) 유콘
+America/Winnipeg;(GMT-06:00) 위니펙
+America/Regina;(GMT-06:00) 서스캐처원
+America/Chicago;(GMT-06:00) 중부 표준시(미국 및 캐나다)
+America/Mexico_City;(GMT-06:00) 멕시코 시티
+America/Guatemala;(GMT-06:00) 과테말라
+America/El_Salvador;(GMT-06:00) 엘살바도르
+America/Managua;(GMT-06:00) 마나과
+America/Costa_Rica;(GMT-06:00) 코스타리카
+America/Tegucigalpa;(GMT-06:00) 테구시갈파
+America/Monterrey;(GMT-06:00) 몬테레이
+America/Montreal;(GMT-05:00) 몬트리올
+America/New_York;(GMT-05:00) 동부 표준시(미국 및 캐나다)
+America/Indianapolis;(GMT-05:00) 인디애나(동부)
+America/Panama;(GMT-05:00) 파나마
+America/Bogota;(GMT-05:00) 보고타
+America/Lima;(GMT-05:00) 리마
+America/Eirunepe;(GMT-05:00) 아크레
+America/Halifax;(GMT-04:00) 핼리팩스
+America/Puerto_Rico;(GMT-04:00) 푸에르토리코
+America/Caracas;(GMT-04:00) 카라카스
+Canada/Atlantic;(GMT-04:00) 대서양 표준시(캐나다)
+America/La_Paz;(GMT-04:00) 라파스
+America/Santiago;(GMT-04:00) 산티아고
+America/Guyana;(GMT-04:00) 가이아나
+America/St_Johns;(GMT-03:30) 뉴펀들랜드 및 래브라도
+America/Montevideo;(GMT-03:30) 몬테비디오
+America/Araguaina;(GMT-03:00) 레시페
+America/Argentina/Buenos_Aires;(GMT-3:00) 부에노스아이레스, 조지타운
+America/Godthab;(GMT-03:00) 그린란드
+America/Sao_Paulo;(GMT-03:00) 상파울루
+America/Noronha;(GMT-02:00) 페르난두데누로냐
+Atlantic/Azores;(GMT-01:00) 아조레스
+Atlantic/Cape_Verde;(GMT-01:00) 카보베르데 제도
+UTC;(GMT+00:00) 세계 표준시 UTC
+Etc/Greenwich;(GMT+00:00) 그리니치 표준시
+Atlantic/Reykjavik;(GMT+00:00) 레이캬비크
+Europe/Dublin;(GMT+00:00) 더블린
+Europe/London;(GMT+00:00) 런던
+Europe/Lisbon;(GMT+00:00) 리스본
+Africa/Casablanca;(GMT+00:00) 카사블랑카
+Africa/Nouakchott;(GMT+00:00) 누악쇼트
+Europe/Belgrade;(GMT+01:00) 베오그라드, 브라티슬라바, 류블랴나
+CET;(GMT+01:00) 사라예보, 스코페, 자그레브
+Europe/Oslo;(GMT+01:00) 오슬로
+Europe/Stockholm;(GMT+01:00) 스톡홀름
+Europe/Copenhagen;(GMT+01:00) 코펜하겐
+Europe/Berlin;(GMT+01:00) 암스테르담, 베를린, 로마, 스톡홀름, 비엔나
+Europe/Amsterdam;(GMT+01:00) 암스테르담
+Europe/Brussels;(GMT+01:00) 브뤼셀
+Europe/Luxembourg;(GMT+01:00) 룩셈부르크
+Europe/Paris;(GMT+01:00) 파리
+Europe/Zurich;(GMT+01:00) 취리히
+Europe/Madrid;(GMT+01:00) 마드리드
+Africa/Bangui;(GMT+1:00) 서중앙 아프리카
+Europe/Rome;(GMT+01:00) 로마
+Africa/Algiers;(GMT+01:00) 알제
+Africa/Tunis;(GMT+01:00) 튀니스
+Europe/Warsaw;(GMT+01:00) 바르샤바
+Europe/Prague;(GMT+01:00) 프라하 브라티슬라바
+Europe/Vienna;(GMT+01:00) 비엔나
+Europe/Budapest;(GMT+01:00) 부다페스트
+Europe/Helsinki;(GMT+02:00) 헬싱키
+Africa/Harare;(GMT+02:00) 하라레, 프리토리아
+Europe/Sofia;(GMT+02:00) 소피아
+Europe/Istanbul;(GMT+02:00) 이스탄불
+Europe/Athens;(GMT+02:00) 아테네
+Europe/Bucharest;(GMT+02:00) 부카레스트
+Asia/Nicosia;(GMT+02:00) 니코시아
+Asia/Beirut;(GMT+02:00) 베이루트
+Asia/Damascus;(GMT+02:00) 다마스쿠스
+Asia/Jerusalem;(GMT+02:00) 예루살렘
+Asia/Amman;(GMT+02:00) 암만
+Africa/Tripoli;(GMT+02:00) 트리폴리
+Africa/Cairo;(GMT+02:00) 카이로
+Africa/Johannesburg;(GMT+02:00) 요하네스버그
+Europe/Kiev;(GMT+02:00) 키예프
+Europe/Chisinau;(GMT+02:00) 키시네프
+Africa/Nairobi;(GMT+03:00) 나이로비
+Europe/Moscow;(GMT+03:00) 모스크바
+Asia/Baghdad;(GMT+03:00) 바그다드
+Asia/Kuwait;(GMT+03:00) 쿠웨이트
+Asia/Riyadh;(GMT+03:00) 리야드
+Asia/Bahrain;(GMT+03:00) 바레인
+Asia/Qatar;(GMT+03:00) 카타르
+Asia/Aden;(GMT+03:00) 아덴
+Africa/Khartoum;(GMT+03:00) 카르툼
+Africa/Djibouti;(GMT+03:00) 지부티
+Africa/Mogadishu;(GMT+03:00) 모가디슈
+Europe/Minsk;(GMT+3:00) 민스크
+Asia/Tehran;(GMT+3:30) 테헤란
+Asia/Dubai;(GMT+4:00) 두바이
+Asia/Muscat;(GMT+4:00) 무스카트
+Asia/Baku;(GMT+4:00) 바쿠, 트빌리시, 예레반
+Asia/Kabul;(GMT+4:30) 카불
+Asia/Yekaterinburg;(GMT+5:00) 예카테린부르크
+Asia/Tashkent;(GMT+5:00) 이슬라마바드, 카라치, 타슈켄트
+Asia/Calcutta;(GMT+5:30) 인도
+Asia/Colombo;(GMT+05:30) 콜롬보
+Asia/Novosibirsk;(GMT+06:00) 노보시비르스크
+Asia/Kolkata;(GMT+05:30) 뭄바이, 콜카타, 뉴델리
+Asia/Kathmandu;(GMT+05:45) 카트만두
+Asia/Almaty;(GMT+06:00) 알마티
+Asia/Dacca;(GMT+06:00) 다카
+Asia/Dhaka;(GMT+06:00) 아스타나, 다카
+Asia/Rangoon;(GMT+06:30) 랑군
+Asia/Krasnoyarsk;(GMT+07:00) 크라스노야르스크
+Asia/Bangkok;(GMT+07:00) 방콕
+Asia/Saigon;(GMT+07:00) 베트남
+Asia/Jakarta;(GMT+07:00) 자카르타
+Asia/Irkutsk;(GMT+08:00) 이르쿠츠크, 울란바토르
+Asia/Shanghai;(GMT+08:00) 베이징, 상하이
+Asia/Hong_Kong;(GMT+08:00) 홍콩
+Asia/Taipei;(GMT+08:00) 타이페이
+Asia/Kuala_Lumpur;(GMT+08:00) 쿠알라룸푸르
+Asia/Singapore;(GMT+08:00) 싱가포르
+Australia/Perth;(GMT+08:00) 퍼스
+Asia/Yakutsk;(GMT+09:00) 야쿠츠크
+Asia/Seoul;(GMT+09:00) 서울
+Asia/Tokyo;(GMT+09:00) 오사카, 삿포로, 도쿄
+Australia/Darwin;(GMT+9:30) 다윈
+Australia/Adelaide;(GMT+09:30) 애들레이드
+Asia/Vladivostok;(GMT+10:00) 블라디보스토크
+Pacific/Port_Moresby;(GMT+10:00) 괌, 포트모르즈비
+Australia/Brisbane;(GMT+10:00) 브리즈번
+Australia/Sydney;(GMT+10:00) 캔버라, 멜버른, 시드니
+Australia/Hobart;(GMT+10:00) 호바트
+Australia/Lord_Howe;(GMT+10:30) 로드하우 섬
+Asia/Magadan;(GMT+11:00) 마가단
+SST;(GMT+11:00) 솔로몬 제도
+Pacific/Noumea;(GMT+11:00) 뉴칼레도니아
+Asia/Kamchatka;(GMT+12:00) 캄차카
+Pacific/Auckland;(GMT+12:00) 오클랜드, 웰링턴
+Pacific/Fiji;(GMT+12:00) 피지 제도, 마샬 제도
+Pacific/Apia;(GMT+13:00) 사모아 독립국

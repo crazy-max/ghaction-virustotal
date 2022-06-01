@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSPrefersDisplaySafeAreaCompatibilityMode</key>
+	<false/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>ZPLogo</string>
+	<key>CFBundleIdentifier</key>
+	<string>us.zoom.xos</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>5.10.4 (6592)</string>
+	<key>CFBundleSignature</key>
+	<string>ZMZV</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.zoom.video</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>zoommtg</string>
+				<string>callto</string>
+				<string>tel</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sip</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>5.10.4.6592</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.video</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSAppleEventsUsageDescription</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>In order for participants to see you, Zoom requires access to your camera.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright ©2012-2022 Zoom Video Communications, Inc. All rights reserved</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>In order to speak to participants, Zoom requires access to your microphone.</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
+	<key>SMPrivilegedExecutables</key>
+	<dict>
+		<key>us.zoom.ZoomDaemon</key>
+		<string>identifier &quot;us.zoom.ZoomDaemon&quot; and anchor apple generic and certificate leaf[subject.OU] = BJ4HAAB9B3 and certificate leaf[subject.CN] = &quot;Developer ID Application: Zoom Video Communications, Inc. (BJ4HAAB9B3)&quot;</string>
+		<key>us.zoom.ZMSipLocationHelper</key>
+		<string>identifier &quot;us.zoom.ZMSipLocationHelper&quot; and anchor apple generic and certificate leaf[subject.OU] = BJ4HAAB9B3 and certificate leaf[subject.CN] = &quot;Developer ID Application: Zoom Video Communications, Inc. (BJ4HAAB9B3)&quot;</string>
+	</dict>
+</dict>
+</plist>

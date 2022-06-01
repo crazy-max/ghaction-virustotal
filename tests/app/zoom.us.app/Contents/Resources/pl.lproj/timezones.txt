@@ -1,0 +1,143 @@
+DefaultTimeZone;Domyślna strefa czasowa w systemie
+Pacific/Midway;(GMT-11:00) Wyspa Midway, Samoa
+Pacific/Pago_Pago;(GMT-11:00) Pago Pago
+Pacific/Honolulu;(GMT-10:00) Hawaje
+America/Anchorage;(GMT-09:00) Alaska
+America/Juneau;(GMT-09:00) Juneau
+America/Vancouver;(GMT-08:00) Vancouver
+America/Los_Angeles;(GMT-08:00) Czas pacyficzny (Stany Zjednoczone i Kanada)
+America/Tijuana;(GMT-08:00) Tijuana
+America/Edmonton;(GMT-07:00) Edmonton
+America/Denver;(GMT-07:00) Czas górski (Stany Zjednoczone i Kanada)
+America/Phoenix;(GMT-07:00) Arizona
+America/Mazatlan;(GMT-07:00) Mazatlan
+America/Chihuahua;(GMT-07:00) Chihuahua
+America/Winnipeg;(GMT-06:00) Winnipeg
+America/Regina;(GMT-06:00) Saskatchewan
+America/Chicago;(GMT-06:00) Czas środkowy (Stany Zjednoczone i Kanada)
+America/Mexico_City;(GMT-06:00) Miasto Meksyk
+America/Guatemala;(GMT-06:00) Gwatemala
+America/El_Salvador;(GMT-06:00) Salwador
+America/Managua;(GMT-06:00) Managua
+America/Costa_Rica;(GMT-06:00) Kostaryka
+America/Tegucigalpa;(GMT-06:00) Tegucigalpa
+America/Monterrey;(GMT-06:00) Monterrey
+America/Montreal;(GMT-05:00) Montreal
+America/New_York;(GMT-05:00) Czas wschodni (Stany Zjednoczone i Kanada)
+America/Indianapolis;(GMT-05:00) Indiana (Wschód)
+America/Panama;(GMT-05:00) Panama
+America/Bogota;(GMT-05:00) Bogota
+America/Lima;(GMT-05:00) Lima
+America/Halifax;(GMT-04:00) Halifax
+America/Puerto_Rico;(GMT-04:00) Portoryko
+America/Caracas;(GMT-04:00) Caracas
+Canada/Atlantic;(GMT-04:00) Czas atlantycki (Kanada)
+America/La_Paz;(GMT-04:00) La Paz
+America/Santiago;(GMT-04:00) Santiago
+America/Guyana;(GMT-4:00) Gujana
+America/St_Johns;(GMT-03:30) Nowa Fundlandia i Labrador
+America/Montevideo;(GMT-03:30) Montevideo
+America/Araguaina;(GMT-03:00) Araguaina
+America/Argentina/Buenos_Aires;(GMT-03:00) Buenos Aires, Georgetown
+America/Godthab;(GMT-03:00) Godthab
+America/Sao_Paulo;(GMT-03:00) Sao Paulo
+Atlantic/Azores;(GMT-01:00) Azory
+Atlantic/Cape_Verde;(GMT-01:00) Wyspy Zielonego Przylądka
+UTC;(GMT+00:00) Uniwersalny czas koordynowany (UTC)
+Etc/Greenwich;(GMT+00:00) Czas uniwersalny Greenwich
+Atlantic/Reykjavik;(GMT+00:00) Reykjavík
+Europe/Dublin;(GMT+00:00) Dublin
+Europe/London;(GMT+00:00) Londyn
+Europe/Lisbon;(GMT+00:00) Lizbona
+Africa/Casablanca;(GMT+00:00) Casablanca
+Africa/Nouakchott;(GMT+00:00) Nawakszut
+Europe/Belgrade;(GMT+01:00) Belgrad, Bratysława, Lublana
+CET;(GMT+01:00) Sarajewo, Skopie, Zagrzeb
+Europe/Oslo;(GMT+01:00) Oslo
+Europe/Stockholm;(GMT+01:00) Sztokholm
+Europe/Copenhagen;(GMT+01:00) Kopenhaga
+Europe/Berlin;(GMT+01:00) Berlin
+Europe/Amsterdam;(GMT+01:00) Amsterdam
+Europe/Brussels;(GMT+01:00) Bruksela
+Europe/Luxembourg;(GMT+01:00) Luksemburg
+Europe/Paris;(GMT+01:00) Paryż
+Europe/Zurich;(GMT+01:00) Zurych
+Europe/Madrid;(GMT+01:00) Madryt
+Africa/Bangui;(GMT+1:00) Afryka Środkowozachodnia
+Europe/Rome;(GMT+01:00) Rzym
+Africa/Algiers;(GMT+01:00) Algier
+Africa/Tunis;(GMT+01:00) Tunis
+Europe/Warsaw;(GMT+01:00) Warszawa
+Europe/Prague;(GMT+01:00) Praga, Bratysława
+Europe/Vienna;(GMT+01:00) Wiedeń
+Europe/Budapest;(GMT+01:00) Budapeszt
+Europe/Helsinki;(GMT+02:00) Helsinki
+Africa/Harare;(GMT+02:00) Harare, Pretoria
+Europe/Sofia;(GMT+02:00) Sofia
+Europe/Istanbul;(GMT+02:00) Stambuł
+Europe/Athens;(GMT+02:00) Ateny
+Europe/Bucharest;(GMT+2:00) Bukareszt
+Asia/Nicosia;(GMT+02:00) Nikozja
+Asia/Beirut;(GMT+02:00) Bejrut
+Asia/Damascus;(GMT+02:00) Damaszek
+Asia/Jerusalem;(GMT+02:00) Jerozolima
+Asia/Amman;(GMT+02:00) Amman
+Africa/Tripoli;(GMT+02:00) Trypolis
+Africa/Cairo;(GMT+02:00) Kair
+Africa/Johannesburg;(GMT+02:00) Johannesburg
+Europe/Kiev;(GMT+02:00) Kijów
+Africa/Nairobi;(GMT+03:00) Nairobi
+Europe/Moscow;(GMT+03:00) Moskwa
+Asia/Baghdad;(GMT+03:00) Bagdad
+Asia/Kuwait;(GMT+03:00) Kuwejt
+Asia/Riyadh;(GMT+03:00) Rijad
+Asia/Bahrain;(GMT+03:00) Bahrajn
+Asia/Qatar;(GMT+03:00) Katar
+Asia/Aden;(GMT+03:00) Aden
+Africa/Khartoum;(GMT+03:00) Chartum
+Africa/Djibouti;(GMT+03:00) Dżibuti
+Africa/Mogadishu;(GMT+03:00) Mogadiszu
+Europe/Minsk;(GMT+03:00) Mińsk
+Asia/Tehran;(GMT+03:30) Teheran
+Asia/Dubai;(GMT+04:00) Dubaj
+Asia/Muscat;(GMT+04:00) Maskat
+Asia/Baku;(GMT+04:00) Baku, Tbilisi, Erywań
+Asia/Kabul;(GMT+04:30) Kabul
+Asia/Yekaterinburg;(GMT+05:00) Jekaterynburg
+Asia/Tashkent;(GMT+05:00) Islamabad, Karaczi, Taszkient
+Asia/Calcutta;(GMT+05:30) Indie
+Asia/Novosibirsk;(GMT+06:00) Nowosybirsk
+Asia/Kolkata;(GMT+05:30) Mumbaj (Bombaj), Kalkuta, Nowe Delhi
+Asia/Kathmandu;(GMT+5:45) Katmandu
+Asia/Almaty;(GMT+06:00) Ałmaty
+Asia/Dacca;(GMT+06:00) Dakka
+Asia/Dhaka;(GMT+06:00) Astana, Dhaka
+Asia/Rangoon;(GMT+06:30) Rangun
+Asia/Krasnoyarsk;(GMT+07:00) Krasnojarsk
+Asia/Bangkok;(GMT+07:00) Bangkok
+Asia/Saigon;(GMT+07:00) Wietnam
+Asia/Jakarta;(GMT+07:00) Dżakarta
+Asia/Irkutsk;(GMT+08:00) Irkuck, Ułan Bator
+Asia/Shanghai;(GMT+08:00) Pekin, Szanghaj
+Asia/Hong_Kong;(GMT+08:00) Hongkong
+Asia/Taipei;(GMT+08:00) Tajpej
+Asia/Kuala_Lumpur;(GMT+08:00) Kuala Lumpur
+Asia/Singapore;(GMT+08:00) Singapur
+Australia/Perth;(GMT+08:00) Perth
+Asia/Yakutsk;(GMT+09:00) Jakuck
+Asia/Seoul;(GMT+09:00) Seul
+Asia/Tokyo;(GMT+09:00) Osaka, Sapporo, Tokio
+Australia/Darwin;(GMT+09:30) Darwin
+Australia/Adelaide;(GMT+09:30) Adelajda
+Asia/Vladivostok;(GMT+10:00) Władywostok
+Pacific/Port_Moresby;(GMT+10:00) Guam, Port Moresby
+Australia/Brisbane;(GMT+10:00) Brisbane
+Australia/Sydney;(GMT+10:00) Canberra, Melbourne, Sydney
+Australia/Hobart;(GMT+10:00) Hobart
+Asia/Magadan;(GMT+11:00) Magadan
+SST;(GMT+11:00) Wyspy Salomona
+Pacific/Noumea;(GMT+11:00) Nowa Kaledonia
+Asia/Kamchatka;(GMT+12:00) Kamczatka
+Pacific/Auckland;(GMT+12:00) Auckland, Wellington
+Pacific/Fiji;(GMT+12:00) Wyspy Fidżi, Wyspy Marshalla
+Pacific/Apia;(GMT+13:00) Niezależne Państwo Samoa
