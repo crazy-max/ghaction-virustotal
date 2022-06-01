@@ -1,10 +1,10 @@
 name: test
 
 on:
-  push:
-    branches:
-      - 'master'
-      - 'releases/v*'
+  # push:
+  #   branches:
+  #     - 'master'
+  #     - 'releases/v*'
   pull_request:
     branches:
       - 'master'
