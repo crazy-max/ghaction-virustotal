@@ -21674,8 +21674,8 @@ class VirusTotal {
             });
             const largeFileURL = yield this.getURL();
             return this.instance
-                // .post('/files', fd.getBuffer(), {
-                .post(largeFileURL, fd.getBuffer(), {
+                .post('https://www.virustotal.com/api/v3/files', fd.getBuffer(), {
+                // .post(largeFileURL, fd.getBuffer(), {
                 headers: fd.getHeaders()
             })
                 .then(upload => {
