@@ -6,6 +6,8 @@ import * as FormData from 'form-data';
 import * as core from '@actions/core';
 import { stringify } from 'querystring';
 
+const fetch = require("node-fetch");
+
 interface UploadData {
   id: string;
   type: string;

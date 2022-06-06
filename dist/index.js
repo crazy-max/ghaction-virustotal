@@ -21633,6 +21633,7 @@ const path_1 = __nccwpck_require__(1017);
 const axios_1 = __nccwpck_require__(6545);
 const FormData = __nccwpck_require__(4334);
 const core = __nccwpck_require__(2186);
+const fetch = __nccwpck_require__(467);
 class VirusTotal {
     constructor(apiKey) {
         this.instance = axios_1.default.create({
