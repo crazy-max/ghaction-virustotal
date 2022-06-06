@@ -40,7 +40,7 @@ jobs:
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
-            ./tests/data/foo/bar.txt
+            ./tests/app/zoom.us.zip
       -
         name: Dump context
         if: always()
