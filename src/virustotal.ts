@@ -4,6 +4,7 @@ import {basename, posix} from 'path';
 import axios, {AxiosInstance} from 'axios';
 import * as FormData from 'form-data';
 import * as core from '@actions/core';
+import { stringify } from 'querystring';
 
 interface UploadData {
   id: string;
@@ -33,7 +34,7 @@ export class VirusTotal {
     });
   }
 
-  async getURL(){
+  async getURL(): Promise<string>{
     const options = {
         method: 'GET',
         headers: {
@@ -47,7 +48,6 @@ export class VirusTotal {
         return JSON.stringify(response.data);
   
     })
-        .catch(err => console.error(err));
   };
 
   async files(filename: string): Promise<UploadData> {
@@ -59,9 +59,12 @@ export class VirusTotal {
       knownLength: size
     });
 
+
+    const largeFileURL: string = await this.getURL();
+
     return this.instance
       // .post('/files', fd.getBuffer(), {
-      .post(await this.getURL(), fd.getBuffer(), {
+      .post(largeFileURL, fd.getBuffer(), {
         headers: fd.getHeaders()
       })
       .then(upload => {
