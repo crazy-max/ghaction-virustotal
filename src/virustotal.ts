@@ -36,23 +36,23 @@ export class VirusTotal {
     });
   }
 
-  async getURL(): Promise<string>{
-    const options = {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            'x-apikey': '34dc81f56bf2322a14ab2f46da736e1cade7c7da37cf7cf3387f904ece5380bf'
-        }
-    };
-    return await fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
-        .then(response => response.json())
-        .then(response => {
-        return JSON.stringify(response.data);
+  // async getURL(): Promise<string>{
+  //   const options = {
+  //       method: 'GET',
+  //       headers: {
+  //           Accept: 'application/json',
+  //           'x-apikey': '34dc81f56bf2322a14ab2f46da736e1cade7c7da37cf7cf3387f904ece5380bf'
+  //       }
+  //   };
+  //   return await fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
+  //       .then(response => response.json())
+  //       .then(response => {
+  //       return JSON.stringify(response.data);
   
-    })
-  };
+  //   })
+  // };
 
-  async files(filename: string): Promise<UploadData> {
+  files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
     const fd = new FormData();
     fd.append('file', file, {
@@ -62,10 +62,10 @@ export class VirusTotal {
     });
 
 
-    const largeFileURL: string = await this.getURL();
+    // const largeFileURL: string = await this.getURL();
 
     return this.instance
-      .post('https://www.virustotal.com/_ah/upload/AMmfu6bZje23uFZ-eaMBPOlNYjYR9MGQDIzxaXq-jQizeeVtYqDir1Cd55_qjrirSfaNhc0b6R4EqURy8UBg_gEPHQCmyd5WVhOvFuBqMUapouq9qyUpTfyOVFX_Q48Zmpe4oK9YEM9xKJ0ed3pOi0RgQ7R53gTrMc4LQGaLm5YFoi1gcvpWG5rydexRd-QVrpw0oalSwZp6a3Q9ks1-xLWMcAxsnljVgT1VMe0c6hYkqmIP_nXMPXUMm9NjSU-EtKldspFhuDrN_2qdTsSEwhEK9Jywb9L-vwtByi3T76D1jHA-AEtnReVaW8TiwK_Rq93AdxuLbxQt7aVVou0GlcQLhARvQuaXH3EE7MK4qZR9dEdlZiDCezHOdcuBp2BYJbVfxsxq8lohqp-Pmy7c5njkHU3mGkE67Rb_zdveXpAAUvG8X_ZqvVJR-NKbZpQ9QVCcmPeKG4kLwd4ywca2N4PQpMF_-D9MdXWVSeAnuOOmnjZvKYFT1JGKiZPLQ_2hpdjEp_tDF6EmXZ1I4TmW1k-QE22nwKgmSXqa6_LGX6SQ0utvMl6FC0jb6_SjlHZ2gK4QTHMoTLYyCkkgZGYRYCdDqpCrxVuNRvUqkg0l-DFMScrDtFkDvpM3DWmmT_mKMWVjPzlPEvH12Cg9nultNsoIDFGsnk-fSid_TtHn0Qq11ZzR6rCrXIV5t9wzm9-_0IXQV-rxYLIDSTUABf__Nw203sF-Jmjm7xexJyWnyi0Pbs3vLlpsw_5m1usmZxWbjPXqKC_RupJ7ysKCJ4hD58lJcE4kwLFuFBqONL6MFOiLbODNWjcJJ5K4zTWEddjD_NfJb9KwLGmlv30A0GWT6yZvmC2NH4Wbuq3XiW-GV1MNjk97crVEGr-o7cwkC2hAcBn1cmWkEjofH-iEFQUMi428z_HqDbMzDk4zLA-l73_NuX6HD42MzeQvyTDNTH8GLhiVifdpE7WRDvm0eM6bwQ1pKZCSdpBwFvQlFZmBjEBoZpKJIuS0VHOKgFkzoxpQlWExPEZ8gLHxYUYF8Mukirnt4dwcZS-IdA/ALBNUaYAAAAAYp6RgWu1_MAfWlyqItwBMgYHFICntB2L/', fd.getBuffer(), {
+      .post("https://www.virustotal.com/_ah/upload/AMmfu6bjFpYSuvz-GRwQ68VROSg6hjjuS61sXILRj2ELPCj6Qv4ZFIjPlvuRvgkysxu7NeiyRpVWJbnRjqntdFG-gJqGRy82ZjleRJhQCFt_GNvmPM8eAP4lnEKYeOjx5jeymCs-6v0wa8X4vsK0MaW-QoYDGBquAhIpZ-KuOoGQk2daBr57TslL5E6U39521G-w1AaEYytIMgVTSEWwpPjPCwjRB6W5bTVVsqpEnAUNP_h7ve3iGGc40jMVMZ544ttk91xpc4N9O0zq0NorVH1LCCQMo6YBieCLBofnwKB-Knt7P5r9cj8L0_DLauKt_Nh2lSaQhQv0O7G2sFj9bpURXUkQyhXiYHPxGK77MqinesRLJ8R3y9fTNBWhzafbnmJHSXGUv_1kPTgLdD6JCCXO4gt-ySTTJaPCeLasuKM8jsbRFVMNq87xFEk8W155BEgV70sfbDr8FN6BT8_c-dH_qdF9KWPbePQQm36dWbn4p_POviByf2yPE9OezI10zObKVXpUffkg3RnbTih7M6lEhquoOrvgNQrm9UWKCsTW9TFCThUi3pCmZ_AgIY95vHLfJgAaVTwH6x7HThI5yObQrDMZQmmzi3P095RkNy8crf4P_gwtJzMjXpysgCtosFAXSJ5du49zp4ep_6ixjANUrIKEFOx3Fw3OHTLkS9fHS8KJKKNcJvdjXhowcEqQ4IIZVNt79nBlPSJ5XMKggGKx_I7GlSdWOlczgNkdsiEyZ9Qrt0Ad7pz2o6ToCB2lrhV-9_sJdQVEoSKNxhrD-tb9n2mIfMFGz5w0nw2fngt3VGNKUkoqIpPKb4OU6XK6E-XMBvuOjSh1fu0W3Nu-Sr-puJeaRL7CTc1JQsYMCAu1OSo-LsLjPDTYy_gqK5wOXMD-hHVQsuazZ3wLv4mDyNFuOqGGufqyJxYsNWsRmNUlPU2dLDcvtDcd53oLNTn1v0-2t64xytYwnMUFpja2gO9EQWhxx0shXFRO2wdi19HnJ1b0tyFX4SQ629RW82PCPdRukEwopSffyOtp3RyDw89-zy1eyNvbVYJgV4GqwYrkcCgmhTHl_4AEVomq-D-Npz4UkdG3_0vwhvllblo1glofOySLmUQAELatmGeRJEtyc_TzajsCYy_hXnIfTjPnAmUiqtKDz7KZv_4br_WYlSDDF0FfW82Kt_6DDIOqyNqQjiAIkxlp99XgLWMok3sBDv2LZnmhQB8qMguL_gV1Q_aSVNQ_nw1ZnQ/ALBNUaYAAAAAYp_E5QbSg3wVomaxoBdkXe11IZBUNEfP/", fd.getBuffer(), {
       // .post(largeFileURL, fd.getBuffer(), {
         headers: fd.getHeaders()
       })
