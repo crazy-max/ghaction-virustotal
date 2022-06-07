@@ -21634,7 +21634,6 @@ const path_1 = __nccwpck_require__(1017);
 const axios_1 = __nccwpck_require__(6545);
 const FormData = __nccwpck_require__(4334);
 const core = __nccwpck_require__(2186);
-const fetch = __nccwpck_require__(467);
 class VirusTotal {
     constructor(apiKey) {
         this.largeURL = '';
@@ -21650,18 +21649,15 @@ class VirusTotal {
     }
     getURL(apiKey) {
         return __awaiter(this, void 0, void 0, function* () {
-            const options = {
-                method: 'GET',
+            let instance = axios_1.default.create({
+                baseURL: '',
                 headers: {
                     Accept: 'application/json',
                     'x-apikey': apiKey !== null && apiKey !== void 0 ? apiKey : ''
                 }
-            };
-            return yield fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
-                .then(response => response.json())
-                .then(response => {
-                return JSON.stringify(response.data);
             });
+            return yield instance.get('https://www.virustotal.com/api/v3/files/upload_url')
+                .then((res) => { return res.data.data; });
         });
     }
     ;
@@ -21670,6 +21666,7 @@ class VirusTotal {
             this.largeURL = yield this.getURL(apiKey);
         });
     }
+    ;
     files(filename) {
         const { name, mime, size, file } = (0, exports.asset)(filename);
         const fd = new FormData();

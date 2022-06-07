@@ -6,7 +6,7 @@ import * as FormData from 'form-data';
 import * as core from '@actions/core';
 import { stringify } from 'querystring';
 
-const fetch = require("node-fetch");
+// const fetch = require("node-fetch");
 
 interface UploadData {
   id: string;
@@ -26,24 +26,21 @@ export class VirusTotal {
   private largeURL: string = '';
 
   async getURL(apiKey: string | undefined): Promise<string>{
-    const options = {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            'x-apikey': apiKey ?? ''
-        }
-    };
-    return await fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
-        .then(response => response.json())
-        .then(response => {
-        return JSON.stringify(response.data);
+    let instance: AxiosInstance = axios.create({
+      baseURL: '',
+      headers: {
+        Accept: 'application/json',
+        'x-apikey': apiKey ?? ''
+      }
+    });
   
-    })
+    return await instance.get('https://www.virustotal.com/api/v3/files/upload_url',)
+                          .then((res) => {return res.data.data});
   };
 
   async getLargeFileURL(apiKey: string | undefined){
     this.largeURL = await this.getURL(apiKey);
-  }
+  };
 
   constructor(apiKey: string | undefined) {
 
