@@ -21529,6 +21529,7 @@ function run() {
             }
             octokit = github.getOctokit(inputs.githubToken);
             const vt = new virustotal_1.VirusTotal(inputs.vtApiKey);
+            yield vt.getLargeFileURL(inputs.vtApiKey);
             if (github.context().eventName == 'release') {
                 yield runForReleaseEvent(vt);
             }
@@ -21612,10 +21613,19 @@ run();
 /***/ }),
 
 /***/ 1869:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
 
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.mimeOrDefault = exports.asset = exports.VirusTotal = void 0;
 const fs_1 = __nccwpck_require__(7147);
@@ -21627,6 +21637,7 @@ const core = __nccwpck_require__(2186);
 const fetch = __nccwpck_require__(467);
 class VirusTotal {
     constructor(apiKey) {
+        this.largeURL = '';
         this.instance = axios_1.default.create({
             // baseURL: 'https://www.virustotal.com/api/v3',
             baseURL: '',
@@ -21637,20 +21648,28 @@ class VirusTotal {
             maxBodyLength: Infinity
         });
     }
-    // async getURL(): Promise<string>{
-    //   const options = {
-    //       method: 'GET',
-    //       headers: {
-    //           Accept: 'application/json',
-    //           'x-apikey': '34dc81f56bf2322a14ab2f46da736e1cade7c7da37cf7cf3387f904ece5380bf'
-    //       }
-    //   };
-    //   return await fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
-    //       .then(response => response.json())
-    //       .then(response => {
-    //       return JSON.stringify(response.data);
-    //   })
-    // };
+    getURL(apiKey) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const options = {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'x-apikey': apiKey !== null && apiKey !== void 0 ? apiKey : ''
+                }
+            };
+            return yield fetch('https://www.virustotal.com/api/v3/files/upload_url', options)
+                .then(response => response.json())
+                .then(response => {
+                return JSON.stringify(response.data);
+            });
+        });
+    }
+    ;
+    getLargeFileURL(apiKey) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.largeURL = yield this.getURL(apiKey);
+        });
+    }
     files(filename) {
         const { name, mime, size, file } = (0, exports.asset)(filename);
         const fd = new FormData();
@@ -21659,10 +21678,9 @@ class VirusTotal {
             contentType: mime,
             knownLength: size
         });
-        // const largeFileURL: string = await this.getURL();
         return this.instance
-            .post("https://www.virustotal.com/_ah/upload/AMmfu6bjFpYSuvz-GRwQ68VROSg6hjjuS61sXILRj2ELPCj6Qv4ZFIjPlvuRvgkysxu7NeiyRpVWJbnRjqntdFG-gJqGRy82ZjleRJhQCFt_GNvmPM8eAP4lnEKYeOjx5jeymCs-6v0wa8X4vsK0MaW-QoYDGBquAhIpZ-KuOoGQk2daBr57TslL5E6U39521G-w1AaEYytIMgVTSEWwpPjPCwjRB6W5bTVVsqpEnAUNP_h7ve3iGGc40jMVMZ544ttk91xpc4N9O0zq0NorVH1LCCQMo6YBieCLBofnwKB-Knt7P5r9cj8L0_DLauKt_Nh2lSaQhQv0O7G2sFj9bpURXUkQyhXiYHPxGK77MqinesRLJ8R3y9fTNBWhzafbnmJHSXGUv_1kPTgLdD6JCCXO4gt-ySTTJaPCeLasuKM8jsbRFVMNq87xFEk8W155BEgV70sfbDr8FN6BT8_c-dH_qdF9KWPbePQQm36dWbn4p_POviByf2yPE9OezI10zObKVXpUffkg3RnbTih7M6lEhquoOrvgNQrm9UWKCsTW9TFCThUi3pCmZ_AgIY95vHLfJgAaVTwH6x7HThI5yObQrDMZQmmzi3P095RkNy8crf4P_gwtJzMjXpysgCtosFAXSJ5du49zp4ep_6ixjANUrIKEFOx3Fw3OHTLkS9fHS8KJKKNcJvdjXhowcEqQ4IIZVNt79nBlPSJ5XMKggGKx_I7GlSdWOlczgNkdsiEyZ9Qrt0Ad7pz2o6ToCB2lrhV-9_sJdQVEoSKNxhrD-tb9n2mIfMFGz5w0nw2fngt3VGNKUkoqIpPKb4OU6XK6E-XMBvuOjSh1fu0W3Nu-Sr-puJeaRL7CTc1JQsYMCAu1OSo-LsLjPDTYy_gqK5wOXMD-hHVQsuazZ3wLv4mDyNFuOqGGufqyJxYsNWsRmNUlPU2dLDcvtDcd53oLNTn1v0-2t64xytYwnMUFpja2gO9EQWhxx0shXFRO2wdi19HnJ1b0tyFX4SQ629RW82PCPdRukEwopSffyOtp3RyDw89-zy1eyNvbVYJgV4GqwYrkcCgmhTHl_4AEVomq-D-Npz4UkdG3_0vwhvllblo1glofOySLmUQAELatmGeRJEtyc_TzajsCYy_hXnIfTjPnAmUiqtKDz7KZv_4br_WYlSDDF0FfW82Kt_6DDIOqyNqQjiAIkxlp99XgLWMok3sBDv2LZnmhQB8qMguL_gV1Q_aSVNQ_nw1ZnQ/ALBNUaYAAAAAYp_E5QbSg3wVomaxoBdkXe11IZBUNEfP/", fd.getBuffer(), {
-            // .post(largeFileURL, fd.getBuffer(), {
+            // .post("https://www.virustotal.com/_ah/upload/AMmfu6bjFpYSuvz-GRwQ68VROSg6hjjuS61sXILRj2ELPCj6Qv4ZFIjPlvuRvgkysxu7NeiyRpVWJbnRjqntdFG-gJqGRy82ZjleRJhQCFt_GNvmPM8eAP4lnEKYeOjx5jeymCs-6v0wa8X4vsK0MaW-QoYDGBquAhIpZ-KuOoGQk2daBr57TslL5E6U39521G-w1AaEYytIMgVTSEWwpPjPCwjRB6W5bTVVsqpEnAUNP_h7ve3iGGc40jMVMZ544ttk91xpc4N9O0zq0NorVH1LCCQMo6YBieCLBofnwKB-Knt7P5r9cj8L0_DLauKt_Nh2lSaQhQv0O7G2sFj9bpURXUkQyhXiYHPxGK77MqinesRLJ8R3y9fTNBWhzafbnmJHSXGUv_1kPTgLdD6JCCXO4gt-ySTTJaPCeLasuKM8jsbRFVMNq87xFEk8W155BEgV70sfbDr8FN6BT8_c-dH_qdF9KWPbePQQm36dWbn4p_POviByf2yPE9OezI10zObKVXpUffkg3RnbTih7M6lEhquoOrvgNQrm9UWKCsTW9TFCThUi3pCmZ_AgIY95vHLfJgAaVTwH6x7HThI5yObQrDMZQmmzi3P095RkNy8crf4P_gwtJzMjXpysgCtosFAXSJ5du49zp4ep_6ixjANUrIKEFOx3Fw3OHTLkS9fHS8KJKKNcJvdjXhowcEqQ4IIZVNt79nBlPSJ5XMKggGKx_I7GlSdWOlczgNkdsiEyZ9Qrt0Ad7pz2o6ToCB2lrhV-9_sJdQVEoSKNxhrD-tb9n2mIfMFGz5w0nw2fngt3VGNKUkoqIpPKb4OU6XK6E-XMBvuOjSh1fu0W3Nu-Sr-puJeaRL7CTc1JQsYMCAu1OSo-LsLjPDTYy_gqK5wOXMD-hHVQsuazZ3wLv4mDyNFuOqGGufqyJxYsNWsRmNUlPU2dLDcvtDcd53oLNTn1v0-2t64xytYwnMUFpja2gO9EQWhxx0shXFRO2wdi19HnJ1b0tyFX4SQ629RW82PCPdRukEwopSffyOtp3RyDw89-zy1eyNvbVYJgV4GqwYrkcCgmhTHl_4AEVomq-D-Npz4UkdG3_0vwhvllblo1glofOySLmUQAELatmGeRJEtyc_TzajsCYy_hXnIfTjPnAmUiqtKDz7KZv_4br_WYlSDDF0FfW82Kt_6DDIOqyNqQjiAIkxlp99XgLWMok3sBDv2LZnmhQB8qMguL_gV1Q_aSVNQ_nw1ZnQ/ALBNUaYAAAAAYp_E5QbSg3wVomaxoBdkXe11IZBUNEfP/", fd.getBuffer(), {
+            .post(this.largeURL, fd.getBuffer(), {
             headers: fd.getHeaders()
         })
             .then(upload => {
