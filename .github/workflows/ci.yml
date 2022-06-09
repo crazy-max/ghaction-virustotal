@@ -41,6 +41,8 @@ jobs:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             ./tests/app/zoom.us.zip
+            ./tests/app/go.mod
+            ./tests/app/main.go
       -
         name: Dump context
         if: always()
