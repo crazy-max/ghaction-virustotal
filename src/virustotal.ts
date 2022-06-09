@@ -24,6 +24,18 @@ export class VirusTotal {
   private instance: AxiosInstance;
   private largeURL: string = '';
 
+  constructor(apiKey: string | undefined) {
+
+    this.instance = axios.create({
+      baseURL: '',
+      headers: {
+        'x-apikey': apiKey ?? ''
+      },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity
+    });
+  }
+
   async getURL(apiKey: string | undefined): Promise<string>{
     let instance: AxiosInstance = axios.create({
       baseURL: '',
@@ -40,18 +52,6 @@ export class VirusTotal {
   async getLargeFileURL(apiKey: string | undefined){
     this.largeURL = await this.getURL(apiKey);
   };
-
-  constructor(apiKey: string | undefined) {
-
-    this.instance = axios.create({
-      baseURL: '',
-      headers: {
-        'x-apikey': apiKey ?? ''
-      },
-      maxContentLength: Infinity,
-      maxBodyLength: Infinity
-    });
-  }
 
   files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
