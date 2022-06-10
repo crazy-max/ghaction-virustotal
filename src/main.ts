@@ -20,7 +20,7 @@ async function run() {
 
     const vt = new VirusTotal(inputs.vtApiKey);
     await vt.getLargeFileURL(inputs.vtApiKey);
-    
+
     if (github.context().eventName == 'release') {
       await runForReleaseEvent(vt);
     } else {

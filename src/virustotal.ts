@@ -4,8 +4,6 @@ import {basename, posix} from 'path';
 import axios, {AxiosInstance} from 'axios';
 import * as FormData from 'form-data';
 import * as core from '@actions/core';
-import { stringify } from 'querystring';
-
 
 interface UploadData {
   id: string;
@@ -22,10 +20,9 @@ export interface Asset {
 
 export class VirusTotal {
   private instance: AxiosInstance;
-  private largeURL: string = '';
+  private largeURL = '';
 
   constructor(apiKey: string | undefined) {
-
     this.instance = axios.create({
       baseURL: '',
       headers: {
@@ -36,22 +33,23 @@ export class VirusTotal {
     });
   }
 
-  async getURL(apiKey: string | undefined): Promise<string>{
-    let instance: AxiosInstance = axios.create({
+  async getURL(apiKey: string | undefined): Promise<string> {
+    const instance: AxiosInstance = axios.create({
       baseURL: '',
       headers: {
         Accept: 'application/json',
         'x-apikey': apiKey ?? ''
       }
     });
-  
-    return await instance.get('https://www.virustotal.com/api/v3/files/upload_url',)
-                          .then((res) => {return res.data.data});
-  };
 
-  async getLargeFileURL(apiKey: string | undefined){
+    return await instance.get('https://www.virustotal.com/api/v3/files/upload_url').then(res => {
+      return res.data.data;
+    });
+  }
+
+  async getLargeFileURL(apiKey: string | undefined) {
     this.largeURL = await this.getURL(apiKey);
-  };
+  }
 
   files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
@@ -61,7 +59,6 @@ export class VirusTotal {
       contentType: mime,
       knownLength: size
     });
-
 
     return this.instance
       .post(this.largeURL, fd.getBuffer(), {
