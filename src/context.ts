@@ -14,6 +14,7 @@ export interface Inputs {
   monitorPath: string;
   updateReleaseBody: boolean;
   githubToken: string;
+  requestRate: number;
 }
 
 export function tmpDir(): string {
@@ -30,7 +31,8 @@ export async function getInputs(): Promise<Inputs> {
     vtMonitor: core.getBooleanInput('vt_monitor'),
     monitorPath: core.getInput('monitor_path') || '/',
     updateReleaseBody: core.getBooleanInput('update_release_body'),
-    githubToken: core.getInput('github_token')
+    githubToken: core.getInput('github_token'),
+    requestRate: parseInt(core.getInput('request_rate'))
   };
 }
 

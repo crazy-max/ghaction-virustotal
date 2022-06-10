@@ -149,6 +149,7 @@ Following inputs can be used as `step.with` keys
 | `monitor_path`**¹**         | String  | A path relative to current monitor user root folder to upload files (default `/`) |
 | `update_release_body`**²**  | Bool    | If enabled, analysis link(s) will be appended to the release body (default `false`) |
 | `github_token`**³**         | String  | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` (default `${{ github.token }}`) |
+| `request_rate`              | String  | API request-rate in requests/minute. Set to 4 or lower when using the standard free public API and scanning more than 4 files per run. Default: 1000 |
 
 > * **¹** Only available if `vt_monitor` is enabled.
 > * **²** Only available if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
