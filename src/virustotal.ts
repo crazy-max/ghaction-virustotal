@@ -32,7 +32,7 @@ export class VirusTotal {
     });
   }
 
-  files(filename: string): Promise<UploadData> {
+  async files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
     const fd = new FormData();
     fd.append('file', file, {
@@ -42,9 +42,17 @@ export class VirusTotal {
     });
 
     return this.instance
-      .post('/files', fd.getBuffer(), {
-        headers: fd.getHeaders()
-      })
+      .post(
+        size < 32 * 1024 * 1024
+          ? '/files'
+          : await this.instance.get('/files/upload_url').then(res => {
+              return res.data.data;
+            }),
+        fd.getBuffer(),
+        {
+          headers: fd.getHeaders()
+        }
+      )
       .then(upload => {
         const data = upload.data.data as UploadData;
         data.url = `https://www.virustotal.com/gui/file-analysis/${data.id}/detection`;
