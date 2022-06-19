@@ -62,12 +62,17 @@ async function runForReleaseEvent(vt: VirusTotal) {
   core.info(`Release event detected for ${github.context().ref} in this workflow. Preparing to scan assets...`);
 
   const release = await github.getRelease(octokit, github.context().ref.replace('refs/tags/', ''));
-  release.body = release.body.concat(`\n\n<details>\n  <summary>🛡 VirusTotal GitHub Action analysis:</summary>\n`);
 
   const assets = await github.getReleaseAssets(octokit, release, inputs.files);
   if (assets.length == 0) {
     core.warning(`No assets were found for ${release.tag_name} release tag. Please check the 'files' input.`);
     return;
+  }
+
+  if (assets.length <= 5) {
+    release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);
+  } else {
+    release.body = release.body.concat(`\n\n<details>\n  <summary>🛡 VirusTotal GitHub Action analysis:</summary>\n`);
   }
 
   core.info(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
@@ -89,7 +94,9 @@ async function runForReleaseEvent(vt: VirusTotal) {
       }
     });
   });
-  release.body = release.body.concat(`\n\ncreated by [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal)</details>\n`);
+  if (assets.length > 5) {
+    release.body = release.body.concat(`\n\ncreated by [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal)</details>\n`);
+  }
 
   if (/true/i.test(core.getInput('update_release_body'))) {
     core.debug(`Appending analysis link(s) to release body`);
