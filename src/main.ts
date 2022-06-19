@@ -72,7 +72,7 @@ async function runForReleaseEvent(vt: VirusTotal) {
   if (assets.length <= 5) {
     release.body = release.body.concat(`\n\n🛡 [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal) analysis:`);
   } else {
-    release.body = release.body.concat(`\n\n<details>\n  <summary>🛡 VirusTotal GitHub Action analysis:</summary>\n`);
+    release.body = release.body.concat(`\n\n<details>\n  <summary>🛡 VirusTotal analysis</summary>\n`);
   }
 
   core.info(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
