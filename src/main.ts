@@ -95,7 +95,7 @@ async function runForReleaseEvent(vt: VirusTotal) {
     });
   });
   if (assets.length > 5) {
-    release.body = release.body.concat(`\n\ncreated by [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal)</details>\n`);
+    release.body = release.body.concat(`\n<sub>These scans were produced by the [VirusTotal GitHub Action](https://github.com/crazy-max/ghaction-virustotal)</sub></details>\n`);
   }
 
   if (/true/i.test(core.getInput('update_release_body'))) {
