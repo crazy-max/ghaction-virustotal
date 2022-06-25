@@ -29,6 +29,10 @@ inputs:
     description: 'The GitHub token used to create an authenticated client for GitHub API'
     default: ${{ github.token }}
     required: false
+  request_rate:
+    description: 'API request-rate in requests/minute'
+    default: "1000"
+    required: true
 
 outputs:
   analysis:
