@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.1.0 (2022/06/26)
+
+* Support rate limiting (#124 #129)
+* Set collapsible assets in release body (#128)
+* Large file upload support (#127)
+* Bump @actions/core from 1.6.0 to 1.9.0 (#126)
+* Bump @actions/github from 5.0.1 to 5.0.3 (#123)
+* Bump axios from 0.26.1 to 0.27.2 (#117)
+
 ## 3.0.0 (2022/05/26)
 
 * Node 16 as default runtime (#113)
