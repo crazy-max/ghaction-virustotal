@@ -19,7 +19,7 @@ async function run() {
 
     octokit = github.getOctokit(inputs.githubToken);
 
-    const limiter = new RateLimiter({tokensPerInterval: inputs.requestRate, interval: 'minute'});
+    const limiter = inputs.requestRate > 0 ? new RateLimiter({tokensPerInterval: inputs.requestRate, interval: 'minute'}) : undefined;
     const vt = new VirusTotal(inputs.vtApiKey);
     if (github.context().eventName == 'release') {
       await runForReleaseEvent(vt, limiter);
@@ -36,8 +36,8 @@ async function run() {
   }
 }
 
-async function runForLocalFiles(vt: VirusTotal, limiter: RateLimiter) {
-  const files: string[] = await context.resolvePaths(inputs.files);
+async function runForLocalFiles(vt: VirusTotal, limiter: RateLimiter | undefined) {
+  const files: string[] = context.resolvePaths(inputs.files);
   if (files.length == 0) {
     core.warning(`No files were found. Please check the 'files' input.`);
     return;
@@ -45,8 +45,10 @@ async function runForLocalFiles(vt: VirusTotal, limiter: RateLimiter) {
 
   await core.group(`${files.length} file(s) will be sent to VirusTotal for analysis`, async () => {
     await context.asyncForEach(files, async filepath => {
-      const remainingRequests = await limiter.removeTokens(1);
-      core.debug(`limiter: remaining requests: ${remainingRequests}`);
+      if (limiter !== undefined) {
+        const remainingRequests = await limiter.removeTokens(1);
+        core.debug(`limiter: remaining requests: ${remainingRequests}`);
+      }
       if (inputs.vtMonitor) {
         await vt.monitorItems(filepath, inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${filepath}=${upload.url}`);
@@ -62,7 +64,7 @@ async function runForLocalFiles(vt: VirusTotal, limiter: RateLimiter) {
   });
 }
 
-async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter) {
+async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter | undefined) {
   core.info(`Release event detected for ${github.context().ref} in this workflow. Preparing to scan assets...`);
 
   const release = await github.getRelease(octokit, github.context().ref.replace('refs/tags/', ''));
@@ -83,8 +85,10 @@ async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter) {
   await core.group(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`, async () => {
     await context.asyncForEach(assets, async asset => {
       core.debug(`Downloading ${asset.name}`);
-      const remainingRequests = await limiter.removeTokens(1);
-      core.debug(`limiter: remaining requests: ${remainingRequests}`);
+      if (limiter !== undefined) {
+        const remainingRequests = await limiter.removeTokens(1);
+        core.debug(`limiter: remaining requests: ${remainingRequests}`);
+      }
       if (inputs.vtMonitor) {
         await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
