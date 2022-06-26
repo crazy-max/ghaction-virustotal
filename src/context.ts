@@ -32,7 +32,7 @@ export async function getInputs(): Promise<Inputs> {
     monitorPath: core.getInput('monitor_path') || '/',
     updateReleaseBody: core.getBooleanInput('update_release_body'),
     githubToken: core.getInput('github_token'),
-    requestRate: parseInt(core.getInput('request_rate') || '1000')
+    requestRate: parseInt(core.getInput('request_rate') || '0')
   };
 }
 

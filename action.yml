@@ -31,7 +31,7 @@ inputs:
     required: false
   request_rate:
     description: 'API request-rate in requests/minute'
-    default: "1000"
+    default: '0'
     required: true
 
 outputs:
