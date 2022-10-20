@@ -28,7 +28,7 @@ async function run() {
     }
 
     await core.group(`Setting output analysis`, async () => {
-      context.setOutput('analysis', outputAnalysis.join(','));
+      core.setOutput('analysis', outputAnalysis.join(','));
       core.info(`analysis=${outputAnalysis.join(',')}`);
     });
   } catch (error) {
