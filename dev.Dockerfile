@@ -4,10 +4,12 @@ ARG NODE_VERSION=16
 
 FROM node:${NODE_VERSION}-alpine AS base
 RUN apk add --no-cache cpio findutils git
+RUN yarn config set --home enableTelemetry 0
 WORKDIR /src
 
 FROM base AS deps
 RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
   yarn install && mkdir /vendor && cp yarn.lock /vendor
 
@@ -16,18 +18,19 @@ COPY --from=deps /vendor /
 
 FROM deps AS vendor-validate
 RUN --mount=type=bind,target=.,rw <<EOT
-set -e
-git add -A
-cp -rf /vendor/* .
-if [ -n "$(git status --porcelain -- yarn.lock)" ]; then
-  echo >&2 'ERROR: Vendor result differs. Please vendor your package with "docker buildx bake vendor-update"'
-  git status --porcelain -- yarn.lock
-  exit 1
-fi
+  set -e
+  git add -A
+  cp -rf /vendor/* .
+  if [ -n "$(git status --porcelain -- yarn.lock)" ]; then
+    echo >&2 'ERROR: Vendor result differs. Please vendor your package with "docker buildx bake vendor-update"'
+    git status --porcelain -- yarn.lock
+    exit 1
+  fi
 EOT
 
 FROM deps AS build
 RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
   yarn run build && mkdir /out && cp -Rf dist /out/
 
@@ -48,15 +51,17 @@ EOT
 
 FROM deps AS format
 RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
   yarn run format \
-  && mkdir /out && find . -name '*.ts' -not -path './node_modules/*' | cpio -pdm /out
+  && mkdir /out && find . -name '*.ts' -not -path './node_modules/*' -not -path './.yarn/*' | cpio -pdm /out
 
 FROM scratch AS format-update
 COPY --from=format /out /
 
 FROM deps AS lint
 RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
   yarn run lint
 
@@ -65,6 +70,7 @@ ENV RUNNER_TEMP=/tmp/github_runner
 ENV RUNNER_TOOL_CACHE=/tmp/github_tool_cache
 ARG GITHUB_REPOSITORY
 RUN --mount=type=bind,target=.,rw \
+  --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
   --mount=type=secret,id=GITHUB_TOKEN \
   --mount=type=secret,id=VT_API_KEY \
