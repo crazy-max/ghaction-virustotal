@@ -3,8 +3,8 @@
 <p align="center">
   <a href="https://github.com/crazy-max/ghaction-virustotal/releases/latest"><img src="https://img.shields.io/github/release/crazy-max/ghaction-virustotal.svg?style=flat-square" alt="GitHub release"></a>
   <a href="https://github.com/marketplace/actions/virustotal-github-action"><img src="https://img.shields.io/badge/marketplace-virustotal--github--action-blue?logo=github&style=flat-square" alt="GitHub marketplace"></a>
-  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=ci"><img src="https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/ci?label=ci&logo=github&style=flat-square" alt="CI workflow"></a>
-  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test"><img src="https://img.shields.io/github/workflow/status/crazy-max/ghaction-virustotal/test?label=test&logo=github&style=flat-square" alt="Test workflow"></a>
+  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=ci"><img src="https://img.shields.io/github/actions/workflow/status/crazy-max/ghaction-virustotal/ci.yml?branch=master&label=ci&logo=github&style=flat-square" alt="CI workflow"></a>
+  <a href="https://github.com/crazy-max/ghaction-virustotal/actions?workflow=test"><img src="https://img.shields.io/github/actions/workflow/status/crazy-max/ghaction-virustotal/test.yml?branch=master&label=test&logo=github&style=flat-square" alt="Test workflow"></a>
   <a href="https://codecov.io/gh/crazy-max/ghaction-virustotal"><img src="https://img.shields.io/codecov/c/github/crazy-max/ghaction-virustotal?logo=codecov&style=flat-square" alt="Codecov"></a>
   <br /><a href="https://github.com/sponsors/crazy-max"><img src="https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square" alt="Become a sponsor"></a>
   <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
@@ -13,8 +13,6 @@
 ## About
 
 GitHub Action to upload and scan files with [VirusTotal](https://www.virustotal.com).
-
-If you are interested, [check out](https://github.com/crazy-max?tab=repositories&q=ghaction&type=source&language=&sort=) my other :octocat: GitHub Actions!
 
 ___
 
