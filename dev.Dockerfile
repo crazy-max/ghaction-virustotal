@@ -78,7 +78,7 @@ RUN --mount=type=bind,target=.,rw \
     GITHUB_TOKEN=$(cat /run/secrets/GITHUB_TOKEN) \
     VT_API_KEY=$(cat /run/secrets/VT_API_KEY) \
     VT_MONITOR_API_KEY=$(cat /run/secrets/VT_MONITOR_API_KEY) \
-    yarn run test --coverageDirectory=/tmp/coverage
+    yarn run test --coverage --coverageDirectory=/tmp/coverage
 
 FROM scratch AS test-coverage
 COPY --from=test /tmp/coverage /
