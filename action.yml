@@ -39,5 +39,5 @@ outputs:
     description: 'Analysis results formatted as asset=analysisURL (comma separated)'
 
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
