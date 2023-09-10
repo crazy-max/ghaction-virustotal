@@ -47,10 +47,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
       -
         name: Build
         run: |
@@ -58,7 +58,7 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v3
+        uses: crazy-max/ghaction-virustotal@v4
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
@@ -68,7 +68,8 @@ jobs:
 
 ### Scan assets of a published release
 
-You can also use this action to scan assets of a published release on GitHub when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release)
+You can also use this action to scan assets of a published release on GitHub
+when a [release event](https://help.github.com/en/actions/reference/events-that-trigger-workflows#release-event-release)
 is triggered:
 
 ```yaml
@@ -84,21 +85,22 @@ jobs:
     steps:
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v3
+        uses: crazy-max/ghaction-virustotal@v4
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
             .exe$
 ```
 
-If you set `update_release_body: true` input, analysis link(s) will be appended to the release body and will look
-like this:
+If you set `update_release_body: true` input, analysis link(s) will be appended
+to the release body and will look like this:
 
 ![VirusTotal GitHub Action update release body](.github/ghaction-virustotal-release-body.png)
 
 ### Scan through VirusTotal Monitor
 
-To scan your assets through VirusTotal Monitor you can use the following workflow:
+To scan your assets through VirusTotal Monitor you can use the following
+workflow:
 
 ```yaml
 name: build
@@ -113,10 +115,10 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
       -
         name: Build
         run: |
@@ -124,7 +126,7 @@ jobs:
           GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
       -
         name: VirusTotal Monitor Scan
-        uses: crazy-max/ghaction-virustotal@v3
+        uses: crazy-max/ghaction-virustotal@v4
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           vt_monitor: true
@@ -155,7 +157,7 @@ Following inputs can be used as `step.with` keys
 
 ### outputs
 
-Following outputs are available
+The following outputs are available
 
 | Name          | Type    | Description                                                                |
 |---------------|---------|----------------------------------------------------------------------------|
@@ -163,11 +165,10 @@ Following outputs are available
 
 ## Contributing
 
-Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. If
-you want to open a pull request, please read the [contributing guidelines](.github/CONTRIBUTING.md).
-
-You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) or by
-making a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely!
+Want to contribute? Awesome! The most basic way to show your support is to star
+the project, or to raise issues. You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max)
+or by making a [PayPal donation](https://www.paypal.me/crazyws) to ensure this
+journey continues indefinitely!
 
 Thanks again for your support, it is much appreciated! :pray:
 
