@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/form-data": "^2.5.0",
     "@types/mime": "^3.0.1",
-    "@types/node": "^18.11.3",
+    "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "@vercel/ncc": "^0.34.0",
