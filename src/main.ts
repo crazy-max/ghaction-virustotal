@@ -83,20 +83,23 @@ async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter | undefin
 
   core.info(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`);
   await core.group(`${assets.length} asset(s) will be sent to VirusTotal for analysis.`, async () => {
+    const dlretrycb = (msg: string): void => {
+      core.debug(msg);
+    };
     await context.asyncForEach(assets, async asset => {
-      core.debug(`Downloading ${asset.name}`);
+      core.info(`Downloading release asset ${asset.name}...`);
       if (limiter !== undefined) {
         const remainingRequests = await limiter.removeTokens(1);
-        core.debug(`limiter: remaining requests: ${remainingRequests}`);
+        core.debug(`Limiter: remaining requests: ${remainingRequests}`);
       }
       if (inputs.vtMonitor) {
-        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name)), inputs.monitorPath).then(upload => {
+        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb), inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n  * [\`${asset.name}\`](${upload.url})`);
         });
       } else {
-        await vt.files(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name))).then(upload => {
+        await vt.files(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb)).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n  * [\`${asset.name}\`](${upload.url})`);
