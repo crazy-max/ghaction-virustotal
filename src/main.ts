@@ -1,11 +1,13 @@
+import * as path from 'path';
+import * as core from '@actions/core';
+import {GitHub} from '@actions/github/lib/utils';
+import {RateLimiter} from 'limiter';
+
 import * as context from './context';
 import * as github from './github';
 import {VirusTotal} from './virustotal';
-import * as core from '@actions/core';
-import * as path from 'path';
-import {RateLimiter} from 'limiter';
 
-let octokit;
+let octokit: InstanceType<typeof GitHub>;
 let inputs: context.Inputs;
 const outputAnalysis: string[] = [];
 

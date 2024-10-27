@@ -19,9 +19,7 @@ export interface Release {
 export interface ReleaseAsset {
   id: number;
   name: string;
-  mime: string;
   size: number;
-  file: Buffer;
 }
 
 export function context(): Context {
@@ -32,7 +30,7 @@ export function getOctokit(token: string, options?: OctokitOptions): InstanceTyp
   return github.getOctokit(token, options);
 }
 
-export const getRelease = async (octokit, tag): Promise<Release> => {
+export const getRelease = async (octokit: InstanceType<typeof GitHub>, tag: string): Promise<Release> => {
   return (
     await octokit.rest.repos
       .getReleaseByTag({
@@ -45,7 +43,7 @@ export const getRelease = async (octokit, tag): Promise<Release> => {
   ).data as Release;
 };
 
-export const getReleaseAssets = async (octokit, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
+export const getReleaseAssets = async (octokit: InstanceType<typeof GitHub>, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
   return (
     await octokit
       .paginate(octokit.rest.repos.listReleaseAssets, {
@@ -59,22 +57,21 @@ export const getReleaseAssets = async (octokit, release: Release, patterns: Arra
     return patterns.some(function (pattern) {
       return asset.name.match(pattern);
     });
-  }) as Array<ReleaseAsset>;
+  });
 };
 
-export const downloadReleaseAsset = async (octokit, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
+export const downloadReleaseAsset = async (octokit: InstanceType<typeof GitHub>, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
   return octokit.rest.repos
     .getReleaseAsset({
       ...github.context.repo,
       asset_id: asset.id,
-      request: {
-        headers: {
-          Accept: 'application/octet-stream'
-        }
+      headers: {
+        accept: 'application/octet-stream'
       }
     })
     .then(downloadAsset => {
-      fs.writeFileSync(downloadPath, Buffer.from(downloadAsset.data), 'binary');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      fs.writeFileSync(downloadPath, Buffer.from(downloadAsset.data as any), 'binary');
       return downloadPath;
     })
     .catch(error => {
@@ -82,7 +79,7 @@ export const downloadReleaseAsset = async (octokit, asset: ReleaseAsset, downloa
     });
 };
 
-export const updateReleaseBody = async (octokit, release: Release): Promise<Release> => {
+export const updateReleaseBody = async (octokit: InstanceType<typeof GitHub>, release: Release): Promise<Release> => {
   return (
     await octokit.rest.repos
       .updateRelease({
