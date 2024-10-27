@@ -32,7 +32,7 @@ export class VirusTotal {
     });
   }
 
-  async files(filename: string): Promise<UploadData> {
+  public async files(filename: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
     const fd = new FormData();
     fd.append('file', file, {
@@ -63,7 +63,7 @@ export class VirusTotal {
       });
   }
 
-  monitorItems(filename: string, path?: string): Promise<UploadData> {
+  public async monitorItems(filename: string, path?: string): Promise<UploadData> {
     const {name, mime, size, file} = asset(filename);
     const fd = new FormData();
     fd.append('file', file, {
@@ -76,18 +76,16 @@ export class VirusTotal {
     core.debug(`monitorItems path: ${itemPath}`);
     fd.append('path', itemPath);
 
-    return this.instance
-      .post('/monitor/items', fd.getBuffer(), {
+    try {
+      const upload = await this.instance.post('/monitor/items', fd.getBuffer(), {
         headers: fd.getHeaders()
-      })
-      .then(upload => {
-        const data = upload.data.data as UploadData;
-        data.url = `https://www.virustotal.com/monitor/analyses/item:${data.id}`;
-        return data;
-      })
-      .catch(error => {
-        throw new Error(`Cannot send ${name} to VirusTotal Monitor at ${itemPath}: ${error}`);
       });
+      const data = upload.data.data as UploadData;
+      data.url = `https://www.virustotal.com/monitor/analyses/item:${data.id}`;
+      return data;
+    } catch (error) {
+      throw new Error(`Cannot send ${name} to VirusTotal Monitor at ${itemPath}: ${error}`);
+    }
   }
 }
 
