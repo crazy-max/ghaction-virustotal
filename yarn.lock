@@ -3182,6 +3182,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"form-data@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "form-data@npm:4.0.1"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: ccee458cd5baf234d6b57f349fe9cc5f9a2ea8fd1af5ecda501a18fd1572a6dd3bf08a49f00568afd995b6a65af34cb8dec083cf9d582c4e621836499498dd84
+  languageName: node
+  linkType: hard
+
 "fs-minipass@npm:^2.0.0, fs-minipass@npm:^2.1.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -5748,7 +5759,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-jest: ^27.2.3
     eslint-plugin-prettier: ^5.0.0
-    form-data: ^4.0.0
+    form-data: ^4.0.1
     jest: ^29.6.4
     limiter: ^2.1.0
     mime: ^3.0.0
