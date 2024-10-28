@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as github from '@actions/github';
 import {Context} from '@actions/github/lib/context';
-import {GitHub} from '@actions/github/lib/utils';
 import {OctokitOptions} from '@octokit/core/dist-types/types';
+import {retry as retryPlugin} from '@octokit/plugin-retry';
 
 export interface Release {
   id: number;
@@ -22,15 +22,17 @@ export interface ReleaseAsset {
   size: number;
 }
 
+export type Octokit = ReturnType<typeof github.getOctokit>;
+
 export function context(): Context {
   return github.context;
 }
 
-export function getOctokit(token: string, options?: OctokitOptions): InstanceType<typeof GitHub> {
-  return github.getOctokit(token, options);
+export function getOctokit(token: string, options?: OctokitOptions): Octokit {
+  return github.getOctokit(token, options, retryPlugin);
 }
 
-export const getRelease = async (octokit: InstanceType<typeof GitHub>, tag: string): Promise<Release> => {
+export const getRelease = async (octokit: Octokit, tag: string): Promise<Release> => {
   return (
     await octokit.rest.repos
       .getReleaseByTag({
@@ -43,7 +45,7 @@ export const getRelease = async (octokit: InstanceType<typeof GitHub>, tag: stri
   ).data as Release;
 };
 
-export const getReleaseAssets = async (octokit: InstanceType<typeof GitHub>, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
+export const getReleaseAssets = async (octokit: Octokit, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
   return (
     await octokit
       .paginate(octokit.rest.repos.listReleaseAssets, {
@@ -60,13 +62,18 @@ export const getReleaseAssets = async (octokit: InstanceType<typeof GitHub>, rel
   });
 };
 
-export const downloadReleaseAsset = async (octokit: InstanceType<typeof GitHub>, asset: ReleaseAsset, downloadPath: string): Promise<string> => {
-  return octokit.rest.repos
+export const downloadReleaseAsset = async (octokit: Octokit, asset: ReleaseAsset, downloadPath: string, retrycb?: (msg: string) => void): Promise<string> => {
+  const retries = 10;
+  const assetPath = await octokit.rest.repos
     .getReleaseAsset({
       ...github.context.repo,
       asset_id: asset.id,
       headers: {
         accept: 'application/octet-stream'
+      },
+      request: {
+        retries: retries,
+        retryAfter: 2
       }
     })
     .then(downloadAsset => {
@@ -74,12 +81,24 @@ export const downloadReleaseAsset = async (octokit: InstanceType<typeof GitHub>,
       fs.writeFileSync(downloadPath, Buffer.from(downloadAsset.data as any), 'binary');
       return downloadPath;
     })
-    .catch(error => {
-      throw new Error(`Cannot download release asset ${asset.name} (${asset.id}): ${error.message}`);
+    .catch(err => {
+      if (retrycb && err.request.request && err.request.request.retryCount) {
+        retrycb(`Download request failed: ${err}. Retrying (${err.request.request.retryCount}/${retries})...`);
+        if (err.request.request.retryCount >= retries) {
+          throw new Error(`Cannot download release asset ${asset.name} (${asset.id}): ${err}`);
+        }
+      }
+      if (!err.request.request || err.request.request.retryCount >= retries) {
+        throw new Error(`Cannot download release asset ${asset.name} (${asset.id}): ${err}`);
+      }
     });
+  if (!assetPath) {
+    throw new Error(`Cannot download release asset ${asset.name} (${asset.id})`);
+  }
+  return assetPath;
 };
 
-export const updateReleaseBody = async (octokit: InstanceType<typeof GitHub>, release: Release): Promise<Release> => {
+export const updateReleaseBody = async (octokit: Octokit, release: Release): Promise<Release> => {
   return (
     await octokit.rest.repos
       .updateRelease({

@@ -4,10 +4,11 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 import * as context from '../src/context';
 import * as github from '../src/github';
+import {Octokit} from '../src/github';
 import {asset} from '../src/virustotal';
 import {Context} from '@actions/github/lib/context';
 
-let octokit;
+let octokit: Octokit;
 
 jest.spyOn(context, 'tmpDir').mockImplementation((): string => {
   const tmpDir = path.join('/tmp/.ghaction-virustotal-jest').split(path.sep).join(path.posix.sep);
