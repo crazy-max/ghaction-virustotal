@@ -37,8 +37,10 @@ This action can be used to scan local files with VirusTotal:
 ```yaml
 name: build
 
+permissions:
+  contents: read
+
 on:
-  pull_request:
   push:
 
 jobs:
@@ -50,7 +52,7 @@ jobs:
         uses: actions/checkout@v4
       -
         name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
       -
         name: Build
         run: |
@@ -75,9 +77,13 @@ is triggered:
 ```yaml
 name: released
 
+permissions:
+  contents: read
+
 on:
   release:
-    types: [published]
+    types:
+      - published
 
 jobs:
   virustotal:
@@ -93,7 +99,37 @@ jobs:
 ```
 
 If you set `update_release_body: true` input, analysis link(s) will be appended
-to the release body and will look like this:
+to the release body:
+
+```yaml
+name: released
+
+permissions:
+  contents: read
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  virustotal:
+    runs-on: ubuntu-latest
+    permissions:
+      # required to write GitHub Release body
+      contents: write
+    steps:
+      -
+        name: VirusTotal Scan
+        uses: crazy-max/ghaction-virustotal@v4
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          update_release_body: true
+          files: |
+            .exe$
+```
+
+And will look like this:
 
 ![VirusTotal GitHub Action update release body](.github/ghaction-virustotal-release-body.png)
 
@@ -105,8 +141,10 @@ workflow:
 ```yaml
 name: build
 
+permissions:
+  contents: read
+
 on:
-  pull_request:
   push:
 
 jobs:
@@ -118,7 +156,7 @@ jobs:
         uses: actions/checkout@v4
       -
         name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
       -
         name: Build
         run: |
@@ -151,6 +189,7 @@ Following inputs can be used as `step.with` keys
 | `github_token`**³**        | String |         | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` |
 | `request_rate`             | Number | `0`     | API request-rate in requests/minute. Set to `4` or lower when using the standard free public API. `0` to disable rate-limit.                                                                              |
 
+> [!NOTE]
 > * **¹** Only available if `vt_monitor` is enabled.
 > * **²** Only available if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
 > * **³** Required if [release event is triggered](#scan-assets-of-a-published-release) in your workflow.
