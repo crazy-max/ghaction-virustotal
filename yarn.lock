@@ -4406,13 +4406,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"just-performance@npm:4.3.0":
-  version: 4.3.0
-  resolution: "just-performance@npm:4.3.0"
-  checksum: 37e226e308689b27ad7e0cdb2b2181c8be85f28cb0026db4b68c189f4894828a2865ea4a7a5f3488f4e3390bac1f9428fc6e40a554c068b08e5992e26920e376
-  languageName: node
-  linkType: hard
-
 "kleur@npm:^3.0.3":
   version: 3.0.3
   resolution: "kleur@npm:3.0.3"
@@ -4437,12 +4430,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"limiter@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "limiter@npm:2.1.0"
-  dependencies:
-    just-performance: 4.3.0
-  checksum: 989092bfdafeefb37bd139f6451f165d449a628cd6fbe9308ed5147a9af24631f031e16466a3e48283418e0bea45c06aa1710f8f8945bc56ea7ef01f94ed5c65
+"limiter@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "limiter@npm:3.0.0"
+  checksum: f08d5643d6d331eb3138acc267280bd4de2417e3e58fc4372660b9a64fb021e09e8ab283ba8a297d43c848e6dd2220db84ba12091f27daa6962187348023fb8a
   languageName: node
   linkType: hard
 
@@ -5907,7 +5898,7 @@ __metadata:
     eslint-plugin-prettier: ^5.0.0
     form-data: ^4.0.2
     jest: ^29.6.4
-    limiter: ^2.1.0
+    limiter: ^3.0.0
     mime: ^3.0.0
     prettier: ^3.0.3
     ts-jest: ^29.1.1
