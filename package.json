@@ -38,6 +38,9 @@
     "mime": "^3.0.0"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.0.0",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.2",
     "@types/form-data": "^2.5.0",
     "@types/mime": "^3.0.1",
     "@types/node": "^20.19.27",
