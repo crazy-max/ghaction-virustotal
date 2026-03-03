@@ -357,7 +357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.39.3, @eslint/js@npm:^9.39.2":
+"@eslint/js@npm:9.39.3, @eslint/js@npm:^9.39.3":
   version: 9.39.3
   resolution: "@eslint/js@npm:9.39.3"
   checksum: 10/91a1a1822cfeb2eb8a89aae86be5dfabad0b66b0915946516690a8485ddd80b91f43eee346789313fea1acbb7390a4958119ca7dc9a684a5c4014f12fcb3aaf3
@@ -852,12 +852,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/form-data@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "@types/form-data@npm:2.5.0"
+"@types/form-data@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "@types/form-data@npm:2.5.2"
   dependencies:
     form-data: "npm:*"
-  checksum: 10/c3f6c8932726970d49d67a23410d5eef0e1ad0be418163ccc3d73a4cbaa0dcd71e0e29acbe2779aab85ed8f47cb0e8f6b67028480da3b0f7d074c5a3416b2400
+  checksum: 10/fb38ae90b671dc912152a01143d7342aac273650c0efa6c866d490913fc83d32e8b96e87bd2d6a737e2c8975cc3d63322d702f77935f68fb838c32662dc616fb
   languageName: node
   linkType: hard
 
@@ -869,13 +869,13 @@ __metadata:
   linkType: hard
 
 "@types/mime@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@types/mime@npm:3.0.1"
-  checksum: 10/4040fac73fd0cea2460e29b348c1a6173da747f3a87da0dbce80dd7a9355a3d0e51d6d9a401654f3e5550620e3718b5a899b2ec1debf18424e298a2c605346e7
+  version: 3.0.4
+  resolution: "@types/mime@npm:3.0.4"
+  checksum: 10/a6139c8e1f705ef2b064d072f6edc01f3c099023ad7c4fce2afc6c2bf0231888202adadbdb48643e8e20da0ce409481a49922e737eca52871b3dc08017455843
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.19.27":
+"@types/node@npm:^20.19.35":
   version: 20.19.35
   resolution: "@types/node@npm:20.19.35"
   dependencies:
@@ -884,7 +884,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.50.0":
+"@typescript-eslint/eslint-plugin@npm:^8.56.1":
   version: 8.56.1
   resolution: "@typescript-eslint/eslint-plugin@npm:8.56.1"
   dependencies:
@@ -904,7 +904,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.50.0":
+"@typescript-eslint/parser@npm:^8.56.1":
   version: 8.56.1
   resolution: "@typescript-eslint/parser@npm:8.56.1"
   dependencies:
@@ -1019,14 +1019,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/ncc@npm:^0.38.0":
-  version: 0.38.0
-  resolution: "@vercel/ncc@npm:0.38.0"
+"@vercel/ncc@npm:^0.38.4":
+  version: 0.38.4
+  resolution: "@vercel/ncc@npm:0.38.4"
   dependencies:
     node-gyp: "npm:latest"
   bin:
     ncc: dist/ncc/cli.js
-  checksum: 10/bd92496540eb825fdb65ac2ed338abecba77527aeb9a807f7253f89e085dd00fd5736d9ebb35788fa180f3d24967e2c1e08f34ee08bd9ed5435b50a2a6fd2b81
+  checksum: 10/06561fb3fd46c4db525ea1c9f39b7982e449e9a1995e94d8f5b876c939147c31dba0ca5ffaed4b30ebc6782ffbde531b3f01658996bdaaecb3928df5b1aec155
   languageName: node
   linkType: hard
 
@@ -1557,10 +1557,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.3.1":
-  version: 16.3.1
-  resolution: "dotenv@npm:16.3.1"
-  checksum: 10/dbb778237ef8750e9e3cd1473d3c8eaa9cc3600e33a75c0e36415d0fa0848197f56c3800f77924c70e7828f0b03896818cd52f785b07b9ad4d88dba73fbba83f
+"dotenv@npm:^17.3.1":
+  version: 17.3.1
+  resolution: "dotenv@npm:17.3.1"
+  checksum: 10/4dde6571dff22c2323a3e33ac25e1e7d51c4b6d60dc884f59e3efe85c8fd3cc8800d6b3925d05c46b19dca08cba821a0a24e22f75a1b9b768c859b98bb927b04
   languageName: node
   linkType: hard
 
@@ -1754,7 +1754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^5.5.4":
+"eslint-plugin-prettier@npm:^5.5.5":
   version: 5.5.5
   resolution: "eslint-plugin-prettier@npm:5.5.5"
   dependencies:
@@ -1805,7 +1805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.39.2":
+"eslint@npm:^9.39.3":
   version: 9.39.3
   resolution: "eslint@npm:9.39.3"
   dependencies:
@@ -2988,7 +2988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.7.4":
+"prettier@npm:^3.8.1":
   version: 3.8.1
   resolution: "prettier@npm:3.8.1"
   bin:
@@ -3499,28 +3499,28 @@ __metadata:
   dependencies:
     "@actions/core": "npm:^1.11.1"
     "@actions/github": "npm:^6.0.0"
-    "@eslint/js": "npm:^9.39.2"
+    "@eslint/js": "npm:^9.39.3"
     "@octokit/core": "npm:^5.2.1"
     "@octokit/plugin-retry": "npm:^6.0.1"
-    "@types/form-data": "npm:^2.5.0"
+    "@types/form-data": "npm:^2.5.2"
     "@types/mime": "npm:^3.0.1"
-    "@types/node": "npm:^20.19.27"
-    "@typescript-eslint/eslint-plugin": "npm:^8.50.0"
-    "@typescript-eslint/parser": "npm:^8.50.0"
-    "@vercel/ncc": "npm:^0.38.0"
+    "@types/node": "npm:^20.19.35"
+    "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
+    "@typescript-eslint/parser": "npm:^8.56.1"
+    "@vercel/ncc": "npm:^0.38.4"
     "@vitest/coverage-v8": "npm:^4.0.18"
     "@vitest/eslint-plugin": "npm:^1.6.9"
     axios: "npm:^1.8.4"
-    dotenv: "npm:^16.3.1"
-    eslint: "npm:^9.39.2"
+    dotenv: "npm:^17.3.1"
+    eslint: "npm:^9.39.3"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-prettier: "npm:^5.5.4"
+    eslint-plugin-prettier: "npm:^5.5.5"
     form-data: "npm:^4.0.2"
     glob: "npm:^13.0.6"
     globals: "npm:^17.3.0"
     limiter: "npm:^2.1.0"
     mime: "npm:^3.0.0"
-    prettier: "npm:^3.7.4"
+    prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.0.18"
   languageName: unknown
