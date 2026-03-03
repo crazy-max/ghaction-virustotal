@@ -1,7 +1,7 @@
 import axios, {AxiosInstance} from 'axios';
 import FormData from 'form-data';
 import {lstatSync, readFileSync} from 'fs';
-import {getType} from 'mime';
+import mime from 'mime';
 import {basename, posix} from 'path';
 import * as core from '@actions/core';
 
@@ -99,5 +99,5 @@ export const asset = (path: string): Asset => {
 };
 
 export const mimeOrDefault = (path: string): string => {
-  return getType(path) || 'application/octet-stream';
+  return mime.getType(path) || 'application/octet-stream';
 };

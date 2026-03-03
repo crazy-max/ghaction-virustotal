@@ -868,10 +868,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mime@npm:^3.0.1":
-  version: 3.0.4
-  resolution: "@types/mime@npm:3.0.4"
-  checksum: 10/a6139c8e1f705ef2b064d072f6edc01f3c099023ad7c4fce2afc6c2bf0231888202adadbdb48643e8e20da0ce409481a49922e737eca52871b3dc08017455843
+"@types/mime@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@types/mime@npm:4.0.0"
+  dependencies:
+    mime: "npm:*"
+  checksum: 10/e19258adf39badcfa1ed1deecc081f5d4fbbbd655bb6ae23fc6f0101309c61e95feb66f6a839dfe908d4c7b82e9ef39717d2de0212eebffa5cdabdc3f5cefcc1
   languageName: node
   linkType: hard
 
@@ -2626,12 +2628,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "mime@npm:3.0.0"
+"mime@npm:*, mime@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "mime@npm:4.1.0"
   bin:
-    mime: cli.js
-  checksum: 10/b2d31580deb58be89adaa1877cbbf152b7604b980fd7ef8f08b9e96bfedf7d605d9c23a8ba62aa12c8580b910cd7c1d27b7331d0f40f7a14e17d5a0bbec3b49f
+    mime: bin/cli.js
+  checksum: 10/154c06eeaf803c4a87f44b3dbd3fafc50afed7154f9ea2d2dde4ae464be33a7c6943de6981d636abd5da3523d2bd66ee1ad2adb2e4c2e7a2fe5e0075bcde62d5
   languageName: node
   linkType: hard
 
@@ -3495,7 +3497,7 @@ __metadata:
     "@octokit/core": "npm:^5.2.1"
     "@octokit/plugin-retry": "npm:^6.0.1"
     "@types/form-data": "npm:^2.5.2"
-    "@types/mime": "npm:^3.0.1"
+    "@types/mime": "npm:^4.0.0"
     "@types/node": "npm:^20.19.35"
     "@typescript-eslint/eslint-plugin": "npm:^8.56.1"
     "@typescript-eslint/parser": "npm:^8.56.1"
@@ -3511,7 +3513,7 @@ __metadata:
     glob: "npm:^13.0.6"
     globals: "npm:^17.3.0"
     limiter: "npm:^2.1.0"
-    mime: "npm:^3.0.0"
+    mime: "npm:^4.1.0"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.0.18"
