@@ -4,8 +4,8 @@ import * as os from 'os';
 import * as path from 'path';
 import * as github from '@actions/github';
 
-import * as ghrelease from '../src/ghrelease';
-import {asset} from '../src/virustotal';
+import * as ghrelease from '../src/ghrelease.js';
+import {asset} from '../src/virustotal.js';
 
 const tmpDir = fs.mkdtempSync(path.join(process.env.TEMP || os.tmpdir(), 'ghrelease-'));
 const octokit = github.getOctokit(process.env.GITHUB_TOKEN);

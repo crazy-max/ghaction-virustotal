@@ -2,7 +2,7 @@ import {describe, expect, it} from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import * as context from '../src/context';
+import * as context from '../src/context.js';
 
 describe('tmpDir', () => {
   it('returns the same directory and normalizes path separators', () => {

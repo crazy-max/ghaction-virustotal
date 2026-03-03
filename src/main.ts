@@ -4,9 +4,9 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import {retry as retryPlugin} from '@octokit/plugin-retry';
 
-import * as context from './context';
-import * as ghrelease from './ghrelease';
-import {VirusTotal} from './virustotal';
+import * as context from './context.js';
+import * as ghrelease from './ghrelease.js';
+import {VirusTotal} from './virustotal.js';
 
 let octokit: ReturnType<typeof github.getOctokit>;
 let inputs: context.Inputs;
