@@ -2469,13 +2469,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"just-performance@npm:4.3.0":
-  version: 4.3.0
-  resolution: "just-performance@npm:4.3.0"
-  checksum: 10/5e5f0664f357d291aac9ccca6357b997254600f2d2dd429e9b63e058035c44b6b1c73dbae51f58af7918c0701db4b20d4f365ed61e77d87c92a0183efb77a72a
-  languageName: node
-  linkType: hard
-
 "keyv@npm:^4.5.4":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -2495,12 +2488,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"limiter@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "limiter@npm:2.1.0"
-  dependencies:
-    just-performance: "npm:4.3.0"
-  checksum: 10/d6292c2a576fe7c4664652a64d286cb3701dd18e1878e01207840d809c62ce6db46ec6ee5e2ab53d548cb56152d0aeeb8555e32fe9177fcb4b04983ef04f805e
+"limiter@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "limiter@npm:3.0.0"
+  checksum: 10/d45865d74b147b715dc2077cf9db1ed5c05c667f303b2ab69d60c65c6cbef0de099f4124065828294a02fcb093dfb2309034bbd382d1b2528f10988030ea8bd1
   languageName: node
   linkType: hard
 
@@ -3512,7 +3503,7 @@ __metadata:
     form-data: "npm:^4.0.5"
     glob: "npm:^13.0.6"
     globals: "npm:^17.3.0"
-    limiter: "npm:^2.1.0"
+    limiter: "npm:^3.0.0"
     mime: "npm:^4.1.0"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
