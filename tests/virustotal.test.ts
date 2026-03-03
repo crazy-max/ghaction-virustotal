@@ -1,5 +1,9 @@
-import {describe, expect, it} from '@jest/globals';
+import {describe, expect, it} from 'vitest';
+import * as path from 'path';
+
 import {mimeOrDefault, asset, VirusTotal} from '../src/virustotal';
+
+const fixturesDir = path.join(__dirname, 'fixtures');
 
 describe('virustotal', () => {
   describe('mimeOrDefault', () => {
@@ -12,7 +16,7 @@ describe('virustotal', () => {
   });
 
   it('derives asset info from a path', async () => {
-    const {name, mime, size, file} = asset('tests/data/foo/bar.txt');
+    const {name, mime, size, file} = asset(path.join(fixturesDir, 'data/foo/bar.txt'));
     expect(name).toEqual('bar.txt');
     expect(mime).toEqual('text/plain');
     expect(size).toEqual(7);
@@ -23,7 +27,7 @@ describe('virustotal', () => {
     'uploads asset on VirusTotal',
     async () => {
       const vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
-      await vt.files('tests/data/foo/bar.txt').then(upload => {
+      await vt.files(path.join(fixturesDir, 'data/foo/bar.txt')).then(upload => {
         // eslint-disable-next-line jest/no-standalone-expect
         expect(upload.id).not.toBeUndefined();
         // eslint-disable-next-line jest/no-standalone-expect

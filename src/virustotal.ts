@@ -1,8 +1,8 @@
+import axios, {AxiosInstance} from 'axios';
+import FormData from 'form-data';
 import {lstatSync, readFileSync} from 'fs';
 import {getType} from 'mime';
 import {basename, posix} from 'path';
-import axios, {AxiosInstance} from 'axios';
-import FormData from 'form-data';
 import * as core from '@actions/core';
 
 interface UploadData {

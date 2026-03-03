@@ -1,12 +1,14 @@
 import * as path from 'path';
-import * as core from '@actions/core';
 import {RateLimiter} from 'limiter';
+import * as core from '@actions/core';
+import * as github from '@actions/github';
+import {retry as retryPlugin} from '@octokit/plugin-retry';
+
 import * as context from './context';
-import * as github from './github';
-import {Octokit} from './github';
+import * as ghrelease from './ghrelease';
 import {VirusTotal} from './virustotal';
 
-let octokit: Octokit;
+let octokit: ReturnType<typeof github.getOctokit>;
 let inputs: context.Inputs;
 const outputAnalysis: string[] = [];
 
@@ -18,11 +20,11 @@ async function run() {
       return;
     }
 
-    octokit = github.getOctokit(inputs.githubToken);
+    octokit = github.getOctokit(inputs.githubToken, undefined, retryPlugin);
 
     const limiter = inputs.requestRate > 0 ? new RateLimiter({tokensPerInterval: inputs.requestRate, interval: 'minute'}) : undefined;
     const vt = new VirusTotal(inputs.vtApiKey);
-    if (github.context().eventName == 'release') {
+    if (github.context.eventName == 'release') {
       await runForReleaseEvent(vt, limiter);
     } else {
       await runForLocalFiles(vt, limiter);
@@ -66,11 +68,11 @@ async function runForLocalFiles(vt: VirusTotal, limiter: RateLimiter | undefined
 }
 
 async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter | undefined) {
-  core.info(`Release event detected for ${github.context().ref} in this workflow. Preparing to scan assets...`);
+  core.info(`Release event detected for ${github.context.ref} in this workflow. Preparing to scan assets...`);
 
-  const release = await github.getRelease(octokit, github.context().ref.replace('refs/tags/', ''));
+  const release = await ghrelease.getRelease(octokit, github.context.ref.replace('refs/tags/', ''));
 
-  const assets = await github.getReleaseAssets(octokit, release, inputs.files);
+  const assets = await ghrelease.getReleaseAssets(octokit, release, inputs.files);
   if (assets.length == 0) {
     core.warning(`No assets were found for ${release.tag_name} release tag. Please check the 'files' input.`);
     return;
@@ -94,13 +96,13 @@ async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter | undefin
         core.debug(`Limiter: remaining requests: ${remainingRequests}`);
       }
       if (inputs.vtMonitor) {
-        await vt.monitorItems(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb), inputs.monitorPath).then(upload => {
+        await vt.monitorItems(await ghrelease.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb), inputs.monitorPath).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n  * [\`${asset.name}\`](${upload.url})`);
         });
       } else {
-        await vt.files(await github.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb)).then(upload => {
+        await vt.files(await ghrelease.downloadReleaseAsset(octokit, asset, path.join(context.tmpDir(), asset.name), dlretrycb)).then(upload => {
           outputAnalysis.push(`${asset.name}=${upload.url}`);
           core.info(`${asset.name} successfully uploaded. Check detection analysis at ${upload.url}`);
           release.body = release.body.concat(`\n  * [\`${asset.name}\`](${upload.url})`);
@@ -114,7 +116,7 @@ async function runForReleaseEvent(vt: VirusTotal, limiter: RateLimiter | undefin
 
   if (/true/i.test(core.getInput('update_release_body'))) {
     core.debug(`Appending analysis link(s) to release body`);
-    await github.updateReleaseBody(octokit, release);
+    await ghrelease.updateReleaseBody(octokit, release);
   }
 }
 

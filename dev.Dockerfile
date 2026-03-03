@@ -86,13 +86,10 @@ ARG GITHUB_REPOSITORY
 RUN --mount=type=bind,target=.,rw \
   --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
-  --mount=type=secret,id=GITHUB_TOKEN \
-  --mount=type=secret,id=VT_API_KEY \
-  --mount=type=secret,id=VT_MONITOR_API_KEY \
-    GITHUB_TOKEN=$(cat /run/secrets/GITHUB_TOKEN) \
-    VT_API_KEY=$(cat /run/secrets/VT_API_KEY) \
-    VT_MONITOR_API_KEY=$(cat /run/secrets/VT_MONITOR_API_KEY) \
-    yarn run test --coverage --coverageDirectory=/tmp/coverage
+  --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN \
+  --mount=type=secret,id=VT_API_KEY,env=VT_API_KEY \
+  --mount=type=secret,id=VT_MONITOR_API_KEY,env=VT_MONITOR_API_KEY \
+    yarn run test --coverage --coverage.reportsDirectory=/tmp/coverage
 
 FROM scratch AS test-coverage
 COPY --from=test /tmp/coverage /
