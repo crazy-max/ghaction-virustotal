@@ -18,8 +18,8 @@ ___
 
 * [Usage](#usage)
   * [Scan local files](#scan-local-files)
-  * [Scan assets of a published release](#scan-assets-of-a-published-release)
   * [Scan through VirusTotal Monitor](#scan-through-virustotal-monitor)
+  * [Scan assets of a published release](#scan-assets-of-a-published-release)
 * [Customizing](#customizing)
   * [inputs](#inputs)
   * [outputs](#outputs)
@@ -35,37 +35,30 @@ This action can be used to scan local files with VirusTotal:
 ![VirusTotal GitHub Action](.github/ghaction-virustotal-files.png)
 
 ```yaml
-name: build
+- name: VirusTotal Scan
+  uses: crazy-max/ghaction-virustotal@v5
+  with:
+    vt_api_key: ${{ secrets.VT_API_KEY }}
+    files: |
+      ./foo-win32.exe
+      ./foo-win64.exe
+```
 
-permissions:
-  contents: read
+### Scan through VirusTotal Monitor
 
-on:
-  push:
+To scan your assets through [VirusTotal Monitor](https://docs.virustotal.com/reference/software-publishers)
+you can use the following workflow:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Set up Go
-        uses: actions/setup-go@v5
-      -
-        name: Build
-        run: |
-          GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -v -ldflags "-s -w"
-          GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
-      -
-        name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v4
-        with:
-          vt_api_key: ${{ secrets.VT_API_KEY }}
-          files: |
-            ./ghaction-virustotal-win32.exe
-            ./ghaction-virustotal-win64.exe
+```yaml
+- name: VirusTotal Scan
+  uses: crazy-max/ghaction-virustotal@v5
+  with:
+    vt_api_key: ${{ secrets.VT_API_KEY }}
+    vt_monitor: true
+    monitor_path: /ghaction-virustotal
+    files: |
+      ./foo-win32.exe
+      ./foo-win64.exe
 ```
 
 ### Scan assets of a published release
@@ -91,7 +84,7 @@ jobs:
     steps:
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v4
+        uses: crazy-max/ghaction-virustotal@v5
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           files: |
@@ -121,7 +114,7 @@ jobs:
     steps:
       -
         name: VirusTotal Scan
-        uses: crazy-max/ghaction-virustotal@v4
+        uses: crazy-max/ghaction-virustotal@v5
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
           update_release_body: true
@@ -133,46 +126,6 @@ And will look like this:
 
 ![VirusTotal GitHub Action update release body](.github/ghaction-virustotal-release-body.png)
 
-### Scan through VirusTotal Monitor
-
-To scan your assets through VirusTotal Monitor you can use the following
-workflow:
-
-```yaml
-name: build
-
-permissions:
-  contents: read
-
-on:
-  push:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Set up Go
-        uses: actions/setup-go@v5
-      -
-        name: Build
-        run: |
-          GOOS=windows GOARCH=386 go build -o ./ghaction-virustotal-win32.exe -v -ldflags "-s -w"
-          GOOS=windows GOARCH=amd64 go build -o ./ghaction-virustotal-win64.exe -v -ldflags "-s -w"
-      -
-        name: VirusTotal Monitor Scan
-        uses: crazy-max/ghaction-virustotal@v4
-        with:
-          vt_api_key: ${{ secrets.VT_API_KEY }}
-          vt_monitor: true
-          monitor_path: /ghaction-virustotal
-          files: |
-            ./ghaction-virustotal-*.exe
-```
-
 ## Customizing
 
 ### inputs
@@ -181,9 +134,9 @@ Following inputs can be used as `step.with` keys
 
 | Name                       | Type   | Default | Description                                                                                                                                                                                               |
 |----------------------------|--------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `vt_api_key`               | String |         | [VirusTotal API key](https://developers.virustotal.com/v3.0/reference#authentication) to upload assets (**required**)                                                                                     |
+| `vt_api_key`               | String |         | [VirusTotal API key](https://docs.virustotal.com/reference/authentication) to upload assets (**required**)                                                                                                |
 | `files`                    | String |         | Newline-delimited list of path globs/patterns for asset files to upload for analysis (**required**)                                                                                                       |
-| `vt_monitor`               | Bool   | `false` | If enabled, files will be uploaded to [VirusTotal Monitor](https://developers.virustotal.com/v3.0/reference#monitor) endpoint                                                                             |
+| `vt_monitor`               | Bool   | `false` | If enabled, files will be uploaded to [VirusTotal Monitor](https://docs.virustotal.com/reference/software-publishers) endpoint                                                                            |
 | `monitor_path`**¹**        | String | `/`     | A path relative to current monitor user root folder to upload files                                                                                                                                       |
 | `update_release_body`**²** | Bool   | `false` | If enabled, analysis link(s) will be appended to the release body                                                                                                                                         |
 | `github_token`**³**        | String |         | [GitHub Token](https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) used to create an authenticated client for GitHub API as provided by `secrets` |
