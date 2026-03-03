@@ -1266,14 +1266,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.8.4":
-  version: 1.8.4
-  resolution: "axios@npm:1.8.4"
+"axios@npm:^1.13.6":
+  version: 1.13.6
+  resolution: "axios@npm:1.13.6"
   dependencies:
-    follow-redirects: "npm:^1.15.6"
-    form-data: "npm:^4.0.0"
+    follow-redirects: "npm:^1.15.11"
+    form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/a10f0dd836613924e48cf03dc2eff3fd21b14f764807aedaee4880a70c0f142aaebdb21da7ce27104d4c16ca00d0e452a20a20851f60e385a8d5bad1ae909d46
+  checksum: 10/a7ed83c2af3ef21d64609df0f85e76893a915a864c5934df69241001d0578082d6521a0c730bf37518ee458821b5695957cb10db9fc705f2a8996c8686ea7a89
   languageName: node
   linkType: hard
 
@@ -1957,17 +1957,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.6":
-  version: 1.15.9
-  resolution: "follow-redirects@npm:1.15.9"
+"follow-redirects@npm:^1.15.11":
+  version: 1.15.11
+  resolution: "follow-redirects@npm:1.15.11"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 10/e3ab42d1097e90d28b913903841e6779eb969b62a64706a3eb983e894a5db000fbd89296f45f08885a0e54cd558ef62e81be1165da9be25a6c44920da10f424c
+  checksum: 10/07372fd74b98c78cf4d417d68d41fdaa0be4dcacafffb9e67b1e3cf090bc4771515e65020651528faab238f10f9b9c0d9707d6c1574a6c0387c5de1042cde9ba
   languageName: node
   linkType: hard
 
-"form-data@npm:*, form-data@npm:^4.0.0":
+"form-data@npm:*":
   version: 4.0.0
   resolution: "form-data@npm:4.0.0"
   dependencies:
@@ -3466,7 +3466,7 @@ __metadata:
     "@vercel/ncc": "npm:^0.38.4"
     "@vitest/coverage-v8": "npm:^4.0.18"
     "@vitest/eslint-plugin": "npm:^1.6.9"
-    axios: "npm:^1.8.4"
+    axios: "npm:^1.13.6"
     dotenv: "npm:^17.3.1"
     eslint: "npm:^9.39.3"
     eslint-config-prettier: "npm:^10.1.8"
