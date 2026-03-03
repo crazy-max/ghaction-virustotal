@@ -1,9 +1,20 @@
 import {describe, expect, it} from 'vitest';
+import {randomBytes, randomUUID} from 'crypto';
+import * as fs from 'fs';
+import * as os from 'os';
 import * as path from 'path';
 
 import {mimeOrDefault, asset, VirusTotal} from '../src/virustotal.js';
 
 const fixturesDir = path.join(__dirname, 'fixtures');
+
+const createUniqueAssetFile = (): string => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'vt-upload-'));
+  const filePath = path.join(dir, `${randomUUID()}.txt`);
+  const content = `scan me ${randomUUID()} ${randomBytes(32).toString('hex')}\n`;
+  fs.writeFileSync(filePath, content, 'utf8');
+  return filePath;
+};
 
 describe('virustotal', () => {
   describe('mimeOrDefault', () => {
@@ -27,9 +38,14 @@ describe('virustotal', () => {
     'uploads asset on VirusTotal',
     async () => {
       const vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
-      const upload = await vt.files(path.join(fixturesDir, 'data/foo/bar.txt'));
-      expect(upload.id).not.toBeUndefined();
-      expect(upload.url).not.toBeUndefined();
+      const uploadFile = createUniqueAssetFile();
+      try {
+        const upload = await vt.files(uploadFile);
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
+      } finally {
+        fs.rmSync(path.dirname(uploadFile), {recursive: true, force: true});
+      }
     },
     30000
   );
@@ -38,9 +54,14 @@ describe('virustotal', () => {
     'uploads asset on VirusTotal Monitor',
     async () => {
       const vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY);
-      const upload = await vt.monitorItems(path.join(fixturesDir, 'data/foo/bar.txt'), '/test');
-      expect(upload.id).not.toBeUndefined();
-      expect(upload.url).not.toBeUndefined();
+      const uploadFile = createUniqueAssetFile();
+      try {
+        const upload = await vt.monitorItems(uploadFile, `/test/${randomUUID()}`);
+        expect(upload.id).not.toBeUndefined();
+        expect(upload.url).not.toBeUndefined();
+      } finally {
+        fs.rmSync(path.dirname(uploadFile), {recursive: true, force: true});
+      }
     },
     30000
   );
