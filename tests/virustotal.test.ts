@@ -1,5 +1,9 @@
-import {describe, expect, it} from '@jest/globals';
-import {mimeOrDefault, asset, VirusTotal} from '../src/virustotal';
+import {describe, expect, it} from 'vitest';
+import * as path from 'path';
+
+import {mimeOrDefault, asset, VirusTotal} from '../src/virustotal.js';
+
+const fixturesDir = path.join(__dirname, 'fixtures');
 
 describe('virustotal', () => {
   describe('mimeOrDefault', () => {
@@ -12,37 +16,31 @@ describe('virustotal', () => {
   });
 
   it('derives asset info from a path', async () => {
-    const {name, mime, size, file} = asset('tests/data/foo/bar.txt');
+    const {name, mime, size, file} = asset(path.join(fixturesDir, 'data/foo/bar.txt'));
     expect(name).toEqual('bar.txt');
     expect(mime).toEqual('text/plain');
     expect(size).toEqual(7);
     expect(file.toString()).toEqual('scan me');
   });
 
-  (process.env.VT_API_KEY ? it : it.skip)(
+  it.skipIf(!process.env.VT_API_KEY)(
     'uploads asset on VirusTotal',
     async () => {
       const vt: VirusTotal = new VirusTotal(process.env.VT_API_KEY);
-      await vt.files('tests/data/foo/bar.txt').then(upload => {
-        // eslint-disable-next-line jest/no-standalone-expect
-        expect(upload.id).not.toBeUndefined();
-        // eslint-disable-next-line jest/no-standalone-expect
-        expect(upload.url).not.toBeUndefined();
-      });
+      const upload = await vt.files(path.join(fixturesDir, 'data/foo/bar.txt'));
+      expect(upload.id).not.toBeUndefined();
+      expect(upload.url).not.toBeUndefined();
     },
     30000
   );
 
-  (process.env.VT_MONITOR_API_KEY ? it : it.skip)(
+  it.skipIf(!process.env.VT_MONITOR_API_KEY)(
     'uploads asset on VirusTotal Monitor',
     async () => {
       const vt: VirusTotal = new VirusTotal(process.env.VT_MONITOR_API_KEY);
-      await vt.monitorItems('tests/data/foo/bar.txt', '/test').then(upload => {
-        // eslint-disable-next-line jest/no-standalone-expect
-        expect(upload.id).not.toBeUndefined();
-        // eslint-disable-next-line jest/no-standalone-expect
-        expect(upload.url).not.toBeUndefined();
-      });
+      const upload = await vt.monitorItems(path.join(fixturesDir, 'data/foo/bar.txt'), '/test');
+      expect(upload.id).not.toBeUndefined();
+      expect(upload.url).not.toBeUndefined();
     },
     30000
   );

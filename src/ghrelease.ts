@@ -1,8 +1,5 @@
 import * as fs from 'fs';
 import * as github from '@actions/github';
-import {Context} from '@actions/github/lib/context';
-import {OctokitOptions} from '@octokit/core/dist-types/types';
-import {retry as retryPlugin} from '@octokit/plugin-retry';
 
 export interface Release {
   id: number;
@@ -22,17 +19,7 @@ export interface ReleaseAsset {
   size: number;
 }
 
-export type Octokit = ReturnType<typeof github.getOctokit>;
-
-export function context(): Context {
-  return github.context;
-}
-
-export function getOctokit(token: string, options?: OctokitOptions): Octokit {
-  return github.getOctokit(token, options, retryPlugin);
-}
-
-export const getRelease = async (octokit: Octokit, tag: string): Promise<Release> => {
+export const getRelease = async (octokit: ReturnType<typeof github.getOctokit>, tag: string): Promise<Release> => {
   return (
     await octokit.rest.repos
       .getReleaseByTag({
@@ -45,7 +32,7 @@ export const getRelease = async (octokit: Octokit, tag: string): Promise<Release
   ).data as Release;
 };
 
-export const getReleaseAssets = async (octokit: Octokit, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
+export const getReleaseAssets = async (octokit: ReturnType<typeof github.getOctokit>, release: Release, patterns: Array<string>): Promise<Array<ReleaseAsset>> => {
   return (
     await octokit
       .paginate(octokit.rest.repos.listReleaseAssets, {
@@ -62,7 +49,7 @@ export const getReleaseAssets = async (octokit: Octokit, release: Release, patte
   });
 };
 
-export const downloadReleaseAsset = async (octokit: Octokit, asset: ReleaseAsset, downloadPath: string, retrycb?: (msg: string) => void): Promise<string> => {
+export const downloadReleaseAsset = async (octokit: ReturnType<typeof github.getOctokit>, asset: ReleaseAsset, downloadPath: string, retrycb?: (msg: string) => void): Promise<string> => {
   const retries = 10;
   const assetPath = await octokit.rest.repos
     .getReleaseAsset({
@@ -98,7 +85,7 @@ export const downloadReleaseAsset = async (octokit: Octokit, asset: ReleaseAsset
   return assetPath;
 };
 
-export const updateReleaseBody = async (octokit: Octokit, release: Release): Promise<Release> => {
+export const updateReleaseBody = async (octokit: ReturnType<typeof github.getOctokit>, release: Release): Promise<Release> => {
   return (
     await octokit.rest.repos
       .updateRelease({

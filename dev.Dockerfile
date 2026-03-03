@@ -3,10 +3,11 @@
 ARG NODE_VERSION=20
 
 FROM node:${NODE_VERSION}-alpine AS base
-RUN apk add --no-cache cpio findutils git
+RUN apk add --no-cache cpio findutils git rsync
 WORKDIR /src
 RUN --mount=type=bind,target=.,rw \
   --mount=type=cache,target=/src/.yarn/cache <<EOT
+  set -e
   corepack enable
   yarn --version
   yarn config set --home enableTelemetry 0
@@ -34,32 +35,40 @@ RUN --mount=type=bind,target=.,rw <<EOT
 EOT
 
 FROM deps AS build
-RUN --mount=type=bind,target=.,rw \
+RUN --mount=target=/context \
   --mount=type=cache,target=/src/.yarn/cache \
-  --mount=type=cache,target=/src/node_modules \
-  yarn run build && mkdir /out && cp -Rf dist /out/
+  --mount=type=cache,target=/src/node_modules <<EOT
+  set -ex
+  rsync -a /context/. .
+  rm -rf dist
+  yarn run build
+  mkdir /out
+  cp -r dist /out
+EOT
 
 FROM scratch AS build-update
 COPY --from=build /out /
 
 FROM build AS build-validate
-RUN --mount=type=bind,target=.,rw <<EOT
-set -e
-git add -A
-cp -rf /out/* .
-if [ -n "$(git status --porcelain -- dist)" ]; then
-  echo >&2 'ERROR: Build result differs. Please build first with "docker buildx bake build"'
-  git status --porcelain -- dist
-  exit 1
-fi
+RUN --mount=target=/context \
+  --mount=target=.,type=tmpfs <<EOT
+  set -e
+  rsync -a /context/. .
+  git add -A
+  rm -rf dist
+  cp -rf /out/* .
+  if [ -n "$(git status --porcelain -- dist)" ]; then
+    echo >&2 'ERROR: Build result differs. Please build first with "docker buildx bake build"'
+    git status --porcelain -- dist
+    exit 1
+  fi
 EOT
 
 FROM deps AS format
 RUN --mount=type=bind,target=.,rw \
   --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
-  yarn run format \
-  && mkdir /out && find . -name '*.ts' -not -path './node_modules/*' -not -path './.yarn/*' | cpio -pdm /out
+  yarn run format && mkdir /out && find . -name '*.ts' -not -path './node_modules/*' -not -path './.yarn/*' | cpio -pdm /out
 
 FROM scratch AS format-update
 COPY --from=format /out /
@@ -77,13 +86,10 @@ ARG GITHUB_REPOSITORY
 RUN --mount=type=bind,target=.,rw \
   --mount=type=cache,target=/src/.yarn/cache \
   --mount=type=cache,target=/src/node_modules \
-  --mount=type=secret,id=GITHUB_TOKEN \
-  --mount=type=secret,id=VT_API_KEY \
-  --mount=type=secret,id=VT_MONITOR_API_KEY \
-    GITHUB_TOKEN=$(cat /run/secrets/GITHUB_TOKEN) \
-    VT_API_KEY=$(cat /run/secrets/VT_API_KEY) \
-    VT_MONITOR_API_KEY=$(cat /run/secrets/VT_MONITOR_API_KEY) \
-    yarn run test --coverage --coverageDirectory=/tmp/coverage
+  --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN \
+  --mount=type=secret,id=VT_API_KEY,env=VT_API_KEY \
+  --mount=type=secret,id=VT_MONITOR_API_KEY,env=VT_MONITOR_API_KEY \
+    yarn run test --coverage --coverage.reportsDirectory=/tmp/coverage
 
 FROM scratch AS test-coverage
 COPY --from=test /tmp/coverage /
