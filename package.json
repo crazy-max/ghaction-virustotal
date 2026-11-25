@@ -26,7 +26,7 @@
   "license": "MIT",
   "packageManager": "yarn@4.17.0",
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "^3.0.1",
     "@actions/github": "^9.0.0",
     "@octokit/core": "^7.0.6",
     "@octokit/plugin-retry": "^8.1.0",
