@@ -307,6 +307,37 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 The following npm package may be included in this product:
 
+ - content-type@3.1.1
+
+This package contains the following license:
+
+(The MIT License)
+
+Copyright (c) 2015 Douglas Christopher Wilson
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-----------
+
+The following npm package may be included in this product:
+
  - universal-user-agent@7.0.3
 
 This package contains the following license:
@@ -683,11 +714,13 @@ THE SOFTWARE.
 
 -----------
 
-The following npm package may be included in this product:
+The following npm packages may be included in this product:
 
  - @octokit/openapi-types@27.0.0
+ - @octokit/openapi-types@28.0.0
+ - @octokit/openapi-types@29.0.1
 
-This package contains the following license:
+These packages each contain the following license:
 
 Copyright (c) GitHub 2025 - Licensed as MIT.
 
@@ -758,7 +791,7 @@ SOFTWARE.
 
 The following npm package may be included in this product:
 
- - @octokit/plugin-retry@8.1.0
+ - @octokit/plugin-retry@8.1.1
 
 This package contains the following license:
 
@@ -906,11 +939,12 @@ SOFTWARE.
 
 -----------
 
-The following npm package may be included in this product:
+The following npm packages may be included in this product:
 
+ - json-with-bigint@3.5.12
  - json-with-bigint@3.5.7
 
-This package contains the following license:
+These packages each contain the following license:
 
 MIT License
 
@@ -1190,6 +1224,8 @@ The following npm packages may be included in this product:
  - @octokit/plugin-paginate-rest@14.0.0
  - @octokit/plugin-rest-endpoint-methods@17.0.0
  - @octokit/types@16.0.0
+ - @octokit/types@17.0.0
+ - @octokit/types@18.0.0
 
 These packages each contain the following license:
 
@@ -1235,7 +1271,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 The following npm packages may be included in this product:
 
  - @octokit/endpoint@11.0.3
+ - @octokit/endpoint@11.0.6
  - @octokit/graphql@9.0.3
+ - @octokit/graphql@9.0.5
+ - @octokit/request@10.0.16
  - @octokit/request@10.0.8
 
 These packages each contain the following license:
@@ -1268,7 +1307,9 @@ The following npm packages may be included in this product:
 
  - @octokit/auth-token@6.0.0
  - @octokit/core@7.0.6
+ - @octokit/core@7.0.8
  - @octokit/request-error@7.1.0
+ - @octokit/request-error@7.1.2
 
 These packages each contain the following license:
 
