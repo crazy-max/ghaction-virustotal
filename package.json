@@ -32,7 +32,7 @@
     "@octokit/plugin-retry": "^8.1.0",
     "axios": "^1.13.6",
     "form-data": "^4.0.5",
-    "glob": "^13.0.6",
+    "glob": "^14.0.0",
     "limiter": "^3.0.0",
     "mime": "^4.1.0"
   },
