@@ -3654,12 +3654,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime@npm:*, mime@npm:^4.1.0":
+"mime@npm:*":
   version: 4.1.0
   resolution: "mime@npm:4.1.0"
   bin:
     mime: bin/cli.js
   checksum: 10/154c06eeaf803c4a87f44b3dbd3fafc50afed7154f9ea2d2dde4ae464be33a7c6943de6981d636abd5da3523d2bd66ee1ad2adb2e4c2e7a2fe5e0075bcde62d5
+  languageName: node
+  linkType: hard
+
+"mime@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "mime@npm:4.1.2"
+  bin:
+    mime: bin/cli.js
+  checksum: 10/3241c974516fcbfe7a850635960841e9dd1920f6b131d829e82ec0a9cecb94327fa2913ddbc2b73ff430c7c1d738386036762a173488d809ba4d95dc11a9788f
   languageName: node
   linkType: hard
 
@@ -5002,7 +5011,7 @@ __metadata:
     glob: "npm:^13.0.6"
     globals: "npm:^17.3.0"
     limiter: "npm:^3.0.0"
-    mime: "npm:^4.1.0"
+    mime: "npm:^4.1.2"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.0.18"
