@@ -3479,10 +3479,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"limiter@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "limiter@npm:3.0.0"
-  checksum: 10/d45865d74b147b715dc2077cf9db1ed5c05c667f303b2ab69d60c65c6cbef0de099f4124065828294a02fcb093dfb2309034bbd382d1b2528f10988030ea8bd1
+"limiter@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "limiter@npm:4.1.0"
+  checksum: 10/7510cb2a605676505f4ee3b197f954d86273e00c23075dac501d6161e8d4fe842ce0a6a2c165a2a73d49166558b3fe9cf43cb5c907a64e37edab3a4fd6c472f6
   languageName: node
   linkType: hard
 
@@ -5001,7 +5001,7 @@ __metadata:
     generate-license-file: "npm:^4.1.1"
     glob: "npm:^13.0.6"
     globals: "npm:^17.3.0"
-    limiter: "npm:^3.0.0"
+    limiter: "npm:^4.1.0"
     mime: "npm:^4.1.0"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
