@@ -33,7 +33,7 @@
     "axios": "^1.13.6",
     "form-data": "^4.0.5",
     "glob": "^13.0.6",
-    "limiter": "^3.0.0",
+    "limiter": "^4.1.0",
     "mime": "^4.1.0"
   },
   "devDependencies": {
